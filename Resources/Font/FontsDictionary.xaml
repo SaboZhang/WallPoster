@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="IRANSans">IRANSans, pack://application:,,,/WallPoster;component/Resources/Font/#IRANSans</FontFamily>
+    <FontFamily x:Key="NotoSans">NotoSans, pack://application:,,,/WallPoster;component/Resources/Font/#NotoSans</FontFamily>
+</ResourceDictionary>
