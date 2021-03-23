@@ -138,6 +138,9 @@
   <data name="FlowDirection" xml:space="preserve">
     <value>方向</value>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>历史</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>首页</value>
   </data>
@@ -148,7 +151,7 @@
     <value>电影</value>
   </data>
   <data name="PaneMode" xml:space="preserve">
-    <value>导航栏方向</value>
+    <value>导航栏设置</value>
   </data>
   <data name="SystemSettings" xml:space="preserve">
     <value>系统设置</value>

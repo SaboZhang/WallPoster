@@ -50,7 +50,7 @@
             </ui:CommandBarFlyout.SecondaryCommands>
         </ui:CommandBarFlyout>
     </Window.Resources>
-    <Grid Focusable="False" FlowDirection="{hc:Localization FlowDirection}">
+    <Grid Focusable="False">
         <ui:NavigationView Name="navView" SelectionChanged="NavigationView_SelectionChanged" PaneTitle="WallPoster" AlwaysShowHeader="True"
                            Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Mode=Self}}" IsSettingsVisible="False" IsBackEnabled="True" Focusable="False"
                            IsBackButtonVisible="Visible" BackRequested="navView_BackRequested">

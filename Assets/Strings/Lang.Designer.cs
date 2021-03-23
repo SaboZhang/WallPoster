@@ -124,6 +124,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 历史 的本地化字符串。
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 首页 的本地化字符串。
         /// </summary>
         public static string Home {
@@ -151,7 +160,7 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 导航栏方向 的本地化字符串。
+        ///   查找类似 导航栏设置 的本地化字符串。
         /// </summary>
         public static string PaneMode {
             get {
