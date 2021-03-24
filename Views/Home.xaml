@@ -18,8 +18,10 @@
 
                 <hc:ComboBox Name="cmbPaneDisplay" ItemsSource="{Binding Source={hc:EnumBindingSource {x:Type ui:NavigationViewPaneDisplayMode}}}" Width="240" HorizontalAlignment="Left" 
                                  IsEditable="False" hc:TitleElement.Title="{hc:Localization PaneMode}" Margin="0,0,50,0" SelectionChanged="cmbPaneDisplay_SelectionChanged" />
-                <hc:DateTimePicker/>
-
+                <Viewbox Width="220" HorizontalAlignment="Left" Margin="6">
+                    <hc:FlipClock/>
+                </Viewbox>
+                
             </StackPanel>
 
             <StackPanel Margin="10,0,50,20" Grid.Column="1">
