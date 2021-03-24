@@ -173,25 +173,10 @@ namespace WallPoster
                 case NavigationViewPaneDisplayMode.Left:
                 case NavigationViewPaneDisplayMode.LeftCompact:
                 case NavigationViewPaneDisplayMode.LeftMinimal:
-                    if (Settings.InterfaceLanguage.Equals("en-US"))
-                    {
-                        cmdBarFlyout.Placement = FlyoutPlacementMode.LeftEdgeAlignedTop;
-                    }
-                    else
-                    {
-                        cmdBarFlyout.Placement = FlyoutPlacementMode.RightEdgeAlignedTop;
-                    }
+                    cmdBarFlyout.Placement = FlyoutPlacementMode.RightEdgeAlignedTop;
                     break;
                 case NavigationViewPaneDisplayMode.Top:
-                    if (Settings.InterfaceLanguage.Equals("zh-CN"))
-                    {
-                        cmdBarFlyout.Placement = FlyoutPlacementMode.BottomEdgeAlignedLeft;
-                    }
-                    else
-                    {
-                        cmdBarFlyout.Placement = FlyoutPlacementMode.BottomEdgeAlignedRight;
-                    }
-
+                    cmdBarFlyout.Placement = FlyoutPlacementMode.BottomEdgeAlignedRight;
                     break;
             }
 

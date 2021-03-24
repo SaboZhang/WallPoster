@@ -1,6 +1,4 @@
-﻿using ModernWpf.Controls;
-using System.Windows.Controls;
-using static WallPoster.Assets.Helper;
+﻿using System.Windows.Controls;
 
 namespace WallPoster.Views
 {
@@ -12,16 +10,6 @@ namespace WallPoster.Views
         public Home()
         {
             InitializeComponent();
-        }
-
-        private void cmbPaneDisplay_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var mode = (NavigationViewPaneDisplayMode)cmbPaneDisplay.SelectedItem;
-            if (mode != Settings.PaneDisplayMode)
-            {
-                Settings.PaneDisplayMode = mode;
-                MainWindow.Instance.navView.PaneDisplayMode = mode;
-            }
         }
     }
 }

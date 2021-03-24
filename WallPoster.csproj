@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Img\logo.ico</ApplicationIcon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +28,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+	
+  <ItemGroup>
+	  <None Remove="Resources\Img\Flag\en.png" />
+	  <None Remove="Resources\Img\Flag\cn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Resource Include="Resources\Img\Flag\en.png" />
+	<Resource Include="Resources\Img\Flag\cn.png" />
+	<Resource Include="Resources\Img\logo.ico" />
   </ItemGroup>
 
 </Project>

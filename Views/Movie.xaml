@@ -8,23 +8,25 @@
              xmlns:ui="http://schemas.modernwpf.com/2019"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <hc:Card MaxWidth="240" BorderThickness="0" Effect="{DynamicResource EffectShadow2}" Margin="8">
-        <!--Card 的内容部分-->
-        <Border CornerRadius="4,4,0,0" Width="160" Height="160">
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Text="测试"/>
-        </Border>
-        <!--Card 的尾部部分-->
-        <hc:Card.Footer>
-            <StackPanel Margin="10" Width="160">
-                <!--Card 的一级内容-->
-                <TextBlock TextWrapping="NoWrap"  Style="{DynamicResource TextBlockLargeBold}" TextTrimming="CharacterEllipsis" 
+    <Grid>
+        <hc:Card MaxWidth="240" BorderThickness="0" Effect="{DynamicResource EffectShadow2}" Margin="0,0,600,140">
+            <!--Card 的内容部分-->
+            <Border CornerRadius="4,4,0,0" Width="160" Height="160">
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Text="测试"/>
+            </Border>
+            <!--Card 的尾部部分-->
+            <hc:Card.Footer>
+                <StackPanel Margin="10" Width="160">
+                    <!--Card 的一级内容-->
+                    <TextBlock TextWrapping="NoWrap"  Style="{DynamicResource TextBlockLargeBold}" TextTrimming="CharacterEllipsis" 
                                        Text="大标题" 
                                        HorizontalAlignment="Left"/>
-                <!--Card 的二级内容-->
-                <TextBlock TextWrapping="NoWrap" Style="{DynamicResource TextBlockDefault}" TextTrimming="CharacterEllipsis" 
+                    <!--Card 的二级内容-->
+                    <TextBlock TextWrapping="NoWrap" Style="{DynamicResource TextBlockDefault}" TextTrimming="CharacterEllipsis" 
                                        Text="描述信息" Margin="0,6,0,0"
                                        HorizontalAlignment="Left"/>
-            </StackPanel>
-        </hc:Card.Footer>
-    </hc:Card>
+                </StackPanel>
+            </hc:Card.Footer>
+        </hc:Card>
+    </Grid>
 </UserControl>

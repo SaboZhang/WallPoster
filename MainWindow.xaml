@@ -27,6 +27,7 @@
                         <ui:PathIcon Data="{DynamicResource NightGeometry}"/>
                     </ui:AppBarButton.Icon>
                 </ui:AppBarButton>
+                <ui:AppBarSeparator/>
                 <ui:AppBarButton FontFamily="{StaticResource NotoSans}" Label="{hc:Localization Accent}" Tag="Accent" Click="ApplicationTheme_Click">
                     <ui:AppBarButton.Icon>
                         <ui:PathIcon Data="M3,38V10h42v28H3z" Opacity="0.75" Foreground="{DynamicResource PrimaryBrush}"/>
