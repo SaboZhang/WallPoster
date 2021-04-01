@@ -33,12 +33,14 @@
   <ItemGroup>
 	  <None Remove="Resources\Img\Flag\en.png" />
 	  <None Remove="Resources\Img\Flag\cn.png" />
+	  <None Remove="Views\poster.jpg" />
   </ItemGroup>
 
   <ItemGroup>
 	<Resource Include="Resources\Img\Flag\en.png" />
 	<Resource Include="Resources\Img\Flag\cn.png" />
 	<Resource Include="Resources\Img\logo.ico" />
+	<Resource Include="Views\poster.jpg" />
   </ItemGroup>
 
 </Project>
