@@ -9,10 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
     <PackageReference Include="HandyControls" Version="3.2.0" />
     <PackageReference Include="ModernWpfUis" Version="1.2.0" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="nucs.JsonSettings" Version="1.0.7" />
     <PackageReference Include="nucs.JsonSettings.Autosave" Version="1.0.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,7 +43,11 @@
 	<Resource Include="Resources\Img\Flag\en.png" />
 	<Resource Include="Resources\Img\Flag\cn.png" />
 	<Resource Include="Resources\Img\logo.ico" />
-	<Resource Include="Views\poster.jpg" />
+	<Resource Include="Resources\poster.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Weather\" />
   </ItemGroup>
 
 </Project>

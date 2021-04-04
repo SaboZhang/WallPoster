@@ -133,7 +133,7 @@
     <value>English</value>
   </data>
   <data name="FlowDirection" xml:space="preserve">
-    <value>Fang Xiang</value>
+    <value>LeftToRight</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -144,8 +144,8 @@
   <data name="Movie" xml:space="preserve">
     <value>Movies</value>
   </data>
-  <data name="SystemSettings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="Theme" xml:space="preserve">
     <value>Theme</value>
@@ -161,5 +161,32 @@
   </data>
   <data name="History" xml:space="preserve">
     <value>History</value>
+  </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>CheckUpdate</value>
+  </data>
+  <data name="CurrentLocation" xml:space="preserve">
+    <value>CurrentLocation</value>
+  </data>
+  <data name="CurrentVersion" xml:space="preserve">
+    <value>CurrentVersion{0}</value>
+  </data>
+  <data name="Desc" xml:space="preserve">
+    <value>A simple and easy to use local film collection management tool</value>
+  </data>
+  <data name="Github" xml:space="preserve">
+    <value>Github Repository</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="ReportBug" xml:space="preserve">
+    <value>Report a bug</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>Request a feature</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
   </data>
 </root>

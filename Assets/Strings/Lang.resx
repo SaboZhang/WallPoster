@@ -126,11 +126,23 @@
   <data name="ChangeLanguage" xml:space="preserve">
     <value>语言设置</value>
   </data>
+  <data name="CheckUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
   <data name="Chinese" xml:space="preserve">
     <value>中文简体</value>
   </data>
+  <data name="CurrentLocation" xml:space="preserve">
+    <value>当前路径</value>
+  </data>
+  <data name="CurrentVersion" xml:space="preserve">
+    <value>当前版本{0}</value>
+  </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>深色</value>
+  </data>
+  <data name="Desc" xml:space="preserve">
+    <value>一款简单易用的本地影视收藏管理工具</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>英文</value>
@@ -138,11 +150,20 @@
   <data name="FlowDirection" xml:space="preserve">
     <value>方向</value>
   </data>
+  <data name="General" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="Github" xml:space="preserve">
+    <value>项目开源地址</value>
+  </data>
   <data name="History" xml:space="preserve">
     <value>历史</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>首页</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>暂时不起作用</value>
   </data>
   <data name="LightTheme" xml:space="preserve">
     <value>浅色</value>
@@ -153,13 +174,19 @@
   <data name="PaneMode" xml:space="preserve">
     <value>导航栏设置</value>
   </data>
-  <data name="SystemSettings" xml:space="preserve">
-    <value>系统设置</value>
+  <data name="ReportBug" xml:space="preserve">
+    <value>BUG反馈</value>
+  </data>
+  <data name="Request" xml:space="preserve">
+    <value>贡献代码</value>
   </data>
   <data name="Theme" xml:space="preserve">
     <value>主题</value>
   </data>
   <data name="TVplay" xml:space="preserve">
     <value>电视剧</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新</value>
   </data>
 </root>

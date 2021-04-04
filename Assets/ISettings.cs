@@ -10,6 +10,8 @@ namespace WallPoster.Assets
     {
         public override string FileName { get; set; } = Consts.ConfigPath;
 
+        public virtual int Version { get; set; } = 0;
+
 
         public virtual string InterfaceLanguage { get; set; } = "zh-CN";
         public virtual string StoreLocation { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
@@ -21,7 +23,7 @@ namespace WallPoster.Assets
 
         public ISettings()
         {
-
+            Version = 0;
         }
 
         public ISettings(string fileName) : base(fileName)

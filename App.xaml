@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:viewModel="clr-namespace:WallPoster.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d1P1:Ignorable="d"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -15,6 +19,7 @@
                 <ResourceDictionary Source="/Resources/Geometries.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

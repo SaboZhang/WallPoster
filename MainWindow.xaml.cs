@@ -60,8 +60,8 @@ namespace WallPoster
                     case "TVplay":
                         Navigate(typeof(TVplay), tag);
                         break;
-                    case "SystemSettings":
-                        Navigate(typeof(SystemSettings), tag);
+                    case "General":
+                        Navigate(typeof(General), tag);
                         break;
                     case "About":
                         Navigate(typeof(About), tag);

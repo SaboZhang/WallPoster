@@ -71,7 +71,7 @@
                         <ui:PathIcon Data="{DynamicResource TVplay}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Tag="SystemSettings" Content="{hc:Localization SystemSettings}" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="General" Content="{hc:Localization General}" FontFamily="Microsoft YaHei UI">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource GeneralGeometry}"/>
                     </ui:NavigationViewItem.Icon>

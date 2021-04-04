@@ -88,6 +88,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 检查更新 的本地化字符串。
+        /// </summary>
+        public static string CheckUpdate {
+            get {
+                return ResourceManager.GetString("CheckUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 中文简体 的本地化字符串。
         /// </summary>
         public static string Chinese {
@@ -97,11 +106,38 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 当前路径 的本地化字符串。
+        /// </summary>
+        public static string CurrentLocation {
+            get {
+                return ResourceManager.GetString("CurrentLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前版本{0} 的本地化字符串。
+        /// </summary>
+        public static string CurrentVersion {
+            get {
+                return ResourceManager.GetString("CurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 深色 的本地化字符串。
         /// </summary>
         public static string DarkTheme {
             get {
                 return ResourceManager.GetString("DarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一款简单易用的本地影视收藏管理工具 的本地化字符串。
+        /// </summary>
+        public static string Desc {
+            get {
+                return ResourceManager.GetString("Desc", resourceCulture);
             }
         }
         
@@ -124,6 +160,24 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 设置 的本地化字符串。
+        /// </summary>
+        public static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 项目开源地址 的本地化字符串。
+        /// </summary>
+        public static string Github {
+            get {
+                return ResourceManager.GetString("Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 历史 的本地化字符串。
         /// </summary>
         public static string History {
@@ -138,6 +192,15 @@ namespace WallPoster.Assets.Strings {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 暂时不起作用 的本地化字符串。
+        /// </summary>
+        public static string LatestVersion {
+            get {
+                return ResourceManager.GetString("LatestVersion", resourceCulture);
             }
         }
         
@@ -169,11 +232,20 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 系统设置 的本地化字符串。
+        ///   查找类似 BUG反馈 的本地化字符串。
         /// </summary>
-        public static string SystemSettings {
+        public static string ReportBug {
             get {
-                return ResourceManager.GetString("SystemSettings", resourceCulture);
+                return ResourceManager.GetString("ReportBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 贡献代码 的本地化字符串。
+        /// </summary>
+        public static string Request {
+            get {
+                return ResourceManager.GetString("Request", resourceCulture);
             }
         }
         
@@ -192,6 +264,15 @@ namespace WallPoster.Assets.Strings {
         public static string TVplay {
             get {
                 return ResourceManager.GetString("TVplay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更新 的本地化字符串。
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
             }
         }
     }

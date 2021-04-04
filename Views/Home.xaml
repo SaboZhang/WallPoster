@@ -14,13 +14,14 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel Margin="10,10">
-
+            <StackPanel Margin="10,10" Height="64" VerticalAlignment="Top">
                 <Viewbox Width="220" HorizontalAlignment="center" Margin="6">
                     <hc:FlipClock/>
                 </Viewbox>
-                
             </StackPanel>
+            <hc:SimplePanel>
+                <hc:TextBox Width="240" Height="400" Margin="10,10,0,40" HorizontalAlignment="Left" Text="天气面板" TextAlignment="Center"/>
+            </hc:SimplePanel>
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

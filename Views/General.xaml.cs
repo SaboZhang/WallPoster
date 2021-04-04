@@ -7,9 +7,9 @@ namespace WallPoster.Views
     /// <summary>
     /// Settings.xaml 的交互逻辑
     /// </summary>
-    public partial class SystemSettings : UserControl
+    public partial class General : UserControl
     {
-        public SystemSettings()
+        public General()
         {
             InitializeComponent();
             LoadInitialSettings();
