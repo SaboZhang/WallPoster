@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using HandyControl.Controls;
+using WallPoster.Models.Service;
 
 namespace WallPoster.Views
 {
@@ -15,7 +17,12 @@ namespace WallPoster.Views
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            MessageBox.Show("正在开发中，敬请期待");
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            dictionary.Add("location", "天津");
+            dictionary.Add("key", "");
+            var result = HttpService.Post("https://geoapi.qweather.com/v2/city/lookup", dictionary);
+            
+            MessageBox.Show(result);
         }
     }
 }
