@@ -49,4 +49,9 @@ namespace WallPoster.Models
         public string wind_spd { get; set; }
     }
 
+    public class Weather
+    {
+        public List<WeatherModel> weathers { get; set; }
+    }
+
 }
