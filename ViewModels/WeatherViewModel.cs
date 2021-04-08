@@ -19,16 +19,21 @@ namespace WallPoster.ViewModels
             string nowURL = "https://devapi.qweather.com/v7/weather/now";
             Dictionary<string, string> dic = new Dictionary<string, string>();
             dic.Add("location", "101030500");
-            dic.Add("key", "e4128d214e47471ea020c5630ebce2d0");
-            Weather nowWeather = null;
+            dic.Add("key", "");
+            WeatherModel nowWeather = null;
             try
             {
-                nowWeather = JsonConvert.DeserializeObject<Weather>(HttpService.Get(nowURL, dic));
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(nowURL, dic));
             }
             catch(Exception e)
             {
-                nowWeather = JsonConvert.DeserializeObject<Weather>(HttpService.Get(nowURL, dic));
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(nowURL, dic));
             }
+            if (nowWeather.code == "200")
+            {
+                string icon = nowWeather.now.icon;
+            }
+
         }
     }
 }

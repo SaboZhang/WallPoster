@@ -3,9 +3,11 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WallPoster.Models.Service
@@ -17,7 +19,7 @@ namespace WallPoster.Models.Service
     {
         public static string Get(string url, Dictionary<string, string> dic)
         {
-            string result = "";
+            string result = @"";
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(url);
             if (dic.Count > 0) 
@@ -38,7 +40,7 @@ namespace WallPoster.Models.Service
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(stringBuilder.ToString());
             //组合参数
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            Stream stream = httpWebResponse.GetResponseStream();
+            Stream stream = new GZipStream(httpWebResponse.GetResponseStream(), CompressionMode.Decompress);
             try
             {
                 //获取内容
@@ -50,7 +52,6 @@ namespace WallPoster.Models.Service
             {
                 stream.Close();
             }
-            Console.WriteLine(result);
             return result;
         }
 
