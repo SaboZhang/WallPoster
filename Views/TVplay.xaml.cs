@@ -1,6 +1,5 @@
 ﻿using System.Windows.Controls;
 using HandyControl.Controls;
-using WallPoster.ViewModels;
 
 namespace WallPoster.Views
 {
@@ -16,9 +15,8 @@ namespace WallPoster.Views
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            WeatherViewModel weather = new WeatherViewModel();
-            weather.LoadWeather();
-            MessageBox.Show("测试");
+            
+            MessageBox.Show("正在努力conding");
         }
     }
 }

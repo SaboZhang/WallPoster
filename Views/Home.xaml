@@ -23,9 +23,7 @@
                 </Viewbox>
             </StackPanel>
             <hc:SimplePanel Width="600" Height="300">
-                <Viewbox >
-
-                </Viewbox>
+                
             </hc:SimplePanel>
         </Grid>
     </hc:ScrollViewer>

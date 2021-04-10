@@ -14,12 +14,12 @@ namespace WallPoster.ViewModels
     /// </summary>
     public class WeatherViewModel
     {
-        public void LoadWeather()
+        public WeatherModel LoadWeather(string location, string key)
         {
             string nowURL = "https://devapi.qweather.com/v7/weather/now";
             Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("location", "101030500");
-            dic.Add("key", "");
+            dic.Add("location", location);
+            dic.Add("key", key);
             WeatherModel nowWeather = null;
             try
             {
@@ -34,6 +34,14 @@ namespace WallPoster.ViewModels
                 string icon = nowWeather.now.icon;
             }
 
+            return nowWeather;
+
+        }
+
+        public static string LoadBackground()
+        {
+            
+            return null;
         }
     }
 }

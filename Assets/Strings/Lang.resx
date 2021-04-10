@@ -123,6 +123,12 @@
   <data name="Accent" xml:space="preserve">
     <value>强调色</value>
   </data>
+  <data name="Advise" xml:space="preserve">
+    <value>为了您更好体验建议使用自己的KEY</value>
+  </data>
+  <data name="AppSecret" xml:space="preserve">
+    <value>和风天气KEY</value>
+  </data>
   <data name="ChangeLanguage" xml:space="preserve">
     <value>语言设置</value>
   </data>
@@ -140,6 +146,9 @@
   </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>深色</value>
+  </data>
+  <data name="DefaultCity" xml:space="preserve">
+    <value>默认显示城市</value>
   </data>
   <data name="Desc" xml:space="preserve">
     <value>一款简单易用的本地影视收藏管理工具</value>

@@ -79,6 +79,24 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 为了您更好体验建议使用自己的KEY 的本地化字符串。
+        /// </summary>
+        public static string Advise {
+            get {
+                return ResourceManager.GetString("Advise", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 和风天气KEY 的本地化字符串。
+        /// </summary>
+        public static string AppSecret {
+            get {
+                return ResourceManager.GetString("AppSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 语言设置 的本地化字符串。
         /// </summary>
         public static string ChangeLanguage {
@@ -129,6 +147,15 @@ namespace WallPoster.Assets.Strings {
         public static string DarkTheme {
             get {
                 return ResourceManager.GetString("DarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 默认显示城市 的本地化字符串。
+        /// </summary>
+        public static string DefaultCity {
+            get {
+                return ResourceManager.GetString("DefaultCity", resourceCulture);
             }
         }
         

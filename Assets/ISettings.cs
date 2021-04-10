@@ -17,9 +17,11 @@ namespace WallPoster.Assets
         public virtual string StoreLocation { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
-        public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.Left;
+        public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;
         public virtual ApplicationTheme Theme { get; set; } = ApplicationTheme.Light;
         public virtual Brush Accent { get; set; }
+        public virtual string AppSecret { get; set; } = "e4128d214e47471ea020c5630ebce2d0";
+        public virtual string Location { get; set; } = "101030100";
 
         public ISettings()
         {

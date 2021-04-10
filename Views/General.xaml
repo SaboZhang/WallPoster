@@ -16,10 +16,13 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="10,10">
 
-                <hc:ComboBox Name="cmbPaneDisplay" ItemsSource="{Binding Source={hc:EnumBindingSource {x:Type ui:NavigationViewPaneDisplayMode}}}" Width="240" HorizontalAlignment="Left" 
-                                 IsEditable="False" hc:TitleElement.Title="{hc:Localization PaneMode}" Margin="0,0,50,0" SelectionChanged="cmbPaneDisplay_SelectionChanged" />
+                <hc:ComboBox Name="cmbPaneDisplay" ItemsSource="{Binding Source={hc:EnumBindingSource {x:Type ui:NavigationViewPaneDisplayMode}}}" Width="280" HorizontalAlignment="Left" 
+                                 IsEditable="False" hc:TitleElement.Title="{hc:Localization PaneMode}" Margin="0,0,50,0" SelectionChanged="cmbPaneDisplay_SelectionChanged" hc:InfoElement.Placeholder="请选择"/>
+                <hc:TextBox Name="AppSecretText" Width="280" HorizontalAlignment="Left" Margin="0,10" hc:TitleElement.Title="{hc:Localization AppSecret}" LostFocus="ChangeAppSecret"
+                            hc:InfoElement.Placeholder="{hc:Localization Advise}"/>
 
             </StackPanel>
+            
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

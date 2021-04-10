@@ -9,12 +9,12 @@ namespace WallPoster.Models
     public class WeatherModel
     {
         /// <summary>
-        /// 
+        /// 状态码
         /// </summary>
         public string code { get; set; }
 
         /// <summary>
-        /// 
+        /// 更新时间
         /// </summary>
         public string updateTime { get; set; }
 
@@ -24,7 +24,7 @@ namespace WallPoster.Models
         public string fxLink { get; set; }
 
         /// <summary>
-        /// 
+        /// 实时天气
         /// </summary>
         public Now now { get; set; }
 

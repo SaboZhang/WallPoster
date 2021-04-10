@@ -189,4 +189,13 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="AppSecret" xml:space="preserve">
+    <value>AppSecret：QWeather</value>
+  </data>
+  <data name="Advise" xml:space="preserve">
+    <value>It is recommended to use your own KEY for better experience</value>
+  </data>
+  <data name="DefaultCity" xml:space="preserve">
+    <value>Default display city</value>
+  </data>
 </root>

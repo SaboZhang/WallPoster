@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using static WallPoster.Assets.Helper;
 
 namespace WallPoster.Views
 {
@@ -10,6 +11,12 @@ namespace WallPoster.Views
         public Home()
         {
             InitializeComponent();
+            LoadInitialSettings();
+        }
+
+        private void LoadInitialSettings()
+        {
+            string key = Settings.AppSecret;
         }
     }
 }
