@@ -6,8 +6,9 @@
         mc:Ignorable="d"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        FontFamily="{StaticResource NotoSans}"
+        FontFamily="Microsoft YaHei UI"
         Background="{DynamicResource SecondaryRegionBrush}"
+        hc:LocalizationManager.Provider="WallPoster;Assets.Strings.Lang"
         Title="WallPoster" 
         WindowStartupLocation="CenterScreen"
         ui:WindowHelper.UseModernWindowStyle="True"
@@ -56,27 +57,27 @@
                            Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Mode=Self}}" IsSettingsVisible="False" IsBackEnabled="True" Focusable="False"
                            IsBackButtonVisible="Visible" BackRequested="navView_BackRequested">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Tag="Home" Content="{hc:Localization Home}" IsSelected="True" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="Home" Content="{hc:Localization Home}" IsSelected="True">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource Home}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Tag="Movie" Content="{hc:Localization Movie}" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="Movie" Content="{hc:Localization Movie}">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource WorldSubtitleGeometry}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Tag="TVplay" Content="{hc:Localization TVplay}" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="TVplay" Content="{hc:Localization TVplay}">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource TVplay}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Tag="General" Content="{hc:Localization General}" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="General" Content="{hc:Localization General}">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource GeneralGeometry}"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
-                <ui:NavigationViewItem Tag="About" Content="{hc:Localization About}" FontFamily="Microsoft YaHei UI">
+                <ui:NavigationViewItem Tag="About" Content="{hc:Localization About}">
                     <ui:NavigationViewItem.Icon>
                         <ui:PathIcon Data="{DynamicResource AboutGeomety}"/>
                     </ui:NavigationViewItem.Icon>
@@ -85,12 +86,12 @@
             <ui:Frame x:Name="contentFrame" Navigated="contentFrame_Navigated" Navigating="contentFrame_Navigating"/>
             <ui:NavigationView.PaneFooter>
                 <StackPanel>
-                    <ui:NavigationViewItem Name="navChangeLanguage" Content="{hc:Localization ChangeLanguage}" MouseLeftButtonDown="navChangeLanguage_MouseLeftButtonDown" FontFamily="Microsoft YaHei UI">
+                    <ui:NavigationViewItem Name="navChangeLanguage" Content="{hc:Localization ChangeLanguage}" MouseLeftButtonDown="navChangeLanguage_MouseLeftButtonDown">
                         <ui:NavigationViewItem.Icon>
                             <ui:PathIcon Data="{DynamicResource TranslationGeometry}"/>
                         </ui:NavigationViewItem.Icon>
                     </ui:NavigationViewItem>
-                    <ui:NavigationViewItem Name="navChangeTheme" Content="{hc:Localization Theme}" MouseLeftButtonDown="navChangeTheme_MouseLeftButtonDown" FontFamily="Microsoft YaHei UI">
+                    <ui:NavigationViewItem Name="navChangeTheme" Content="{hc:Localization Theme}" MouseLeftButtonDown="navChangeTheme_MouseLeftButtonDown">
                         <ui:NavigationViewItem.Icon>
                             <ui:PathIcon Data="{DynamicResource ThemeGeometry}"/>
                         </ui:NavigationViewItem.Icon>

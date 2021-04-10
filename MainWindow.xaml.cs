@@ -95,7 +95,7 @@ namespace WallPoster
 
                 if (Settings.Accent != null)
                 {
-                    picker.SelectedBrush = new SolidColorBrush(ApplicationHelper.GetColorFromBrush(Settings.Accent));
+                    picker.SelectedBrush = new SolidColorBrush(ColorHelper.GetColorFromBrush(Settings.Accent));
                 }
 
                 picker.SelectedColorChanged += delegate

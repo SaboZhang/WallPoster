@@ -20,7 +20,7 @@ namespace WallPoster
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            LocalizationManager.Instance.LocalizationProvider = new Provider();
+            
             ConfigHelper.Instance.SetLang(Settings.InterfaceLanguage);
             /*if (!Settings.Version.Equals(RegistryHelper.GetValue<int>(Consts.VersionKey, Consts.AppName)))
             {
@@ -61,7 +61,7 @@ namespace WallPoster
             if (ThemeManager.Current.AccentColor != accent)
             {
                 ThemeManager.Current.AccentColor = accent;
-                ModernWpf.ThemeManager.Current.AccentColor = accent == null ? null : ApplicationHelper.GetColorFromBrush(accent);
+                ModernWpf.ThemeManager.Current.AccentColor = accent == null ? null : ColorHelper.GetColorFromBrush(accent);
             }
         }
     }
