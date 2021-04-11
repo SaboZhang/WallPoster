@@ -79,7 +79,7 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 为了您更好体验建议使用自己的KEY 的本地化字符串。
+        ///   查找类似 为了您更好体验建议更换自己的KEY 的本地化字符串。
         /// </summary>
         public static string Advise {
             get {
@@ -277,6 +277,24 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 天气查询 的本地化字符串。
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请输入要查询的城市 的本地化字符串。
+        /// </summary>
+        public static string SearchWeather {
+            get {
+                return ResourceManager.GetString("SearchWeather", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 主题 的本地化字符串。
         /// </summary>
         public static string Theme {
@@ -300,6 +318,15 @@ namespace WallPoster.Assets.Strings {
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取天气信息失败,已打开错误代码页 的本地化字符串。
+        /// </summary>
+        public static string WeatherError {
+            get {
+                return ResourceManager.GetString("WeatherError", resourceCulture);
             }
         }
     }

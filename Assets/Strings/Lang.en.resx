@@ -193,9 +193,18 @@
     <value>AppSecret：QWeather</value>
   </data>
   <data name="Advise" xml:space="preserve">
-    <value>It is recommended to use your own KEY for better experience</value>
+    <value>For your better experience, it is suggested to change your own KEY</value>
   </data>
   <data name="DefaultCity" xml:space="preserve">
     <value>Default display city</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>WeatherSearch</value>
+  </data>
+  <data name="SearchWeather" xml:space="preserve">
+    <value>Please enter the city you want to query</value>
+  </data>
+  <data name="WeatherError" xml:space="preserve">
+    <value>Failed to get weather information.The error code page has been opened</value>
   </data>
 </root>

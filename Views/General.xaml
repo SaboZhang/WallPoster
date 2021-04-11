@@ -22,7 +22,7 @@
                             hc:InfoElement.Placeholder="{hc:Localization Advise}"/>
 
             </StackPanel>
-            
+
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

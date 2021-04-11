@@ -22,9 +22,24 @@
                     <hc:FlipClock/>
                 </Viewbox>
             </StackPanel>
-            <hc:SimplePanel Width="600" Height="300">
-                
-            </hc:SimplePanel>
+            <StackPanel Margin="0,36,0,0" Width="400" HorizontalAlignment="Left">
+                <hc:SearchBar ShowClearButton="True" Width="390" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}"
+                              hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource SearchBarPlus}">
+                    <hc:SearchBar.Background>
+                        <SolidColorBrush Opacity="0.6"/>
+                    </hc:SearchBar.Background>
+                </hc:SearchBar>
+                <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="88" HorizontalAlignment="Right" Margin="0,2,18,0" Foreground="#FF535353" FontSize="10"/>
+                <Image x:Name="WeatherIcon" Height="64" Width="64" HorizontalAlignment="Left" Margin="138,0,0,0" />
+                <TextBlock x:Name="Temp" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-56,146,0" FontSize="28" TextAlignment="Center"/>
+                <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="20,-86,0,0" VerticalAlignment="Top" FontSize="24"/>
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-22,-28,0" TextAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="30" x:Name="windScale"/>
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="280" x:Name="des" TextAlignment="Center"/>
+                <Border Width="34" HorizontalAlignment="Right" Margin="0,-188,30,0" Height="24" CornerRadius="10" BorderThickness="1">
+                    <TextBlock x:Name="Aqi" TextWrapping="Wrap" Text="良" Background="{Binding Aqi}" FontSize="14" TextAlignment="Center"/>
+                </Border>
+            </StackPanel>
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

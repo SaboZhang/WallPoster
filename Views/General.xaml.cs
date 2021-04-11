@@ -3,7 +3,7 @@ using HandyControl.Controls;
 using ModernWpf.Controls;
 using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
-using HandyControl.Tools;
+using WallPoster.Assets;
 
 namespace WallPoster.Views
 {
@@ -12,7 +12,6 @@ namespace WallPoster.Views
     /// </summary>
     public partial class General : UserControl
     {
-        private readonly string weatherKEY = "e4128d214e47471ea020c5630ebce2d0";
         public General()
         {
             InitializeComponent();
@@ -24,9 +23,8 @@ namespace WallPoster.Views
             cmbPaneDisplay.SelectedItem = Settings.PaneDisplayMode;
             MainWindow.Instance.navView.PaneDisplayMode = Settings.PaneDisplayMode;
             string key = Settings.AppSecret;
-            AppSecretText.Text = weatherKEY.Equals(key) ? null : key;
+            AppSecretText.Text = Consts.WeatherKey.Equals(key) ? null : key;
             
-
         }
         /// <summary>
         /// 设置导航栏显示方式
