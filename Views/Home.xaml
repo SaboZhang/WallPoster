@@ -23,7 +23,7 @@
                 </Viewbox>
             </StackPanel>
             <StackPanel Margin="0,36,0,0" Width="400" HorizontalAlignment="Left">
-                <hc:SearchBar ShowClearButton="True" Width="390" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}"
+                <hc:SearchBar ShowClearButton="True" Width="390" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}" SearchStarted="WeatherQuery" x:Name="SearchWeather"
                               hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,0,0,0" Style="{DynamicResource SearchBarPlus}">
                     <hc:SearchBar.Background>
                         <SolidColorBrush Opacity="0.6"/>

@@ -250,11 +250,29 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 国外天气信息不完整，暂时不提供查询 的本地化字符串。
+        /// </summary>
+        public static string Nonsupport {
+            get {
+                return ResourceManager.GetString("Nonsupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导航栏设置 的本地化字符串。
         /// </summary>
         public static string PaneMode {
             get {
                 return ResourceManager.GetString("PaneMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 查询的城市不存在或输入有误 的本地化字符串。
+        /// </summary>
+        public static string QueryWarning {
+            get {
+                return ResourceManager.GetString("QueryWarning", resourceCulture);
             }
         }
         

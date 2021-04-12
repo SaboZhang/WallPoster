@@ -180,8 +180,14 @@
   <data name="Movie" xml:space="preserve">
     <value>电影</value>
   </data>
+  <data name="Nonsupport" xml:space="preserve">
+    <value>国外天气信息不完整，暂时不提供查询</value>
+  </data>
   <data name="PaneMode" xml:space="preserve">
     <value>导航栏设置</value>
+  </data>
+  <data name="QueryWarning" xml:space="preserve">
+    <value>查询的城市不存在或输入有误</value>
   </data>
   <data name="ReportBug" xml:space="preserve">
     <value>BUG反馈</value>

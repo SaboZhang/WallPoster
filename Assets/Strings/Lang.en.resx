@@ -207,4 +207,10 @@
   <data name="WeatherError" xml:space="preserve">
     <value>Failed to get weather information.The error code page has been opened</value>
   </data>
+  <data name="QueryWarning" xml:space="preserve">
+    <value>The queried city does not exist or was incorrectly entered</value>
+  </data>
+  <data name="Nonsupport" xml:space="preserve">
+    <value>Foreign weather information is incomplete, no query is available at this time</value>
+  </data>
 </root>

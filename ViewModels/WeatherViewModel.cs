@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WallPoster.Assets;
 using WallPoster.Models;
@@ -60,7 +61,37 @@ namespace WallPoster.ViewModels
             {
                 WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.Air, dic));
             }
+
             return WeatherAqi;
+        }
+
+        public string CityQuery(string city, string key)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic.Add("location", city);
+            dic.Add("key", key);
+            CityModel cityModel = null;
+            string cityInfo = "";
+            try
+            {
+                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
+            }
+            catch
+            {
+                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
+            }
+            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
+            {
+                cityInfo = cityModel.location[0].name;
+                return cityInfo;
+            }
+            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$"))
+            {
+                cityInfo = cityModel.location[0].id;
+                return cityInfo;
+            }
+
+            return cityInfo;
         }
     }
 }
