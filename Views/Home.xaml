@@ -29,15 +29,16 @@
                         <SolidColorBrush Opacity="0.6"/>
                     </hc:SearchBar.Background>
                 </hc:SearchBar>
-                <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="88" HorizontalAlignment="Right" Margin="0,2,18,0" Foreground="#FF535353" FontSize="10"/>
+                <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="150" HorizontalAlignment="Right" Margin="0,2,2,0" Foreground="#FF535353" FontSize="10"/>
                 <Image x:Name="WeatherIcon" Height="64" Width="64" HorizontalAlignment="Left" Margin="138,0,0,0" />
                 <TextBlock x:Name="Temp" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-56,146,0" FontSize="28" TextAlignment="Center"/>
-                <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="20,-86,0,0" VerticalAlignment="Top" FontSize="24"/>
+                <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="20,-76,0,0" VerticalAlignment="Top" FontSize="24"/>
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-22,-28,0" TextAlignment="Center"/>
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="30" x:Name="windScale"/>
                 <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="280" x:Name="des" TextAlignment="Center"/>
-                <Border Width="34" HorizontalAlignment="Right" Margin="0,-188,30,0" Height="24" CornerRadius="10" BorderThickness="1">
-                    <TextBlock x:Name="Aqi" TextWrapping="Wrap" Text="良" Background="{Binding Aqi}" FontSize="14" TextAlignment="Center"/>
+                <Border x:Name="AqiBorder" Width="64" HorizontalAlignment="Right" Margin="0,-188,10,0" Height="22" CornerRadius="10" 
+                        BorderThickness="1" Background="{Binding Aqi}">
+                    <TextBlock x:Name="Aqi" TextWrapping="Wrap"  FontSize="16" TextAlignment="Center"/>
                 </Border>
             </StackPanel>
         </Grid>

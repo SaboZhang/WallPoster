@@ -16,7 +16,7 @@ namespace WallPoster.Models
         /// <summary>
         /// 更新时间
         /// </summary>
-        public string updateTime { get; set; }
+        public DateTime updateTime { get; set; }
 
         /// <summary>
         /// 
@@ -32,6 +32,7 @@ namespace WallPoster.Models
         /// 
         /// </summary>
         public Refer refer { get; set; }
+
     }
 
     public class Now
@@ -111,6 +112,51 @@ namespace WallPoster.Models
         /// </summary>
         public string dew { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pubTime { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string aqi { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string level { get; set; }
+        /// <summary>
+        /// 良
+        /// </summary>
+        public string category { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string primary { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pm10 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pm2p5 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string no2 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string so2 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string co { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string o3 { get; set; }
+
     }
 
     public class Refer
@@ -126,5 +172,53 @@ namespace WallPoster.Models
         public List<string> license { get; set; }
 
     }
+
+    /*public class Aqi
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pubTime { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string aqi { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string level { get; set; }
+        /// <summary>
+        /// 良
+        /// </summary>
+        public string category { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string primary { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pm10 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pm2p5 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string no2 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string so2 { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string co { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string o3 { get; set; }
+    }*/
 
 }
