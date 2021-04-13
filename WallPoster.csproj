@@ -231,6 +231,11 @@
 	  <None Remove="Resources\Weather\color-64\900.png" />
 	  <None Remove="Resources\Weather\color-64\901.png" />
 	  <None Remove="Resources\Weather\color-64\999.png" />
+	  <None Remove="Resources\Weather\hum--night.png" />
+	  <None Remove="Resources\Weather\pressure--night.png" />
+	  <None Remove="Resources\Weather\uv--night.png" />
+	  <None Remove="Resources\Weather\vis--night.png" />
+	  <None Remove="Resources\Weather\wind--night.png" />
 	  <None Remove="Views\poster.jpg" />
   </ItemGroup>
 	
@@ -435,6 +440,11 @@
 	<Resource Include="Resources\Weather\color-64\900.png" />
 	<Resource Include="Resources\Weather\color-64\901.png" />
 	<Resource Include="Resources\Weather\color-64\999.png" />
+	<Resource Include="Resources\Weather\hum--night.png" />
+	<Resource Include="Resources\Weather\pressure--night.png" />
+	<Resource Include="Resources\Weather\uv--night.png" />
+	<Resource Include="Resources\Weather\vis--night.png" />
+	<Resource Include="Resources\Weather\wind--night.png" />
   </ItemGroup>
 
 </Project>

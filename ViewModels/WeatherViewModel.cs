@@ -20,7 +20,7 @@ namespace WallPoster.ViewModels
         
         public WeatherModel LoadWeather(string location, string key)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> dic = new();
             dic.Add("location", location);
             dic.Add("key", key);
             WeatherModel nowWeather = null;
@@ -49,7 +49,7 @@ namespace WallPoster.ViewModels
 
         public WeatherModel LoadWeatherAqi(string location, string key)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> dic = new();
             dic.Add("location", location);
             dic.Add("key", key);
             WeatherModel WeatherAqi = null;
@@ -67,7 +67,7 @@ namespace WallPoster.ViewModels
 
         public string CityQuery(string city, string key)
         {
-            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Dictionary<string, string> dic = new();
             dic.Add("location", city);
             dic.Add("key", key);
             CityModel cityModel = null;
@@ -98,6 +98,28 @@ namespace WallPoster.ViewModels
             }
 
             return cityInfo;
+        }
+
+        public WeatherModel LifeIndex(string location, string key, string type)
+        {
+            Dictionary<string, string> dic = new();
+            dic.Add("type", type);
+            dic.Add("location", location);
+            dic.Add("key", key);
+            WeatherModel weather = null;
+            try 
+            {
+                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.TheLife, dic));
+            }
+            catch
+            {
+                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.TheLife, dic));
+            }
+            if (weather.code == "200")
+            {
+                return weather;
+            }
+            return null;
         }
     }
 }

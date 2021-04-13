@@ -28,17 +28,25 @@
                               hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,10,10,8" Style="{DynamicResource SearchBarPlus}">
                         
                     </hc:SearchBar>
-                    <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="150" HorizontalAlignment="Right" Margin="0,2,12,0" Foreground="{DynamicResource ReverseTextBrush	}" FontSize="10"/>
-                    <Image x:Name="WeatherIcon" Height="64" Width="64" HorizontalAlignment="Left" Margin="138,0,0,0" />
-                    <TextBlock x:Name="Temp" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-56,146,0" FontSize="28" TextAlignment="Center"/>
-                    <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="20,-76,0,0" VerticalAlignment="Top" FontSize="24"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-22,-28,0" TextAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="30" x:Name="windScale"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="280" x:Name="des" TextAlignment="Center"/>
-                    <Border x:Name="AqiBorder" Width="64" HorizontalAlignment="Right" Margin="0,-188,10,0" Height="22" CornerRadius="10" 
-                        BorderThickness="1" Background="{Binding Aqi}">
-                        <TextBlock x:Name="Aqi" TextWrapping="Wrap"  FontSize="16" TextAlignment="Center"/>
+                    <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="145" HorizontalAlignment="Right"  FontSize="10" FontWeight="Bold"/>
+                    <Border x:Name="AqiBorder"  HorizontalAlignment="Right" Margin="0,10,10,0" CornerRadius="12"
+                            BorderThickness="1" Background="{Binding Aqi}">
+                        <TextBlock x:Name="Aqi" TextWrapping="Wrap"  FontSize="14" TextAlignment="Center" Margin="8,2,8,2"/>
                     </Border>
+                    <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="8,-44,0,0" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>
+                    <Image x:Name="WeatherIcon" Height="78" Width="78" HorizontalAlignment="Left" Margin="130,0,0,0" />
+                    <TextBlock x:Name="Temp" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-68,140,0" FontSize="32" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-30,-34,0" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" x:Name="des" TextAlignment="Center" Margin="10,24,10,10"/>
+                    <Image Source="/Resources/Weather/wind--night.png" Width="40" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                    <Image Source="/Resources/Weather/hum--night.png" Width="40" HorizontalAlignment="Left" Margin="94,-40,0,0"/>
+                    <Image Source="/Resources/Weather/pressure--night.png" Width="40" HorizontalAlignment="Left" Margin="190,-40,0,0"/>
+                    <Image Source="/Resources/Weather/vis--night.png" Width="40" HorizontalAlignment="Left" Margin="290,-40,0,0"/>
+                    <TextBlock x:Name="WindScale" Margin="-254,-40,0,0" TextWrapping="Wrap" Width="50"/>
+                    <TextBlock x:Name="WindDir" Margin="-254,-20,0,0" TextWrapping="Wrap" Width="50"/>
+                    <TextBlock x:Name="Humidity" Margin="-60,-40,0,0" TextWrapping="Wrap" Width="80"/>
+                    <TextBlock x:Name="Pressure" Margin="120,-40,0,0" TextWrapping="Wrap" Width="64"/>
+                    <TextBlock x:Name="vis" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
                 </StackPanel>
             </Border>
         </Grid>

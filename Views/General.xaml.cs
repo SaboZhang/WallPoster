@@ -48,7 +48,7 @@ namespace WallPoster.Views
         private void ChangeAppSecret(object sender, RoutedEventArgs e)
         {
             string key = AppSecretText.Text;
-            if (key != Settings.AppSecret)
+            if (key != Settings.AppSecret && key != "")
             {
                 Settings.AppSecret = key;
             }

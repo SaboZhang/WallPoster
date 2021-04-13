@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace WallPoster.Models
 {
+    /// <summary>
+    /// 和风天气实体类 https://dev.qweather.com/docs/api/
+    /// </summary>
     public class WeatherModel
     {
         /// <summary>
@@ -32,6 +35,11 @@ namespace WallPoster.Models
         /// 
         /// </summary>
         public Refer refer { get; set; }
+
+        /// <summary>
+        /// 生活指数
+        /// </summary>
+        public List<Daily> daily { get; set; }
 
     }
 
@@ -125,7 +133,7 @@ namespace WallPoster.Models
         /// </summary>
         public string level { get; set; }
         /// <summary>
-        /// 良
+        /// 
         /// </summary>
         public string category { get; set; }
         /// <summary>
@@ -171,6 +179,34 @@ namespace WallPoster.Models
         /// </summary>
         public List<string> license { get; set; }
 
+    }
+
+    public class Daily
+    {
+        /// <summary>
+        /// 预报日期
+        /// </summary>
+        public DateTime date { get; set; }
+        /// <summary>
+        /// 生活指数类型ID
+        /// </summary>
+        public string type { get; set; }
+        /// <summary>
+        /// 生活指数类型名称
+        /// </summary>
+        public string name { get; set; }
+        /// <summary>
+        /// 生活指数预报等级
+        /// </summary>
+        public string level { get; set; }
+        /// <summary>
+        /// 生活等级预报级别名称
+        /// </summary>
+        public string category { get; set; }
+        /// <summary>
+        /// 生活指数预报的详细描述
+        /// </summary>
+        public string text { get; set; }
     }
 
 

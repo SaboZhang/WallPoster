@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 namespace WallPoster.Views
 {
     /// <summary>
-    /// Home.xaml 的交互逻辑 weather.now.temp;
+    /// Home.xaml 的交互逻辑
     /// </summary>
     public partial class Home : UserControl
     {
@@ -39,21 +39,23 @@ namespace WallPoster.Views
         {
             
             WeatherModel weather  = weatherViewModel.LoadWeather(location, key);
-            if(weather.code == "200")
+            WeatherModel life = weatherViewModel.LifeIndex(location, key, "8");
+            if (weather.code == "200")
             {
-                UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm':'ss");
+                UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm");
                 City.Text = weatherViewModel.CityQuery(location, key);
-                BitmapImage icon = new BitmapImage(new Uri(new StringBuilder("pack://application:,,,/WallPoster;component/Resources/Weather/color-64/").Append(weather.now.icon).Append(".png").ToString()));
+                BitmapImage icon = new BitmapImage(new Uri(new StringBuilder("pack://application:,,,/WallPoster;component/Resources/Weather/color-128/").Append(weather.now.icon).Append(".png").ToString()));
                 WeatherIcon.Source = icon;
                 Temp.Text = weather.now.temp + "°";
                 Clime.Text = weather.now.text;
                 WeatherAqi(weatherViewModel, location);
-                string windDir = weather.now.windDir;
-                string windScale = weather.now.windScale;
-                string windSpeed = weather.now.windSpeed;
-                string humidity = weather.now.humidity;
-                string vis = weather.now.vis;
-                des.Text = "风向：" + windDir + "\t风力等级：" + windScale + "\t风速：" + windSpeed + "\t湿度:" + humidity + "%\t能见度：" + vis;
+                WindDir.Text = weather.now.windDir;
+                WindScale.Text = weather.now.windScale + "级";
+                Humidity.Text = weather.now.humidity + "%\n相对湿度";
+                vis.Text = weather.now.vis + "KM\n能见度";
+                Pressure.Text = weather.now.pressure + "hpa\n大气压";
+                /*des.Text = "风向：" + windDir + "\t风力等级：" + windScale + "\t风速：" + windSpeed + "\t湿度:" + humidity + "%\t能见度：" + vis;*/
+                des.Text = life.daily[0].text;
                 return;
             }
 
@@ -75,19 +77,19 @@ namespace WallPoster.Views
                         binding.Source = "#95B359";
                         break;
                     case "2":
-                        binding.Source = "#FFD700";
+                        binding.Source = "#D3CF63";
                         break;
                     case "3":
-                        binding.Source = "#FF8C00";
+                        binding.Source = "#E0991D";
                         break;
                     case "4":
-                        binding.Source = "#FF0000";
+                        binding.Source = "#D96161";
                         break;
                     case "5":
-                        binding.Source = "#59181A";
+                        binding.Source = "#A257D0";
                         break;
                     case "6":
-                        binding.Source = "#4B0204";
+                        binding.Source = "#D94371";
                         break;
                 }
                 BindingOperations.SetBinding(AqiBorder, Border.BackgroundProperty, binding);
@@ -98,23 +100,19 @@ namespace WallPoster.Views
         private void WeatherQuery(object sender, HandyControl.Data.FunctionEventArgs<string> e)
         {
             string city = SearchWeather.Text;
-            if (Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$"))
+            string loaction = weatherViewModel.CityQuery(city, key);
+            if (Regex.IsMatch(loaction, @"^[+-]?\d*[.]?\d*$") && loaction != "" && loaction != "Error")
             {
-                string loaction = weatherViewModel.CityQuery(city, key);
-                if (Regex.IsMatch(loaction, @"^[+-]?\d*[.]?\d*$") && loaction != "" && loaction != "Error")
-                {
-                    WeatherCard(weatherViewModel, loaction);
-                    return;
-                }
-                if (loaction == "Error")
-                {
-                    MessageBox.Warning(Lang.ResourceManager.GetString("QueryWarning"));
-                    return;
-                }
-                MessageBox.Warning(Lang.ResourceManager.GetString("Nonsupport"));
+                WeatherCard(weatherViewModel, loaction);
                 return;
             }
-            MessageBox.Warning(Lang.ResourceManager.GetString("QueryWarning"));
+            if (loaction == "Error")
+            {
+                MessageBox.Warning(Lang.ResourceManager.GetString("QueryWarning"));
+                return;
+            }
+            MessageBox.Warning(Lang.ResourceManager.GetString("Nonsupport"));
+
         }
     }
 }

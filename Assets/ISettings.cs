@@ -21,7 +21,7 @@ namespace WallPoster.Assets
         public virtual ApplicationTheme Theme { get; set; } = ApplicationTheme.Light;
         public virtual Brush Accent { get; set; }
         public virtual string AppSecret { get; set; } = Consts.WeatherKey;
-        public virtual string Location { get; set; } = "101030100";
+        public virtual string Location { get; set; } = "101030500";
 
         public ISettings()
         {
