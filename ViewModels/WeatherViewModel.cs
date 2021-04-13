@@ -80,14 +80,20 @@ namespace WallPoster.ViewModels
             {
                 cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
             }
+            //判断是否城市ID
             if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
             {
                 cityInfo = cityModel.location[0].name;
                 return cityInfo;
             }
-            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$"))
+            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$") && cityModel.location[0].country.Equals("中国"))
             {
                 cityInfo = cityModel.location[0].id;
+                return cityInfo;
+            }
+            if (cityModel.code == "404")
+            {
+                cityInfo = "Error";
                 return cityInfo;
             }
 

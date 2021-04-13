@@ -101,9 +101,14 @@ namespace WallPoster.Views
             if (Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$"))
             {
                 string loaction = weatherViewModel.CityQuery(city, key);
-                if (Regex.IsMatch(loaction, @"^[+-]?\d*[.]?\d*$"))
+                if (Regex.IsMatch(loaction, @"^[+-]?\d*[.]?\d*$") && loaction != "" && loaction != "Error")
                 {
                     WeatherCard(weatherViewModel, loaction);
+                    return;
+                }
+                if (loaction == "Error")
+                {
+                    MessageBox.Warning(Lang.ResourceManager.GetString("QueryWarning"));
                     return;
                 }
                 MessageBox.Warning(Lang.ResourceManager.GetString("Nonsupport"));
