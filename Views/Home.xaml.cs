@@ -72,7 +72,7 @@ namespace WallPoster.Views
                 switch (weatherAqi.now.level)
                 {
                     case "1":
-                        binding.Source = "#7FFFAA";
+                        binding.Source = "#95B359";
                         break;
                     case "2":
                         binding.Source = "#FFD700";
