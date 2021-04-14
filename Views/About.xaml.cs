@@ -1,12 +1,6 @@
 ﻿using HandyControl.Controls;
-using HandyControl.Tools;
 using HandyControl.Tools.Extension;
-using WallPoster.Assets;
 using WallPoster.Assets.Strings;
-using WallPoster.Models;
-using ModernWpf.Controls;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
