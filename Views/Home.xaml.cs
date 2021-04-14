@@ -37,8 +37,7 @@ namespace WallPoster.Views
 
         private void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
-            
-            WeatherModel weather  = weatherViewModel.LoadWeather(location, key);
+            WeatherModel weather  = weatherViewModel.LoadWeather(location,key);
             WeatherModel life = weatherViewModel.LifeIndex(location, key, "8");
             if (weather.code == "200")
             {
@@ -54,7 +53,6 @@ namespace WallPoster.Views
                 Humidity.Text = weather.now.humidity + "%\n相对湿度";
                 vis.Text = weather.now.vis + "KM\n能见度";
                 Pressure.Text = weather.now.pressure + "hpa\n大气压";
-                /*des.Text = "风向：" + windDir + "\t风力等级：" + windScale + "\t风速：" + windSpeed + "\t湿度:" + humidity + "%\t能见度：" + vis;*/
                 des.Text = life.daily[0].text;
                 return;
             }
