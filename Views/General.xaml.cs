@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using HandyControl.Controls;
 using ModernWpf.Controls;
 using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
