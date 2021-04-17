@@ -80,7 +80,7 @@ namespace WallPoster.ViewModels
             {
                 cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
             }
-            //判断是否城市ID
+            #region 判断是否城市ID
             if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
             {
                 cityInfo = cityModel.location[0].name;
@@ -91,6 +91,7 @@ namespace WallPoster.ViewModels
                 cityInfo = cityModel.location[0].id;
                 return cityInfo;
             }
+            #endregion
             if (cityModel.code == "404")
             {
                 cityInfo = "Error";
