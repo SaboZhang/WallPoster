@@ -139,7 +139,7 @@
     <value>中文简体</value>
   </data>
   <data name="CurrentLocation" xml:space="preserve">
-    <value>当前路径</value>
+    <value>媒体库目录设置</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>当前版本{0}</value>
@@ -154,7 +154,7 @@
     <value>一款简单易用的本地影视收藏管理工具</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>英文</value>
+    <value>English</value>
   </data>
   <data name="FlowDirection" xml:space="preserve">
     <value>方向</value>
@@ -180,6 +180,9 @@
   <data name="Movie" xml:space="preserve">
     <value>电影</value>
   </data>
+  <data name="MovieDirectory" xml:space="preserve">
+    <value>影视目录</value>
+  </data>
   <data name="Nonsupport" xml:space="preserve">
     <value>国外天气信息不完整，暂时不提供查询</value>
   </data>
@@ -203,6 +206,9 @@
   </data>
   <data name="Theme" xml:space="preserve">
     <value>主题</value>
+  </data>
+  <data name="TVDirectory" xml:space="preserve">
+    <value>剧集目录</value>
   </data>
   <data name="TVplay" xml:space="preserve">
     <value>电视剧</value>

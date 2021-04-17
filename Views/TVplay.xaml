@@ -4,10 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:local="clr-namespace:WallPoster.Views"
+             xmlns:local="clr-namespace:WallPoster.Models"
+             xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <DataGrid x:Name="saying" ItemsSource="{Binding Saying}">
+                <DataTemplate>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" x:Name="con" TextAlignment="Center" Margin="10,24,10,10" Text="{Binding content}"/>
+                </DataTemplate>
+            </DataGrid>
         <hc:SimpleStackPanel>
             <Button Width="200" Height="30" Click="Button_Click" Content="点击这里" Style="{StaticResource ButtonInfo}"/>
         </hc:SimpleStackPanel>

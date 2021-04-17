@@ -6,16 +6,17 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Resources\Img\logo.ico</ApplicationIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright © Rick 2021</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.6" />
     <PackageReference Include="HandyControls" Version="3.3.4" />
     <PackageReference Include="ModernWpfUis" Version="1.2.0" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="nucs.JsonSettings" Version="1.0.7" />
     <PackageReference Include="nucs.JsonSettings.Autosave" Version="1.0.0" />
+    <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.113.7" />
   </ItemGroup>
 

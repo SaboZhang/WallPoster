@@ -124,7 +124,7 @@
     <value>Language setting</value>
   </data>
   <data name="Chinese" xml:space="preserve">
-    <value>Simplified Chinese</value>
+    <value>中文简体</value>
   </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>Dark</value>
@@ -166,7 +166,7 @@
     <value>CheckUpdate</value>
   </data>
   <data name="CurrentLocation" xml:space="preserve">
-    <value>CurrentLocation</value>
+    <value>Media library directory Settings</value>
   </data>
   <data name="CurrentVersion" xml:space="preserve">
     <value>CurrentVersion{0}</value>
@@ -212,5 +212,11 @@
   </data>
   <data name="Nonsupport" xml:space="preserve">
     <value>Foreign weather information is incomplete, no query is available at this time</value>
+  </data>
+  <data name="MovieDirectory" xml:space="preserve">
+    <value>Movie Directory</value>
+  </data>
+  <data name="TVDirectory" xml:space="preserve">
+    <value>TV Directory</value>
   </data>
 </root>

@@ -10,6 +10,7 @@ using WallPoster.Assets.Strings;
 using HandyControl.Controls;
 using WallPoster.Assets;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace WallPoster.Views
 {
@@ -21,6 +22,7 @@ namespace WallPoster.Views
         public string key;
         public string location;
         WeatherViewModel weatherViewModel = new WeatherViewModel();
+        
 
         public Home()
         {
@@ -37,7 +39,8 @@ namespace WallPoster.Views
 
         private void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
-            WeatherModel weather  = weatherViewModel.LoadWeather(location,key);
+            
+            WeatherModel weather = weatherViewModel.LoadWeather(location, key);
             WeatherModel life = weatherViewModel.LifeIndex(location, key, "8");
             if (weather.code == "200")
             {
@@ -53,7 +56,8 @@ namespace WallPoster.Views
                 Humidity.Text = weather.now.humidity + "%\n相对湿度";
                 vis.Text = weather.now.vis + "KM\n能见度";
                 Pressure.Text = weather.now.pressure + "hpa\n大气压";
-                des.Text = life.daily[0].text;
+                des.Text = SayingViewModel.LoadSaying();
+
                 return;
             }
 

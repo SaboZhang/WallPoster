@@ -1,26 +1,23 @@
-﻿using GalaSoft.MvvmLight;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Prism.Mvvm;
+using WallPoster.Models;
 
 namespace WallPoster.ViewModels
 {
-    public class ViewModelBase<T> : ViewModelBase
+    public class ViewModelBase : BindableBase
     {
         /// <summary>
         ///     数据列表
         /// </summary>
-        private IList<T> _dataList;
+        private IList<MoviesModel> _dataList;
 
         /// <summary>
         ///     数据列表
         /// </summary>
-        public IList<T> DataList
+        public IList<MoviesModel> DataList
         {
             get => _dataList;
-#if NET40
-            set => Set(nameof(DataList), ref _dataList, value);
-#else
-            set => Set(ref _dataList, value);
-#endif       
+            set => SetProperty(ref _dataList, value);
         }
     }
 }

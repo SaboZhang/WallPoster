@@ -1,19 +1,14 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace WallPoster.Models.Service
 {
     /// <summary>
-    /// 获取天气情况
+    /// 获取天气情况 Deflate
     /// </summary>
     public class HttpService
     {
@@ -40,7 +35,9 @@ namespace WallPoster.Models.Service
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(stringBuilder.ToString());
             //组合参数
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            Stream stream = new GZipStream(httpWebResponse.GetResponseStream(), CompressionMode.Decompress);
+            Stream stream = httpWebResponse.ContentEncoding == "gzip"
+                ? new GZipStream(httpWebResponse.GetResponseStream(), CompressionMode.Decompress)
+                : httpWebResponse.GetResponseStream();
             try
             {
                 //获取内容
@@ -84,6 +81,28 @@ namespace WallPoster.Models.Service
             using StreamReader streamReader = new StreamReader(stream, Encoding.UTF8);
             result = streamReader.ReadToEnd();
             Console.WriteLine(result);
+            return result;
+        }
+
+        public static string Get(string url)
+        {
+            string result = @"";
+
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            //组合参数
+            HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            Stream stream = httpWebResponse.GetResponseStream();
+            try
+            {
+                //获取内容
+                using StreamReader streamReader = new StreamReader(stream);
+                result = streamReader.ReadToEnd();
+            }
+
+            finally
+            {
+                stream.Close();
+            }
             return result;
         }
     }

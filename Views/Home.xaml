@@ -49,6 +49,8 @@
                     <TextBlock x:Name="vis" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
                 </StackPanel>
             </Border>
+            
+            
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

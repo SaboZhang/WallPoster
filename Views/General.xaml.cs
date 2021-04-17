@@ -4,6 +4,7 @@ using ModernWpf.Controls;
 using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
+using System;
 
 namespace WallPoster.Views
 {
@@ -58,6 +59,14 @@ namespace WallPoster.Views
         private void ChangeDefaultCity(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void MediaStoreLocation_Click(object sender, RoutedEventArgs e)
+        {
+            /*using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+
+            }*/
         }
     }
 }

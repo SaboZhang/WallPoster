@@ -21,5 +21,7 @@ namespace WallPoster.Assets
         public static readonly string FutureWeather = "https://devapi.qweather.com/v7/weather/7d";
         public static readonly string StatusCode = "https://dev.qweather.com/docs/start/status-code/";
         #endregion
+
+        public static readonly string SayingUrl = "https://api.xygeng.cn/one";
     }
 }

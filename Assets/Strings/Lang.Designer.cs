@@ -124,7 +124,7 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 当前路径 的本地化字符串。
+        ///   查找类似 媒体库目录设置 的本地化字符串。
         /// </summary>
         public static string CurrentLocation {
             get {
@@ -169,7 +169,7 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 英文 的本地化字符串。
+        ///   查找类似 English 的本地化字符串。
         /// </summary>
         public static string English {
             get {
@@ -250,6 +250,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 影视目录 的本地化字符串。
+        /// </summary>
+        public static string MovieDirectory {
+            get {
+                return ResourceManager.GetString("MovieDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 国外天气信息不完整，暂时不提供查询 的本地化字符串。
         /// </summary>
         public static string Nonsupport {
@@ -318,6 +327,15 @@ namespace WallPoster.Assets.Strings {
         public static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 剧集目录 的本地化字符串。
+        /// </summary>
+        public static string TVDirectory {
+            get {
+                return ResourceManager.GetString("TVDirectory", resourceCulture);
             }
         }
         

@@ -22,29 +22,12 @@ namespace WallPoster
             base.OnStartup(e);
             
             ConfigHelper.Instance.SetLang(Settings.InterfaceLanguage);
-            /*if (!Settings.Version.Equals(RegistryHelper.GetValue<int>(Consts.VersionKey, Consts.AppName)))
-            {
-                if (File.Exists(Consts.ConfigPath))
-                {
-                    File.Delete(Consts.ConfigPath);
-                }
-                RegistryHelper.AddOrUpdateKey(Consts.VersionKey, Consts.AppName, Settings.Version);
-            }*/
-
+            
             UpdateTheme(Settings.Theme);
             UpdateAccent(Settings.Accent);
 
-            /*if (e.Args.Length > 0)
-            {
-                var NameFromContextMenu = RemoveJunkString(Path.GetFileNameWithoutExtension(e.Args[0]));
-
-                WindowsContextMenuArgument[0] = NameFromContextMenu;
-                WindowsContextMenuArgument[1] = e.Args[0].Replace(Path.GetFileName(e.Args[0]), "");
-            }*/
-
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            /*AppCenter.Start(Consts.AppSecret, typeof(Analytics), typeof(Crashes));*/
         }
 
         internal void UpdateTheme(ApplicationTheme theme)
