@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using WallPoster.Assets;
 using WallPoster.Models;
 using WallPoster.Models.Service;
@@ -26,11 +23,11 @@ namespace WallPoster.ViewModels
             WeatherModel nowWeather = null;
             try
             {
-                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.NowWeather, dic));
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.NowWeather, dic));
             }
             catch(Exception e)
             {
-                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.NowWeather, dic));
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.NowWeather, dic));
             }
             if (nowWeather.code == "200")
             {
@@ -55,11 +52,11 @@ namespace WallPoster.ViewModels
             WeatherModel WeatherAqi = null;
             try
             {
-                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.Air, dic));
+                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
             }
             catch
             {
-                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.Air, dic));
+                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
             }
 
             return WeatherAqi;
@@ -74,11 +71,11 @@ namespace WallPoster.ViewModels
             string cityInfo = "";
             try
             {
-                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
+                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
             }
             catch
             {
-                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpService.Get(Consts.CityInfof, dic));
+                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
             }
             #region 判断是否城市ID
             if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
@@ -110,11 +107,11 @@ namespace WallPoster.ViewModels
             WeatherModel weather = null;
             try 
             {
-                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.TheLife, dic));
+                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.TheLife, dic));
             }
             catch
             {
-                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpService.Get(Consts.TheLife, dic));
+                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.TheLife, dic));
             }
             if (weather.code == "200")
             {

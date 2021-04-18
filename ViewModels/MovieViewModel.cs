@@ -76,7 +76,15 @@ namespace WallPoster.ViewModels
         {
             DataList = GetMovieDataList();
         }
-    
+
+        /*internal MoviesModel GetMovieData()
+        {
+            return new MoviesModel
+            {
+                Content = $"/WallPoster;component/Resources/Album/{DateTime.Now.Second % 10 + 1}.jpg"
+            };
+        }*/
+
     }
 
 }

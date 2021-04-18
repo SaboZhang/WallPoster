@@ -1,10 +1,8 @@
-﻿using HandyControl.Controls;
-using HandyControl.Themes;
+﻿using HandyControl.Themes;
 using HandyControl.Tools;
 using System.Net;
 using System.Windows;
 using System.Windows.Media;
-using WallPoster.Assets;
 using static WallPoster.Assets.Helper;
 
 namespace WallPoster

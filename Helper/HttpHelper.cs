@@ -8,9 +8,9 @@ using System.Text;
 namespace WallPoster.Models.Service
 {
     /// <summary>
-    /// 获取天气情况 Deflate
+    /// HTTP请求工具类 Deflate压缩方式未做处理
     /// </summary>
-    public class HttpService
+    public class HttpHelper
     {
         public static string Get(string url, Dictionary<string, string> dic)
         {

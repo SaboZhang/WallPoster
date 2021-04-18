@@ -19,7 +19,6 @@
                 <ResourceDictionary Source="/Resources/Geometries.xaml"/>
                 <ResourceDictionary Source="/Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
