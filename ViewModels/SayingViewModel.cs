@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using WallPoster.Models;
 using WallPoster.Models.Service;
 using WallPoster.Assets;
+using Prism.Mvvm;
+using System.Collections.ObjectModel;
 
 namespace WallPoster.ViewModels
 {
-    public class SayingViewModel
+    public class SayingViewModel : BindableBase
     {
         public static string LoadSaying()
         {
@@ -31,5 +33,20 @@ namespace WallPoster.ViewModels
             }
             return "获取名言失败";
         }
+
+        
+
+        private string _content;
+        public string content
+        {
+            get { return _content; }
+            set => SetProperty(ref _content, value);
+        }
+
+        public SayingViewModel()
+        {
+            content = "123456";
+        }
+
     }
 }

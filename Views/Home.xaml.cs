@@ -37,11 +37,10 @@ namespace WallPoster.Views
             location = Settings.Location;
         }
 
-        private void WeatherCard(WeatherViewModel weatherViewModel, string location)
+        private async void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
             
-            WeatherModel weather = weatherViewModel.LoadWeather(location, key);
-            WeatherModel life = weatherViewModel.LifeIndex(location, key, "8");
+            WeatherModel weather = await weatherViewModel.LoadWeather(location, key);
             if (weather.code == "200")
             {
                 UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm");
@@ -61,7 +60,7 @@ namespace WallPoster.Views
                 return;
             }
 
-            Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {weather.code}")));
+           await Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {weather.code}")));
             System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
 
         }

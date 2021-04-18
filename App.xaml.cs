@@ -12,6 +12,7 @@ namespace WallPoster
     /// </summary>
     public partial class App : Application
     {
+        
         public static string[] WindowsContextMenuArgument = { string.Empty, string.Empty };
 
 

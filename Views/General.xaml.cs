@@ -3,7 +3,7 @@ using ModernWpf.Controls;
 using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
-using System;
+using WallPoster.Helper;
 
 namespace WallPoster.Views
 {
@@ -12,6 +12,8 @@ namespace WallPoster.Views
     /// </summary>
     public partial class General : UserControl
     {
+        private static string dbPath = System.AppDomain.CurrentDomain.BaseDirectory + "data.db";
+
         public General()
         {
             InitializeComponent();
@@ -62,10 +64,19 @@ namespace WallPoster.Views
 
         private void MediaStoreLocation_Click(object sender, RoutedEventArgs e)
         {
-            /*using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
-
-            }*/
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string path = dialog.SelectedPath;
+                    SQLiteHelper sql = new SQLiteHelper("data source=" + dbPath);
+                    sql.InsertValues("media_location", new string[] { "1", path, "123" });
+                    sql.CloseConnection();
+                    string[] loaction = { path };
+                    Settings.MovieLocation = loaction;
+                }
+            }
+            
         }
     }
 }

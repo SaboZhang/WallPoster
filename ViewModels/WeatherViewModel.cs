@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using WallPoster.Assets;
 using WallPoster.Models;
 using WallPoster.Models.Service;
@@ -13,9 +14,9 @@ namespace WallPoster.ViewModels
     /// </summary>
     public class WeatherViewModel
     {
-        
-        
-        public WeatherModel LoadWeather(string location, string key)
+
+        HttpHelper httpHelper = new HttpHelper();
+        public async Task<WeatherModel> LoadWeather(string location, string key)
         {
             Dictionary<string, string> dic = new();
             dic.Add("location", location);
@@ -23,11 +24,13 @@ namespace WallPoster.ViewModels
             WeatherModel nowWeather = null;
             try
             {
-                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.NowWeather, dic));
+                var result = await httpHelper.GetAsync(Consts.NowWeather, dic);
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(result);
             }
             catch(Exception e)
             {
-                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.NowWeather, dic));
+                var result = await httpHelper.GetAsync(Consts.NowWeather, dic);
+                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(result);
             }
             if (nowWeather.code == "200")
             {

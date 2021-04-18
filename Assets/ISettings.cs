@@ -2,6 +2,7 @@
 using ModernWpf.Controls;
 using nucs.JsonSettings;
 using System;
+using System.Collections;
 using System.Windows.Media;
 
 namespace WallPoster.Assets
@@ -11,10 +12,12 @@ namespace WallPoster.Assets
         public override string FileName { get; set; } = Consts.ConfigPath;
 
         public virtual int Version { get; set; } = 0;
+        public static ArrayList SourcePath = new ArrayList();
 
 
         public virtual string InterfaceLanguage { get; set; } = "zh-CN";
-        public virtual string StoreLocation { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\";
+        public virtual string[] MovieLocation { get; set; } = Array.Empty<string>();
+        public virtual string[] TVLocation { get; set; } = { Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" };
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
         public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;

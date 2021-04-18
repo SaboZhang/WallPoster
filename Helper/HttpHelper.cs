@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.GZip;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace WallPoster.Models.Service
 {
@@ -12,6 +15,45 @@ namespace WallPoster.Models.Service
     /// </summary>
     public class HttpHelper
     {
+        private static readonly object LockObj = new object();
+        private static HttpClient client = null;
+        /*private static readonly HttpClient _httpClient;*/
+       
+        public HttpHelper()
+        {
+            GetInstance();
+        }
+        /// <summary>
+        /// 单例 双检锁/双重校验锁
+        /// </summary>
+        /// <returns></returns>
+        public static HttpClient GetInstance()
+        {
+            if (client == null)
+            {
+                lock (LockObj)
+                {
+                    if (client == null)
+                    {
+                        client = new HttpClient();
+                    }
+                }
+            }
+            return client;
+        }
+
+        /*static HttpHelper()
+        {
+            client = new HttpClient() { BaseAddress = new Uri(Consts.NowWeather) };
+            //帮HttpClient热身
+            client.SendAsync(new HttpRequestMessage
+            {
+                Method = new HttpMethod("HEAD"),
+                RequestUri = new Uri(Consts.NowWeather + "/")
+            })
+                .Result.EnsureSuccessStatusCode();
+        }*/
+
         public static string Get(string url, Dictionary<string, string> dic)
         {
             string result = @"";
@@ -31,9 +73,8 @@ namespace WallPoster.Models.Service
                     
                 }
             }
-
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(stringBuilder.ToString());
             //组合参数
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(stringBuilder.ToString());
             HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             Stream stream = httpWebResponse.ContentEncoding == "gzip"
                 ? new GZipStream(httpWebResponse.GetResponseStream(), CompressionMode.Decompress)
@@ -80,7 +121,6 @@ namespace WallPoster.Models.Service
             Stream stream = response.GetResponseStream();
             using StreamReader streamReader = new StreamReader(stream, Encoding.UTF8);
             result = streamReader.ReadToEnd();
-            Console.WriteLine(result);
             return result;
         }
 
@@ -102,6 +142,75 @@ namespace WallPoster.Models.Service
             finally
             {
                 stream.Close();
+            }
+            return result;
+        }
+
+        public async Task<string> GetAsync(string url, Dictionary<string,string> dic)
+        {
+            string result = @"";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(url);
+            if (dic.Count > 0)
+            {
+                stringBuilder.Append("?");
+                int i = 0;
+                foreach (var item in dic)
+                {
+                    if (i > 0)
+                        stringBuilder.Append("&");
+                    stringBuilder.AppendFormat("{0}={1}", item.Key, item.Value);
+                    i++;
+                }
+            }
+            try
+            {
+                HttpResponseMessage httpResponse = await client.GetAsync(stringBuilder.ToString());
+                httpResponse.EnsureSuccessStatusCode();
+                var resType = httpResponse.Content.Headers.ContentEncoding.ToString();
+                if (resType == "gzip")
+                {
+                    GZipInputStream inputStream = new GZipInputStream(await httpResponse.Content.ReadAsStreamAsync());
+                    result = new StreamReader(inputStream).ReadToEnd();
+                    return result;
+                }
+                result = await httpResponse.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                
+            }
+            return result;
+        }
+
+        public async Task<string> PostAsync(string url, Dictionary<string, string> dic)
+        {
+            string result = @"";
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(url);
+            if (dic.Count > 0)
+            {
+                stringBuilder.Append("?");
+                int i = 0;
+                foreach (var item in dic)
+                {
+                    if (i > 0)
+                        stringBuilder.Append("&");
+                    stringBuilder.AppendFormat("{0}={1}", item.Key, item.Value);
+                    i++;
+                }
+            }
+            try
+            {
+                HttpContent content = new StringContent(stringBuilder.ToString());
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                response.EnsureSuccessStatusCode();
+                result = response.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+            catch(Exception e)
+            {
+               
             }
             return result;
         }
