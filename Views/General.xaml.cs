@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
 using WallPoster.Helper;
+using System.Data;
 
 namespace WallPoster.Views
 {
@@ -70,7 +71,7 @@ namespace WallPoster.Views
                 {
                     string path = dialog.SelectedPath;
                     SQLiteHelper sql = new SQLiteHelper("data source=" + dbPath);
-                    sql.InsertValues("media_location", new string[] { "1", path, "123" });
+                    sql.InsertValues("media_location", new string[] { "", path, "123" });
                     sql.CloseConnection();
                     string[] loaction = { path };
                     Settings.MovieLocation = loaction;

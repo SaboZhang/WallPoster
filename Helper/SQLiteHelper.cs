@@ -107,7 +107,7 @@ namespace WallPoster.Helper
             {
                 throw new SQLiteException("数据长度出错");
             }
-            string queryString = "INSERT INTO" + tableName + "VALUES (" + "'" + values[0] + "'";
+            string queryString = "INSERT INTO " + tableName + " VALUES (" + "'" + values[0] + "'";
             for (int i = 1; i < values.Length; i++)
             {
                 queryString += ", " + "'" + values[i] + "'";
