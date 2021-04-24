@@ -3,6 +3,7 @@ using ModernWpf.Controls;
 using nucs.JsonSettings;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace WallPoster.Assets
@@ -18,6 +19,8 @@ namespace WallPoster.Assets
         public virtual string InterfaceLanguage { get; set; } = "zh-CN";
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
+        public virtual List<string> MovieLocation { get; set; } = new List<string>();
+        public virtual List<string> TVlocation { get; set; } = new List<string>();
         public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;
         public virtual ApplicationTheme Theme { get; set; } = ApplicationTheme.Light;
         public virtual Brush Accent { get; set; }

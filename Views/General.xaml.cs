@@ -7,6 +7,7 @@ using WallPoster.Helper;
 using System.Data;
 using WallPoster.Models;
 using WallPoster.ViewModels;
+using System.Collections.Generic;
 
 namespace WallPoster.Views
 {
@@ -71,6 +72,9 @@ namespace WallPoster.Views
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string path = dialog.SelectedPath;
+                    int pathCount = Settings.MovieLocation.Count;
+                    Settings.MovieLocation.Add(path);
+                    Settings.MovieLocation = new List<string>(Settings.MovieLocation);
                     using (var helper = new SQLiteHelper())
                     {
                         var model = new PathModel()
