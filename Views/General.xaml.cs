@@ -5,6 +5,7 @@ using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
 using WallPoster.Helper;
 using System.Data;
+using WallPoster.Models;
 
 namespace WallPoster.Views
 {
@@ -13,7 +14,6 @@ namespace WallPoster.Views
     /// </summary>
     public partial class General : UserControl
     {
-        private static string dbPath = System.AppDomain.CurrentDomain.BaseDirectory + "data.db";
 
         public General()
         {
@@ -70,9 +70,16 @@ namespace WallPoster.Views
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string path = dialog.SelectedPath;
-                    SQLiteHelper sql = new SQLiteHelper("data source=" + dbPath);
-                    sql.InsertValues("media_location", new string[] { "", path, "123" });
-                    sql.CloseConnection();
+                    using (var helper = new SQLiteHelper())
+                    {
+                        var model = new PathModel()
+                        {
+                            MoviePath = path,
+                            TVPath = ""
+                        };
+                        helper.paths.Add(model);
+                        helper.SaveChanges();
+                    }
                     string[] loaction = { path };
                     Settings.MovieLocation = loaction;
                 }
