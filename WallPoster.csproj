@@ -12,7 +12,6 @@
   <ItemGroup>
     <PackageReference Include="HandyControls" Version="3.3.4" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.5" />
     <PackageReference Include="ModernWpfUis" Version="1.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="nucs.JsonSettings" Version="1.0.7" />

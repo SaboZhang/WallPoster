@@ -16,8 +16,6 @@ namespace WallPoster.Assets
 
 
         public virtual string InterfaceLanguage { get; set; } = "zh-CN";
-        public virtual string[] MovieLocation { get; set; } = Array.Empty<string>();
-        public virtual string[] TVLocation { get; set; } = { Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\" };
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
         public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;

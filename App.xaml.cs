@@ -1,8 +1,12 @@
-﻿using HandyControl.Themes;
+﻿using DryIoc;
+using HandyControl.Themes;
 using HandyControl.Tools;
+using Prism.DryIoc;
+using Prism.Ioc;
 using System.Net;
 using System.Windows;
 using System.Windows.Media;
+using WallPoster.ViewModels;
 using static WallPoster.Assets.Helper;
 
 namespace WallPoster
@@ -10,7 +14,7 @@ namespace WallPoster
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
         
         public static string[] WindowsContextMenuArgument = { string.Empty, string.Empty };
@@ -46,5 +50,16 @@ namespace WallPoster
                 ModernWpf.ThemeManager.Current.AccentColor = accent == null ? null : ColorHelper.GetColorFromBrush(accent);
             }
         }
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            /*containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
+            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);*/
+            containerRegistry.RegisterForNavigation<MainWindow, MainViewModel>();
+        }
+
+        protected override Window CreateShell()
+
+         => Container.Resolve<MainWindow>();
     }
 }

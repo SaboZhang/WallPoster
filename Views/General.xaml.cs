@@ -6,6 +6,7 @@ using WallPoster.Assets;
 using WallPoster.Helper;
 using System.Data;
 using WallPoster.Models;
+using WallPoster.ViewModels;
 
 namespace WallPoster.Views
 {
@@ -77,11 +78,9 @@ namespace WallPoster.Views
                             MoviePath = path,
                             TVPath = ""
                         };
-                        helper.paths.Add(model);
+                        helper.Paths.Add(model);
                         helper.SaveChanges();
                     }
-                    string[] loaction = { path };
-                    Settings.MovieLocation = loaction;
                 }
             }
             

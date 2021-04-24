@@ -1,14 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WallPoster.Models;
 using WallPoster.Models.Service;
 using WallPoster.Assets;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
 
 namespace WallPoster.ViewModels
 {

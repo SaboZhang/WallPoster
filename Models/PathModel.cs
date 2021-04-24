@@ -10,5 +10,6 @@ namespace WallPoster.Models
         public int Id { get; set; }
         public string MoviePath { get; set; }
         public string TVPath { get; set; }
+        public string Category { get; set; }
     }
 }

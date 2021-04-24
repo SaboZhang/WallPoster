@@ -28,6 +28,7 @@ namespace WallPoster.Helper
             Database.SetInitializer(new SqliteDropCreateDatabaseWhenModelChanges<SQLiteHelper>(modelBuilder));
         }
 
-        public DbSet<PathModel> paths { get; set; }
+        public DbSet<PathModel> Paths { get; set; }
+
     }
 }

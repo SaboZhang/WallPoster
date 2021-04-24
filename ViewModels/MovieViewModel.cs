@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using WallPoster.Models;
 
 namespace WallPoster.ViewModels
 {
-    public class MovieViewModel : ViewModelBase
+    public class MovieViewModel : ViewModelBase<MoviesModel>
     {
+
         internal ObservableCollection<MoviesModel> GetMovieDataList()
         {
             return new ObservableCollection<MoviesModel>
