@@ -10,7 +10,6 @@ using WallPoster.Assets.Strings;
 using HandyControl.Controls;
 using WallPoster.Assets;
 using System.Text.RegularExpressions;
-using System.Collections.ObjectModel;
 
 namespace WallPoster.Views
 {
@@ -41,7 +40,7 @@ namespace WallPoster.Views
         {
             
             WeatherModel weather = await weatherViewModel.LoadWeather(location, key);
-            if (weather.code == "200")
+            if (weather != null && weather.code == "200")
             {
                 UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm");
                 City.Text = weatherViewModel.CityQuery(location, key);
@@ -60,7 +59,7 @@ namespace WallPoster.Views
                 return;
             }
 
-           await Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {weather.code}")));
+            await Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {(weather == null ? "网络错误" : weather.code)}")));
             System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
 
         }

@@ -3,11 +3,6 @@ using ModernWpf.Controls;
 using System.Windows.Controls;
 using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
-using WallPoster.Helper;
-using System.Data;
-using WallPoster.Models;
-using WallPoster.ViewModels;
-using System.Collections.Generic;
 
 namespace WallPoster.Views
 {
@@ -58,36 +53,6 @@ namespace WallPoster.Views
                 Settings.AppSecret = key;
             }
             
-        }
-
-        private void ChangeDefaultCity(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void MediaStoreLocation_Click(object sender, RoutedEventArgs e)
-        {
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
-            {
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    string path = dialog.SelectedPath;
-                    int pathCount = Settings.MovieLocation.Count;
-                    Settings.MovieLocation.Add(path);
-                    Settings.MovieLocation = new List<string>(Settings.MovieLocation);
-                    using (var helper = new SQLiteHelper())
-                    {
-                        var model = new PathModel()
-                        {
-                            MoviePath = path,
-                            TVPath = ""
-                        };
-                        helper.Paths.Add(model);
-                        helper.SaveChanges();
-                    }
-                }
-            }
-            
-        }
+        } 
     }
 }

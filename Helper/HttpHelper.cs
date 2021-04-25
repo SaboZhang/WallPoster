@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.GZip;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +16,7 @@ namespace WallPoster.Models.Service
     /// </summary>
     public class HttpHelper
     {
+        private static ILog log = LogManager.GetLogger("HttpHelper");
         private static readonly object LockObj = new object();
         private static HttpClient client = null;
         /*private static readonly HttpClient _httpClient;*/
@@ -176,9 +178,10 @@ namespace WallPoster.Models.Service
                 }
                 result = await httpResponse.Content.ReadAsStringAsync();
             }
-            catch
+            catch(Exception e)
             {
-                
+                log.Debug($"网络异常--" + e.Message);
+                return result;
             }
             return result;
         }
@@ -210,7 +213,7 @@ namespace WallPoster.Models.Service
             }
             catch(Exception e)
             {
-               
+                log.Debug($"网络异常--{e.StackTrace}" + e.Message);
             }
             return result;
         }

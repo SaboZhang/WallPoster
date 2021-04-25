@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,6 +15,7 @@ namespace WallPoster.ViewModels
     /// </summary>
     public class WeatherViewModel
     {
+        private static ILog log = LogManager.GetLogger("WeatherViewModel");
 
         HttpHelper httpHelper = new HttpHelper();
         public async Task<WeatherModel> LoadWeather(string location, string key)
@@ -29,14 +31,9 @@ namespace WallPoster.ViewModels
             }
             catch(Exception e)
             {
-                var result = await httpHelper.GetAsync(Consts.NowWeather, dic);
-                nowWeather = JsonConvert.DeserializeObject<WeatherModel>(result);
+                log.Debug($"和风天气连接异常，代码：{nowWeather.code}--"+e.Message);
+                return null;
             }
-            if (nowWeather.code == "200")
-            {
-                string icon = nowWeather.now.icon;
-            }
-
             return nowWeather;
 
         }
@@ -57,9 +54,9 @@ namespace WallPoster.ViewModels
             {
                 WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
             }
-            catch
+            catch(Exception e)
             {
-                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
+                log.Debug($"和风天气获取AQI异常，代码：{WeatherAqi.code}--" + e.Message);
             }
 
             return WeatherAqi;
@@ -76,9 +73,9 @@ namespace WallPoster.ViewModels
             {
                 cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
             }
-            catch
+            catch(Exception e)
             {
-                cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
+                log.Debug($"和风天气获取城市列表异常，代码：{cityModel.code}--" + e.Message);
             }
             #region 判断是否城市ID
             if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
@@ -112,9 +109,9 @@ namespace WallPoster.ViewModels
             {
                 weather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.TheLife, dic));
             }
-            catch
+            catch(Exception e)
             {
-                weather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.TheLife, dic));
+                log.Debug($"和风天气获取生活指数异常，代码：{weather.code}--" + e.Message);
             }
             if (weather.code == "200")
             {

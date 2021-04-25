@@ -3,11 +3,15 @@ using WallPoster.Models;
 using WallPoster.Models.Service;
 using WallPoster.Assets;
 using Prism.Mvvm;
+using System;
+using log4net;
 
 namespace WallPoster.ViewModels
 {
     public class SayingViewModel : BindableBase
     {
+        private static ILog log = LogManager.GetLogger("SayingViewModel");
+
         public static string LoadSaying()
         {
             SayingModel sayingModel = null;
@@ -15,9 +19,9 @@ namespace WallPoster.ViewModels
             {
                 sayingModel = JsonConvert.DeserializeObject<SayingModel>(HttpHelper.Get(Consts.SayingUrl));
             }
-            catch
+            catch(Exception e)
             {
-                sayingModel = JsonConvert.DeserializeObject<SayingModel>(HttpHelper.Get(Consts.SayingUrl));
+                log.Debug(e);
             }
             if (sayingModel.code == "200")
             {
@@ -26,20 +30,6 @@ namespace WallPoster.ViewModels
                 return saying;
             }
             return "获取名言失败";
-        }
-
-        
-
-        private string _content;
-        public string content
-        {
-            get { return _content; }
-            set => SetProperty(ref _content, value);
-        }
-
-        public SayingViewModel()
-        {
-            content = "123456";
         }
 
     }

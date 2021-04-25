@@ -87,6 +87,24 @@ namespace WallPoster.ViewModels
             };
         }*/
 
+        /*internal async void GetPaths()
+        {
+            using (var helper = new SQLiteHelper())
+            {
+                var paths = await helper.Paths.ToListAsync();
+                var pathList = new List<PathModel>();
+                foreach (var path in paths)
+                {
+                    PathModel item = new PathModel 
+                    { 
+                        MoviePath = path.MoviePath 
+                    };
+                    pathList.Add(item);
+                }
+                DataList = pathList;
+            }
+        }*/
+
     }
 
 }
