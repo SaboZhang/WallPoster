@@ -26,11 +26,13 @@ namespace WallPoster.ViewModels
             using (var helper = new SQLiteHelper())
             {
                 var paths = await helper.Paths.ToListAsync();
-                PathModel item = null;
                 var pathList = new List<PathModel>();
                 foreach (var path in paths)
                 {
-                    item = path.Category == "2" ? new PathModel { TVPath = path.TVPath } : new PathModel { MoviePath = path.MoviePath };
+                    PathModel item = new PathModel 
+                    { 
+                        MoviePath = path.MoviePath 
+                    };
                     pathList.Add(item);
                 }
                 DataList = pathList;
