@@ -69,6 +69,7 @@ namespace WallPoster.ViewModels
             switch (category)
             {
                 case "1":
+                    Whether = MovieLocations.Count > 0 ? true : false;
                     foreach (var movie in MovieLocations)
                     {
                         item = new PathModel
@@ -81,6 +82,7 @@ namespace WallPoster.ViewModels
                     log.Info(pathList);
                     break;
                 case "2":
+                    Whether = TVLocation.Count > 0 ? true : false;
                     foreach (var tv in TVLocation)
                     {
                         item = new PathModel
@@ -107,11 +109,13 @@ namespace WallPoster.ViewModels
                             Settings.MovieLocation.Add(path);
                             Settings.MovieLocation = new List<string>(Settings.MovieLocation);
                             GetLocations(category);
+                            Whether = true;
                             break;
                         case "2":
                             Settings.TVlocation.Add(path);
                             Settings.TVlocation = new List<string>(Settings.TVlocation);
                             GetLocations(category);
+                            Whether = true;
                             break;
                     }
                 }

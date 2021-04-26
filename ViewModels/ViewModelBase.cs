@@ -60,5 +60,19 @@ namespace WallPoster.ViewModels
                     ErrorsContainer.ClearErrors(() => DataList);
             }
         }
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        private bool _whether;
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        public bool Whether
+        {
+            get => _whether;
+            set => SetProperty(ref _whether, value);
+        }
     }
 }
