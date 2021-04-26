@@ -64,15 +64,29 @@ namespace WallPoster.ViewModels
         /// <summary>
         ///     布尔类型数据绑定
         /// </summary>
-        private bool _whether;
+        private bool _movieWhether;
 
         /// <summary>
         ///     布尔类型数据绑定
         /// </summary>
-        public bool Whether
+        public bool MovieWhether
         {
-            get => _whether;
-            set => SetProperty(ref _whether, value);
+            get => _movieWhether;
+            set => SetProperty(ref _movieWhether, value);
+        }
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        private bool _tvWhether;
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        public bool TVWhether
+        {
+            get => _tvWhether;
+            set => SetProperty(ref _tvWhether, value);
         }
     }
 }

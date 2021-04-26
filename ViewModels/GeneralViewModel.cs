@@ -52,10 +52,14 @@ namespace WallPoster.ViewModels
         }
 
         public DelegateCommand<string> SetStoreLocation { get; private set; }
+        public DelegateCommand<object> DelMoviePath { get; private set; }
+        public DelegateCommand<object> DelTVPath { get; private set; }
 
         public GeneralViewModel()
         {
             SetStoreLocation = new DelegateCommand<string>(SetLocation);
+            DelMoviePath = new DelegateCommand<object>(DeleteMoviePath);
+            DelTVPath = new DelegateCommand<object>(DeleteTVPath);
             GetLocations("1");
             GetLocations("2");
         }
@@ -69,7 +73,7 @@ namespace WallPoster.ViewModels
             switch (category)
             {
                 case "1":
-                    Whether = MovieLocations.Count > 0 ? true : false;
+                    MovieWhether = MovieLocations.Count > 0 ? true : false;
                     foreach (var movie in MovieLocations)
                     {
                         item = new PathModel
@@ -82,7 +86,7 @@ namespace WallPoster.ViewModels
                     log.Info(pathList);
                     break;
                 case "2":
-                    Whether = TVLocation.Count > 0 ? true : false;
+                    TVWhether = TVLocation.Count > 0 ? true : false;
                     foreach (var tv in TVLocation)
                     {
                         item = new PathModel
@@ -109,17 +113,31 @@ namespace WallPoster.ViewModels
                             Settings.MovieLocation.Add(path);
                             Settings.MovieLocation = new List<string>(Settings.MovieLocation);
                             GetLocations(category);
-                            Whether = true;
+                            MovieWhether = true;
                             break;
                         case "2":
                             Settings.TVlocation.Add(path);
                             Settings.TVlocation = new List<string>(Settings.TVlocation);
                             GetLocations(category);
-                            Whether = true;
+                            TVWhether = true;
                             break;
                     }
                 }
             }
+        }
+
+        protected virtual void DeleteMoviePath(object index)
+        {
+            List<string> path = Settings.MovieLocation;
+            path.RemoveAt((int)index);
+            GetLocations("1");
+        }
+
+        protected virtual void DeleteTVPath(object index)
+        {
+            List<string> path = Settings.TVlocation;
+            path.RemoveAt((int)index);
+            GetLocations("2");
         }
 
     }
