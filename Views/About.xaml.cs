@@ -26,8 +26,6 @@ namespace WallPoster.Views
             Version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
             MainWindow.Instance.navView.PaneDisplayMode = Settings.PaneDisplayMode;
             currentVersion.Text = Lang.ResourceManager.GetString("CurrentVersion").Format(Version);
-
-            /*txtLocation.Text = Lang.ResourceManager.GetString("CurrentLocation").Format(Settings.StoreLocation);*/
         }
 
         private void CheckUpdate_Click(object sender, RoutedEventArgs e)

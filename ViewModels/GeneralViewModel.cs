@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using HandyControl.Controls;
+using log4net;
 using Prism.Commands;
 using System.Collections.Generic;
 using WallPoster.Models;
@@ -68,7 +69,7 @@ namespace WallPoster.ViewModels
         {
             var MovieLocations = Settings.MovieLocation;
             var pathList = new List<PathModel>();
-            var TVLocation = Settings.TVlocation;
+            var TVLocation = Settings.Movielocation;
             PathModel item = new PathModel();
             switch (category)
             {
@@ -116,8 +117,8 @@ namespace WallPoster.ViewModels
                             MovieWhether = true;
                             break;
                         case "2":
-                            Settings.TVlocation.Add(path);
-                            Settings.TVlocation = new List<string>(Settings.TVlocation);
+                            Settings.Movielocation.Add(path);
+                            Settings.Movielocation = new List<string>(Settings.Movielocation);
                             GetLocations(category);
                             TVWhether = true;
                             break;
@@ -135,7 +136,7 @@ namespace WallPoster.ViewModels
 
         protected virtual void DeleteTVPath(object index)
         {
-            List<string> path = Settings.TVlocation;
+            List<string> path = Settings.Movielocation;
             path.RemoveAt((int)index);
             GetLocations("2");
         }

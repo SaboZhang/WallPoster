@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using HandyControl.Controls;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using WallPoster.Helper;
 using WallPoster.Models;
+using static WallPoster.Assets.Helper;
 
 namespace WallPoster.ViewModels
 {
@@ -76,7 +81,7 @@ namespace WallPoster.ViewModels
 
         public MovieViewModel()
         {
-            DataList = GetMovieDataList();
+            GetMoviesFile();
         }
 
         /*internal MoviesModel GetMovieData()
@@ -102,8 +107,36 @@ namespace WallPoster.ViewModels
                     pathList.Add(item);
                 }
                 DataList = pathList;
+        Directory.GetFiles
             }
         }*/
+        internal void GetMoviesFile()
+        {
+            List<string> paths = Settings.MovieLocation;
+            if (paths.Count <= 0)
+            {
+                return;
+            }
+            var pathList = new List<MoviesModel>();
+            var fileList = new List<string>();
+            foreach (string path in paths)
+            {
+                /*Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".jpg"));*/
+                string[] file = Directory.GetFiles(@path, "*.png", SearchOption.AllDirectories);
+                fileList.AddRange(file);
+            }
+            foreach (string poster in fileList)
+            {
+                MoviesModel item = new MoviesModel()
+                {
+                    Content = poster,
+                    Header = "测试",
+                    Footer = "测试内容"
+                };
+                pathList.Add(item);
+            }
+            DataList = pathList;
+        }
 
     }
 

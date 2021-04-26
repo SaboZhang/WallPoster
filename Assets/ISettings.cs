@@ -20,7 +20,7 @@ namespace WallPoster.Assets
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
         public virtual List<string> MovieLocation { get; set; } = new List<string>();
-        public virtual List<string> TVlocation { get; set; } = new List<string>();
+        public virtual List<string> Movielocation { get; set; } = new List<string>();
         public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;
         public virtual ApplicationTheme Theme { get; set; } = ApplicationTheme.Light;
         public virtual Brush Accent { get; set; }
