@@ -1,7 +1,6 @@
 ﻿using HandyControl.Themes;
 using ModernWpf.Controls;
 using nucs.JsonSettings;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Media;
@@ -20,7 +19,7 @@ namespace WallPoster.Assets
         public virtual bool IsFirstRun { get; set; } = true;
         public virtual bool IsBackEnabled { get; set; } = true;
         public virtual List<string> MovieLocation { get; set; } = new List<string>();
-        public virtual List<string> Movielocation { get; set; } = new List<string>();
+        public virtual List<string> TVLocation { get; set; } = new List<string>();
         public virtual NavigationViewPaneDisplayMode PaneDisplayMode { get; set; } = NavigationViewPaneDisplayMode.LeftCompact;
         public virtual ApplicationTheme Theme { get; set; } = ApplicationTheme.Light;
         public virtual Brush Accent { get; set; }

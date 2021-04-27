@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using ModernWpf.Controls;
+﻿using ModernWpf.Controls;
+using System.Windows;
 using System.Windows.Controls;
-using static WallPoster.Assets.Helper;
 using WallPoster.Assets;
+using static WallPoster.Assets.Helper;
 
 namespace WallPoster.Views
 {
@@ -24,7 +24,7 @@ namespace WallPoster.Views
             MainWindow.Instance.navView.PaneDisplayMode = Settings.PaneDisplayMode;
             string key = Settings.AppSecret;
             AppSecretText.Text = Consts.WeatherKey.Equals(key) ? null : key;
-            
+
         }
         /// <summary>
         /// 设置导航栏显示方式
@@ -52,7 +52,7 @@ namespace WallPoster.Views
             {
                 Settings.AppSecret = key;
             }
-            
-        } 
+
+        }
     }
 }

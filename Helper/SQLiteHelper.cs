@@ -19,9 +19,9 @@ namespace WallPoster.Helper
                     ForeignKeys = true
                 }.ConnectionString
             }, true)
-            {
+        {
 
-            }
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //如果不存在数据库，则创建 

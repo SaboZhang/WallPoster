@@ -1,9 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using HandyControl.Controls;
 using System.Windows.Controls;
-using HandyControl.Controls;
-using WallPoster.Models;
 using WallPoster.ViewModels;
-using Prism.Mvvm;
 
 namespace WallPoster.Views
 {
@@ -25,6 +22,6 @@ namespace WallPoster.Views
             MessageBox.Show("正在努力conding");
         }
 
-        
+
     }
 }

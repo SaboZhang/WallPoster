@@ -23,5 +23,7 @@ namespace WallPoster.Assets
         #endregion
 
         public static readonly string SayingUrl = "https://api.xygeng.cn/one";
+        public const string MovieCategory = "0";
+        public const string TVCategory = "1";
     }
 }

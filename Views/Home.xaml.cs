@@ -1,15 +1,15 @@
-﻿using System.Windows.Controls;
-using WallPoster.ViewModels;
-using WallPoster.Models;
-using static WallPoster.Assets.Helper;
-using System.Windows.Media.Imaging;
+﻿using HandyControl.Controls;
 using System;
 using System.Text;
-using System.Windows.Data;
-using WallPoster.Assets.Strings;
-using HandyControl.Controls;
-using WallPoster.Assets;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media.Imaging;
+using WallPoster.Assets;
+using WallPoster.Assets.Strings;
+using WallPoster.Models;
+using WallPoster.ViewModels;
+using static WallPoster.Assets.Helper;
 
 namespace WallPoster.Views
 {
@@ -21,13 +21,13 @@ namespace WallPoster.Views
         public string key;
         public string location;
         WeatherViewModel weatherViewModel = new WeatherViewModel();
-        
+
 
         public Home()
         {
             InitializeComponent();
             LoadInitialSettings();
-            WeatherCard(weatherViewModel,location);
+            WeatherCard(weatherViewModel, location);
         }
 
         private void LoadInitialSettings()
@@ -38,7 +38,7 @@ namespace WallPoster.Views
 
         private async void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
-            
+
             WeatherModel weather = await weatherViewModel.LoadWeather(location, key);
             if (weather != null && weather.code == "200")
             {
@@ -64,7 +64,7 @@ namespace WallPoster.Views
 
         }
 
-        private void WeatherAqi(WeatherViewModel weatherViewModel,string location)
+        private void WeatherAqi(WeatherViewModel weatherViewModel, string location)
         {
             WeatherModel weatherAqi = weatherViewModel.LoadWeatherAqi(location, key);
             if (weatherAqi.code == "200")

@@ -29,9 +29,9 @@ namespace WallPoster.ViewModels
                 var result = await httpHelper.GetAsync(Consts.NowWeather, dic);
                 nowWeather = JsonConvert.DeserializeObject<WeatherModel>(result);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                log.Debug($"和风天气连接异常，代码：{nowWeather.code}--"+e.Message);
+                log.Debug($"和风天气连接异常，代码：{nowWeather.code}--" + e.Message);
                 return null;
             }
             return nowWeather;
@@ -40,7 +40,7 @@ namespace WallPoster.ViewModels
 
         public static string LoadBackground()
         {
-            
+
             return null;
         }
 
@@ -54,7 +54,7 @@ namespace WallPoster.ViewModels
             {
                 WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug($"和风天气获取AQI异常，代码：{WeatherAqi.code}--" + e.Message);
             }
@@ -73,7 +73,7 @@ namespace WallPoster.ViewModels
             {
                 cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug($"和风天气获取城市列表异常，代码：{cityModel.code}--" + e.Message);
             }
@@ -105,11 +105,11 @@ namespace WallPoster.ViewModels
             dic.Add("location", location);
             dic.Add("key", key);
             WeatherModel weather = null;
-            try 
+            try
             {
                 weather = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.TheLife, dic));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug($"和风天气获取生活指数异常，代码：{weather.code}--" + e.Message);
             }

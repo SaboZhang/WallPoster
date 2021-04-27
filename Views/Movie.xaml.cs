@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using WallPoster.Models;
+﻿using System.Windows.Controls;
 
 namespace WallPoster.Views
 {
@@ -14,6 +11,6 @@ namespace WallPoster.Views
         {
             InitializeComponent();
         }
-      
+
     }
 }

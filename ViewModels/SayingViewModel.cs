@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using WallPoster.Models;
-using WallPoster.Models.Service;
-using WallPoster.Assets;
+﻿using log4net;
+using Newtonsoft.Json;
 using Prism.Mvvm;
 using System;
-using log4net;
+using WallPoster.Assets;
+using WallPoster.Models;
+using WallPoster.Models.Service;
 
 namespace WallPoster.ViewModels
 {
@@ -19,7 +19,7 @@ namespace WallPoster.ViewModels
             {
                 sayingModel = JsonConvert.DeserializeObject<SayingModel>(HttpHelper.Get(Consts.SayingUrl));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug(e);
             }

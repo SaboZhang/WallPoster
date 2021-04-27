@@ -1,7 +1,7 @@
-﻿using HandyControl.Controls;
-using log4net;
+﻿using log4net;
 using Prism.Commands;
 using System.Collections.Generic;
+using WallPoster.Assets;
 using WallPoster.Models;
 using static WallPoster.Assets.Helper;
 
@@ -61,20 +61,20 @@ namespace WallPoster.ViewModels
             SetStoreLocation = new DelegateCommand<string>(SetLocation);
             DelMoviePath = new DelegateCommand<object>(DeleteMoviePath);
             DelTVPath = new DelegateCommand<object>(DeleteTVPath);
-            GetLocations("1");
-            GetLocations("2");
+            GetLocations(Consts.MovieCategory);
+            GetLocations(Consts.TVCategory);
         }
 
         internal void GetLocations(string category)
         {
             var MovieLocations = Settings.MovieLocation;
             var pathList = new List<PathModel>();
-            var TVLocation = Settings.Movielocation;
-            PathModel item = new PathModel();
+            var TVLocation = Settings.TVLocation;
+            PathModel item;
             switch (category)
             {
-                case "1":
-                    MovieWhether = MovieLocations.Count > 0 ? true : false;
+                case Consts.MovieCategory:
+                    MovieWhether = MovieLocations.Count > 0;
                     foreach (var movie in MovieLocations)
                     {
                         item = new PathModel
@@ -86,8 +86,8 @@ namespace WallPoster.ViewModels
                     MoviePathDataList = pathList;
                     log.Info(pathList);
                     break;
-                case "2":
-                    TVWhether = TVLocation.Count > 0 ? true : false;
+                case Consts.TVCategory:
+                    TVWhether = TVLocation.Count > 0;
                     foreach (var tv in TVLocation)
                     {
                         item = new PathModel
@@ -110,15 +110,15 @@ namespace WallPoster.ViewModels
                     string path = dialog.SelectedPath;
                     switch (category)
                     {
-                        case "1":
+                        case Consts.MovieCategory:
                             Settings.MovieLocation.Add(path);
                             Settings.MovieLocation = new List<string>(Settings.MovieLocation);
                             GetLocations(category);
                             MovieWhether = true;
                             break;
-                        case "2":
-                            Settings.Movielocation.Add(path);
-                            Settings.Movielocation = new List<string>(Settings.Movielocation);
+                        case Consts.TVCategory:
+                            Settings.TVLocation.Add(path);
+                            Settings.TVLocation = new List<string>(Settings.TVLocation);
                             GetLocations(category);
                             TVWhether = true;
                             break;
@@ -131,14 +131,14 @@ namespace WallPoster.ViewModels
         {
             List<string> path = Settings.MovieLocation;
             path.RemoveAt((int)index);
-            GetLocations("1");
+            GetLocations(Consts.MovieCategory);
         }
 
         protected virtual void DeleteTVPath(object index)
         {
-            List<string> path = Settings.Movielocation;
+            List<string> path = Settings.TVLocation;
             path.RemoveAt((int)index);
-            GetLocations("2");
+            GetLocations(Consts.TVCategory);
         }
 
     }

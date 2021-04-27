@@ -16,16 +16,16 @@ namespace WallPoster
     /// </summary>
     public partial class App : PrismApplication
     {
-        
+
         public static string[] WindowsContextMenuArgument = { string.Empty, string.Empty };
 
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
+
             ConfigHelper.Instance.SetLang(Settings.InterfaceLanguage);
-            
+
             UpdateTheme(Settings.Theme);
             UpdateAccent(Settings.Accent);
 

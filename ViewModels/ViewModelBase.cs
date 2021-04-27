@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Prism.Mvvm;
-using WallPoster.Models;
 
 namespace WallPoster.ViewModels
 {

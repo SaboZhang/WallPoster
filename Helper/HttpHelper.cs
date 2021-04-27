@@ -20,7 +20,7 @@ namespace WallPoster.Models.Service
         private static readonly object LockObj = new object();
         private static HttpClient client = null;
         /*private static readonly HttpClient _httpClient;*/
-       
+
         public HttpHelper()
         {
             GetInstance();
@@ -61,18 +61,18 @@ namespace WallPoster.Models.Service
             string result = @"";
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(url);
-            if (dic.Count > 0) 
+            if (dic.Count > 0)
             {
                 stringBuilder.Append("?");
                 int i = 0;
-                foreach(var item in dic)
+                foreach (var item in dic)
                 {
                     if (i > 0)
-                    
+
                         stringBuilder.Append("&");
                     stringBuilder.AppendFormat("{0}={1}", item.Key, System.Web.HttpUtility.UrlEncode(item.Value));
                     i++;
-                    
+
                 }
             }
             //组合参数
@@ -104,14 +104,14 @@ namespace WallPoster.Models.Service
             #region 添加响应参数
             StringBuilder stringBuilder = new StringBuilder();
             int i = 0;
-            foreach(var item in dic)
+            foreach (var item in dic)
             {
-                if(i > 0)
-                
+                if (i > 0)
+
                     stringBuilder.Append("&");
                 stringBuilder.AppendFormat("{0}={1}", item.Key, item.Value);
                 i++;
-                
+
             }
             byte[] data = Encoding.UTF8.GetBytes(stringBuilder.ToString());
             httpWebRequest.ContentLength = data.Length;
@@ -148,7 +148,7 @@ namespace WallPoster.Models.Service
             return result;
         }
 
-        public async Task<string> GetAsync(string url, Dictionary<string,string> dic)
+        public async Task<string> GetAsync(string url, Dictionary<string, string> dic)
         {
             string result = @"";
             StringBuilder stringBuilder = new StringBuilder();
@@ -178,7 +178,7 @@ namespace WallPoster.Models.Service
                 }
                 result = await httpResponse.Content.ReadAsStringAsync();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug($"网络异常--" + e.Message);
                 return result;
@@ -211,7 +211,7 @@ namespace WallPoster.Models.Service
                 result = response.Content.ReadAsStringAsync().Result;
                 return result;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug($"网络异常--{e.StackTrace}" + e.Message);
             }

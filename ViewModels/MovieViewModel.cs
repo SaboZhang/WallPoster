@@ -1,9 +1,7 @@
-﻿using HandyControl.Controls;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using WallPoster.Helper;
+using System.Threading;
 using WallPoster.Models;
 using static WallPoster.Assets.Helper;
 
@@ -81,7 +79,9 @@ namespace WallPoster.ViewModels
 
         public MovieViewModel()
         {
-            GetMoviesFile();
+            ThreadStart movieref = new ThreadStart(GetMoviesFile);
+            Thread MoviesThread = new Thread(movieref);
+            MoviesThread.Start();
         }
 
         /*internal MoviesModel GetMovieData()
@@ -130,7 +130,7 @@ namespace WallPoster.ViewModels
                 MoviesModel item = new MoviesModel()
                 {
                     Content = poster,
-                    Header = "测试",
+                    Header = Path.GetFileNameWithoutExtension(poster),
                     Footer = "测试内容"
                 };
                 pathList.Add(item);
