@@ -30,5 +30,7 @@ namespace WallPoster.Helper
 
         public DbSet<PathModel> Paths { get; set; }
 
+        public DbSet<FilesModel> Files { get; set; }
+
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using WallPoster.Helper;
 using WallPoster.Models;
 using static WallPoster.Assets.Helper;
 
@@ -79,9 +81,11 @@ namespace WallPoster.ViewModels
 
         public MovieViewModel()
         {
-            ThreadStart movieref = new ThreadStart(GetMoviesFile);
+            /*ThreadStart movieref = new ThreadStart(GetMoviesFile);
             Thread MoviesThread = new Thread(movieref);
-            MoviesThread.Start();
+            MoviesThread.Start();*/
+            ShowInfo();
+            DataList = GetMovieDataList();
         }
 
         /*internal MoviesModel GetMovieData()
@@ -110,7 +114,7 @@ namespace WallPoster.ViewModels
         Directory.GetFiles
             }
         }*/
-        internal void GetMoviesFile()
+        /*internal void GetMoviesFile()
         {
             List<string> paths = Settings.MovieLocation;
             if (paths.Count <= 0)
@@ -121,7 +125,7 @@ namespace WallPoster.ViewModels
             var fileList = new List<string>();
             foreach (string path in paths)
             {
-                /*Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".jpg"));*/
+                *//*Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".jpg"));*//*
                 string[] file = Directory.GetFiles(@path, "*.png", SearchOption.AllDirectories);
                 fileList.AddRange(file);
             }
@@ -136,6 +140,45 @@ namespace WallPoster.ViewModels
                 pathList.Add(item);
             }
             DataList = pathList;
+        }*/
+
+        public  Task Work()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                List<string> paths = Settings.MovieLocation;
+                if (paths.Count <= 0)
+                {
+                    return;
+                }
+                var pathList = new List<MoviesModel>();
+                var fileList = new List<string>();
+                foreach (string path in paths)
+                {
+                    /*Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".jpg"));*/
+                    string[] file = Directory.GetFiles(@path, "*.png", SearchOption.AllDirectories);
+                    fileList.AddRange(file);
+                }
+                foreach (string poster in fileList)
+                {
+                    MoviesModel item = new MoviesModel()
+                    {
+                        Content = poster,
+                        Header = Path.GetFileNameWithoutExtension(poster),
+                        Footer = "测试内容"
+                    };
+                    pathList.Add(item);
+                }
+                DataList = pathList;
+            });
+        }
+
+        private async void ShowInfo()
+        {
+            FilesHelper files = new FilesHelper();
+            List<string> paths = Settings.MovieLocation;
+            string[] ext = { "*.mkv", "*.mp4" };
+            await files.GetMediaFiles(paths, ext, "0");
         }
 
     }

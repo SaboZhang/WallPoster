@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" FontSize="40" TextAlignment="Center" Margin="10,24,10,10" Text="{Binding content}"/>
+        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" FontSize="40" TextAlignment="Center" Margin="10,24,10,10"/>
         <hc:SimpleStackPanel>
             <Button Width="200" Height="30" Click="Button_Click" Content="点击这里" Style="{StaticResource ButtonInfo}"/>
         </hc:SimpleStackPanel>
