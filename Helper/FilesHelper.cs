@@ -9,9 +9,35 @@ using WallPoster.Models;
 
 namespace WallPoster.Helper
 {
+    /// <summary>
+    /// 文件读取帮助类
+    /// </summary>
     public class FilesHelper
     {
         private static ILog log = LogManager.GetLogger("FilesHelper");
+
+        private static readonly object LockObj = new object();
+        private static SQLiteHelper helper = null;
+
+        public static SQLiteHelper GetInstance()
+        {
+            if (helper == null)
+            {
+                lock (LockObj)
+                {
+                    if (helper == null)
+                    {
+                        helper = new SQLiteHelper();
+                    }
+                }
+            }
+            return helper;
+        }
+
+        public FilesHelper()
+        {
+            GetInstance();
+        }
 
         public Task GetMediaFiles(List<string> mediaPath, string[] searchPatterns, string category)
         {
@@ -59,10 +85,10 @@ namespace WallPoster.Helper
                 {
                     FileInfo fileInfo = new(path);
                     StringHelper stringHelper = new();
-                    using var helper = new SQLiteHelper();
                     var file = helper.Files.Where(p => p.FilePath.Contains(path)).ToList();
                     if (file.Count > 0)
                     {
+                        log.Info($"跳过路径[{path}]因为数据库中已经存在");
                         continue;
                     }
                     var model = new FilesModel()
@@ -81,6 +107,7 @@ namespace WallPoster.Helper
                     };
                     helper.Files.Add(model);
                     helper.SaveChanges();
+                    log.Info($"{(category == "0" ? "影视数据保存成功" : "剧集数据保存成功")}");
                 }
             });
         }

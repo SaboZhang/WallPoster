@@ -9,6 +9,7 @@ namespace WallPoster.Helper
 {
     public class SQLiteHelper : DbContext
     {
+        
         private static string dbPath = AppDomain.CurrentDomain.BaseDirectory + "data.db";
 
         public SQLiteHelper() :
@@ -33,7 +34,6 @@ namespace WallPoster.Helper
 
         public DbSet<FilesModel> Files { get; set; }
 
-        public DbSet Datas { get; set; }
 
     }
 }

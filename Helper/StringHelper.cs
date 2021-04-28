@@ -11,7 +11,7 @@ namespace WallPoster.Helper
     {
         public string GetCaption(string fileName)
         {
-            string tempStr = Regex.Match(fileName, @"[^.]+").Value;
+            string tempStr = Regex.Match(fileName, @"^\[([^]]*)\]").Value;
             return tempStr;
         }
     }
