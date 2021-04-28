@@ -87,5 +87,19 @@ namespace WallPoster.ViewModels
             get => _tvWhether;
             set => SetProperty(ref _tvWhether, value);
         }
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        private bool _isShow;
+
+        /// <summary>
+        ///     布尔类型数据绑定
+        /// </summary>
+        public bool IsShow
+        {
+            get => _isShow;
+            set => SetProperty(ref _isShow, value);
+        }
     }
 }

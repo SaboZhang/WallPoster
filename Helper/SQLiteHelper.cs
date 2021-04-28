@@ -1,5 +1,6 @@
 ﻿using SQLite.CodeFirst;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SQLite;
 using WallPoster.Models;
@@ -31,6 +32,8 @@ namespace WallPoster.Helper
         public DbSet<PathModel> Paths { get; set; }
 
         public DbSet<FilesModel> Files { get; set; }
+
+        public DbSet Datas { get; set; }
 
     }
 }

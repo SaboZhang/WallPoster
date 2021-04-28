@@ -103,26 +103,24 @@ namespace WallPoster.ViewModels
 
         protected virtual void SetLocation(string category)
         {
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            using var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                string path = dialog.SelectedPath;
+                switch (category)
                 {
-                    string path = dialog.SelectedPath;
-                    switch (category)
-                    {
-                        case Consts.MovieCategory:
-                            Settings.MovieLocation.Add(path);
-                            Settings.MovieLocation = new List<string>(Settings.MovieLocation);
-                            GetLocations(category);
-                            MovieWhether = true;
-                            break;
-                        case Consts.TVCategory:
-                            Settings.TVLocation.Add(path);
-                            Settings.TVLocation = new List<string>(Settings.TVLocation);
-                            GetLocations(category);
-                            TVWhether = true;
-                            break;
-                    }
+                    case Consts.MovieCategory:
+                        Settings.MovieLocation.Add(path);
+                        Settings.MovieLocation = new List<string>(Settings.MovieLocation);
+                        GetLocations(category);
+                        MovieWhether = true;
+                        break;
+                    case Consts.TVCategory:
+                        Settings.TVLocation.Add(path);
+                        Settings.TVLocation = new List<string>(Settings.TVLocation);
+                        GetLocations(category);
+                        TVWhether = true;
+                        break;
                 }
             }
         }

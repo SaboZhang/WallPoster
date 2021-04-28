@@ -81,39 +81,9 @@ namespace WallPoster.ViewModels
 
         public MovieViewModel()
         {
-            /*ThreadStart movieref = new ThreadStart(GetMoviesFile);
-            Thread MoviesThread = new Thread(movieref);
-            MoviesThread.Start();*/
             ShowInfo();
             DataList = GetMovieDataList();
         }
-
-        /*internal MoviesModel GetMovieData()
-        {
-            return new MoviesModel
-            {
-                Content = $"/WallPoster;component/Resources/Album/{DateTime.Now.Second % 10 + 1}.jpg"
-            };
-        }*/
-
-        /*internal async void GetPaths()
-        {
-            using (var helper = new SQLiteHelper())
-            {
-                var paths = await helper.Paths.ToListAsync();
-                var pathList = new List<PathModel>();
-                foreach (var path in paths)
-                {
-                    PathModel item = new PathModel 
-                    { 
-                        MoviePath = path.MoviePath 
-                    };
-                    pathList.Add(item);
-                }
-                DataList = pathList;
-        Directory.GetFiles
-            }
-        }*/
         /*internal void GetMoviesFile()
         {
             List<string> paths = Settings.MovieLocation;
@@ -142,7 +112,7 @@ namespace WallPoster.ViewModels
             DataList = pathList;
         }*/
 
-        public  Task Work()
+        public Task Work()
         {
             return Task.Factory.StartNew(() =>
             {
@@ -177,7 +147,7 @@ namespace WallPoster.ViewModels
         {
             FilesHelper files = new FilesHelper();
             List<string> paths = Settings.MovieLocation;
-            string[] ext = { "*.mkv", "*.mp4" };
+            string[] ext = { "*.mkv", "*.mp4", "*.png" };
             await files.GetMediaFiles(paths, ext, "0");
         }
 

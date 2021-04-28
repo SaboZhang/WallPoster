@@ -36,31 +36,32 @@ namespace WallPoster.Views
             location = Settings.Location;
         }
 
-        private async void WeatherCard(WeatherViewModel weatherViewModel, string location)
+        private void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
-
-            WeatherModel weather = await weatherViewModel.LoadWeather(location, key);
-            if (weather != null && weather.code == "200")
+            Dispatcher.InvokeAsync( async() =>
             {
-                UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm");
-                City.Text = weatherViewModel.CityQuery(location, key);
-                BitmapImage icon = new BitmapImage(new Uri(new StringBuilder("pack://application:,,,/WallPoster;component/Resources/Weather/color-128/").Append(weather.now.icon).Append(".png").ToString()));
-                WeatherIcon.Source = icon;
-                Temp.Text = weather.now.temp + "°";
-                Clime.Text = weather.now.text;
-                WeatherAqi(weatherViewModel, location);
-                WindDir.Text = weather.now.windDir;
-                WindScale.Text = weather.now.windScale + "级";
-                Humidity.Text = weather.now.humidity + "%\n相对湿度";
-                vis.Text = weather.now.vis + "KM\n能见度";
-                Pressure.Text = weather.now.pressure + "hpa\n大气压";
-                des.Text = SayingViewModel.LoadSaying();
+                WeatherModel weather = await weatherViewModel.LoadWeather(location, key);
+                if (weather != null && weather.code == "200")
+                {
+                    UpdateTime.Text = "更新时间：" + weather.updateTime.ToString("yyyy-MM-dd HH':'mm");
+                    City.Text = weatherViewModel.CityQuery(location, key);
+                    BitmapImage icon = new BitmapImage(new Uri(new StringBuilder("pack://application:,,,/WallPoster;component/Resources/Weather/color-128/").Append(weather.now.icon).Append(".png").ToString()));
+                    WeatherIcon.Source = icon;
+                    Temp.Text = weather.now.temp + "°";
+                    Clime.Text = weather.now.text;
+                    WeatherAqi(weatherViewModel, location);
+                    WindDir.Text = weather.now.windDir;
+                    WindScale.Text = weather.now.windScale + "级";
+                    Humidity.Text = weather.now.humidity + "%\n相对湿度";
+                    vis.Text = weather.now.vis + "KM\n能见度";
+                    Pressure.Text = weather.now.pressure + "hpa\n大气压";
+                    des.Text = SayingViewModel.LoadSaying();
 
-                return;
-            }
-
-            await Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {(weather == null ? "网络错误" : weather.code)}")));
-            System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
+                    return;
+                }
+                await Dispatcher.BeginInvoke(new Action(() => MessageBox.Error(Lang.ResourceManager.GetString("WeatherError"), $"error code {(weather == null ? "网络错误" : weather.code)}")));
+                System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
+            });
 
         }
 
