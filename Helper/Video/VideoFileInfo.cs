@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WallPoster.Helper.Video
+﻿namespace WallPoster.Helper.Video
 {
     /// <summary>
     /// 表示单个视频文件
     /// </summary>
     public class VideoFileInfo
     {
-        public VideoFileInfo(string name, string path, string? container, int? year = default, ExtraType? extraType = default, ExtraRule? extraRule = default, bool isStub = default, string? stubType = default, bool isDirectory = default)
+        public VideoFileInfo(string name, string path, string? container, int? year = default, ExtraType? extraType = default, ExtraRule? extraRule = default, string? format3D = default, bool is3D = default, bool isStub = default, string? stubType = default, bool isDirectory = default)
         {
             Path = path;
             Container = container;
@@ -19,6 +13,8 @@ namespace WallPoster.Helper.Video
             Year = year;
             ExtraType = extraType;
             ExtraRule = extraRule;
+            Format3D = format3D;
+            Is3D = is3D;
             IsStub = isStub;
             StubType = stubType;
             IsDirectory = isDirectory;
@@ -59,6 +55,16 @@ namespace WallPoster.Helper.Video
         /// </summary>
         /// <value>额外的规则</value>
         public ExtraRule? ExtraRule { get; set; }
+
+        /// <summary>
+        /// 获取或设置3D格式
+        /// </summary>
+        public string? Format3D { get; set; }
+
+        /// <summary>
+        /// 获取或设置是否3D
+        /// </summary>
+        public bool Is3D { get; set; }
 
         /// <summary>
         /// 获取或设置一个值，该值指示此实例是否为存根

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WallPoster.Models;
-using WallPoster.Helper.Common;
+﻿using WallPoster.Helper.Common;
 
 namespace WallPoster.Helper.Video
 {

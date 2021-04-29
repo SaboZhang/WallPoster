@@ -1,6 +1,5 @@
 ﻿using SQLite.CodeFirst;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SQLite;
 using WallPoster.Models;
@@ -9,7 +8,7 @@ namespace WallPoster.Helper
 {
     public class SQLiteHelper : DbContext
     {
-        
+
         private static string dbPath = AppDomain.CurrentDomain.BaseDirectory + "data.db";
 
         public SQLiteHelper() :

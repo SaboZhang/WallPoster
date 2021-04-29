@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using WallPoster.Helper.Video;
-using WallPoster.Models;
 
 namespace WallPoster.Helper.Common
 {
@@ -518,6 +517,36 @@ namespace WallPoster.Helper.Common
                     MediaType.Video),
             };
 
+            Format3DRules = new[]
+            {
+                // Kodi rules:
+                new Format3DRule(
+                    precedingToken: "3d",
+                    token: "hsbs"),
+
+                new Format3DRule(
+                    precedingToken: "3d",
+                    token: "sbs"),
+
+                new Format3DRule(
+                    precedingToken: "3d",
+                    token: "htab"),
+
+                new Format3DRule(
+                    precedingToken: "3d",
+                    token: "tab"),
+
+                 // Media Browser rules:
+                new Format3DRule("fsbs"),
+                new Format3DRule("hsbs"),
+                new Format3DRule("sbs"),
+                new Format3DRule("ftab"),
+                new Format3DRule("htab"),
+                new Format3DRule("tab"),
+                new Format3DRule("sbs3d"),
+                new Format3DRule("mvc")
+            };
+
             var extensions = VideoFileExtensions.ToList();
 
             extensions.AddRange(new[]
@@ -631,6 +660,11 @@ namespace WallPoster.Helper.Common
         /// 获取或设置视频标志分隔符列表
         /// </summary>
         public char[] VideoFlagDelimiters { get; set; }
+
+        /// <summary>
+        /// 获取或设置3D格式规则列表
+        /// </summary>
+        public Format3DRule[] Format3DRules { get; set; }
 
         /// <summary>
         /// 获取或设置原始视频文件堆叠表达式字符串的列表

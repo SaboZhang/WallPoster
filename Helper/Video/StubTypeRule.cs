@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WallPoster.Helper.Video
+﻿namespace WallPoster.Helper.Video
 {
     /// <summary>
     /// 数据类保存关于存根类型规则的信息

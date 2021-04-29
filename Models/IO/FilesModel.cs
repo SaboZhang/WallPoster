@@ -20,5 +20,6 @@ namespace WallPoster.Models
         public string? PrivatePwd { get; set; }
         public string? Category { get; set; }
         public string? StoreSite { get; set; }
+        public string? Container { get; set; }
     }
 }

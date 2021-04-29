@@ -1,11 +1,12 @@
-﻿using log4net;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WallPoster.Models;
+using WallPoster.Helper.Video;
+using WallPoster.Helper.Common;
 
 namespace WallPoster.Helper
 {
@@ -15,8 +16,9 @@ namespace WallPoster.Helper
     public class FilesHelper
     {
         private static ILog log = LogManager.GetLogger("FilesHelper");
+        private readonly VideoResolver _videoResolver = new VideoResolver(new NamingOptions());
 
-        private static readonly object LockObj = new object();
+        private static readonly object LockObj = new();
         private static SQLiteHelper helper = null;
 
         public static SQLiteHelper GetInstance()
@@ -79,7 +81,7 @@ namespace WallPoster.Helper
 
         private Task SaveMediaFiles(List<string> fileList, string category)
         {
-            return Task.Factory.StartNew(() => 
+            return Task.Factory.StartNew(() =>
             {
                 foreach (string path in fileList)
                 {
@@ -91,11 +93,12 @@ namespace WallPoster.Helper
                         log.Info($"跳过路径[{path}]因为数据库中已经存在");
                         continue;
                     }
+                    VideoFileInfo video = _videoResolver.Resolve(path, false);
                     var model = new FilesModel()
                     {
                         FilePath = path,
                         FileName = Path.GetFileNameWithoutExtension(path),
-                        Caption = stringHelper.GetCaption(Path.GetFileNameWithoutExtension(path)),
+                        Caption = video.Name,
                         FileSize = (fileInfo.Length / 1024).ToString(),
                         AddTime = DateTime.Now.ToLocalTime(),
                         FileModifyTime = fileInfo.LastWriteTime,
@@ -103,7 +106,8 @@ namespace WallPoster.Helper
                         Duration = "",
                         PrivatePwd = "",
                         Category = category,
-                        StoreSite = fileInfo.DirectoryName
+                        StoreSite = fileInfo.DirectoryName,
+                        Container = video.Container
                     };
                     helper.Files.Add(model);
                     helper.SaveChanges();

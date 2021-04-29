@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WallPoster.Helper.Video
+﻿namespace WallPoster.Helper.Video
 {
     /// <summary>
     /// 用于从ExtraResolver传递结果的Holder对象

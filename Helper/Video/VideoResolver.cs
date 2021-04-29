@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WallPoster.Helper.Common;
 
 namespace WallPoster.Helper.Video
@@ -66,6 +64,7 @@ namespace WallPoster.Helper.Video
                 container = extension.TrimStart('.');
             }
             var flags = new FlagParser(_options).GetFlags(path);
+            var format3DResult = new Format3DParser(_options).Parse(flags);
             var extraResult = new ExtraResolver(_options).GetExtraInfo(path);
             var name = isDirectory
                 ? Path.GetFileName(path)
@@ -75,9 +74,27 @@ namespace WallPoster.Helper.Video
             if (parseName)
             {
                 var cleanDateTimeResult = CleanDateTime(name);
+                name = cleanDateTimeResult.Name;
+                year = cleanDateTimeResult.Year;
+                if (extraResult.ExtraType == null
+                    && TryCleanString(name, out ReadOnlySpan<char> newName))
+                {
+                    name = newName.ToString();
+                }
             }
 
-            return null;
+            return new VideoFileInfo(
+                path: path,
+                container: container,
+                isStub: isStub,
+                name: name,
+                year: year,
+                stubType: stubType,
+                is3D: format3DResult.Is3D,
+                format3D: format3DResult.Format3D,
+                extraType: extraResult.ExtraType,
+                isDirectory: isDirectory,
+                extraRule: extraResult.Rule);
         }
 
         /// <summary>
@@ -89,6 +106,11 @@ namespace WallPoster.Helper.Video
         {
             var extension = Path.GetExtension(path);
             return _options.VideoFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase);
+        }
+
+        public bool TryCleanString([NotNullWhen(true)] string? name, out ReadOnlySpan<char> newName)
+        {
+            return CleanStringParser.TryClean(name, _options.CleanStringRegexes, out newName);
         }
 
         public CleanDateTimeResult CleanDateTime(string name)

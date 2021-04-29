@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using WallPoster.Helper;
 using WallPoster.Models;
 using static WallPoster.Assets.Helper;
@@ -116,7 +113,7 @@ namespace WallPoster.ViewModels
         {
             FilesHelper files = new FilesHelper();
             List<string> paths = Settings.MovieLocation;
-            string[] ext = { "*.mkv", "*.mp4", "*.png" };
+            string[] ext = { "*.mkv", "*.mp4" };
             await files.GetMediaFiles(paths, ext, "0");
         }
 
