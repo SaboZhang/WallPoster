@@ -1,4 +1,4 @@
-﻿namespace WallPoster.Models
+﻿namespace WallPoster.Helper.Video
 {
     public enum ExtraType
     {

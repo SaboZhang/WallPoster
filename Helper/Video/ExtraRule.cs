@@ -22,22 +22,22 @@ namespace WallPoster.Helper.Video
         }
 
         /// <summary>
-        /// Gets or sets the token to use for matching against the file path.
+        /// 获取或设置用于与文件路径匹配的令牌
         /// </summary>
         public string Token { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the extra to return when matched.
+        /// 获取或设置匹配时要返回的额外值的类型
         /// </summary>
         public ExtraType ExtraType { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the rule.
+        /// 获取或设置规则的类型
         /// </summary>
         public ExtraRuleType RuleType { get; set; }
 
         /// <summary>
-        /// Gets or sets the type of the media to return when matched.
+        /// 获取或设置匹配时要返回的媒体类型
         /// </summary>
         public MediaType MediaType { get; set; }
     }

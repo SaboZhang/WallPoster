@@ -17,7 +17,10 @@ namespace WallPoster.Helper.Video
             StubType = stubType;
         }
 
-
+        /// <summary>
+        /// 获取或设置Token
+        /// </summary>
+        /// <value>Token</value>
         public string Token { get; set; }
 
         public string StubType { get; set; }
