@@ -16,6 +16,7 @@ namespace WallPoster.Helper
     public class FilesHelper
     {
         private static ILog log = LogManager.GetLogger("FilesHelper");
+        private readonly NamingOptions _namingOptions = new NamingOptions();
         private readonly VideoResolver _videoResolver = new VideoResolver(new NamingOptions());
 
         private static readonly object LockObj = new();
@@ -75,6 +76,8 @@ namespace WallPoster.Helper
                     }
                     fileList.AddRange(files);
                 }
+                var resolver = GetResolver();
+                resolver.ResolveFiles(fileList);
                 await SaveMediaFiles(fileList, category);
             });
         }
@@ -99,11 +102,11 @@ namespace WallPoster.Helper
                         FilePath = path,
                         FileName = Path.GetFileNameWithoutExtension(path),
                         Caption = video.Name,
-                        FileSize = (fileInfo.Length / 1024).ToString(),
+                        FileSize = fileInfo.Length / 1024,
                         AddTime = DateTime.Now.ToLocalTime(),
                         FileModifyTime = fileInfo.LastWriteTime,
                         Ext = fileInfo.Extension,
-                        Duration = "",
+                        Duration = video.Year,
                         PrivatePwd = "",
                         Category = category,
                         StoreSite = fileInfo.DirectoryName,
@@ -114,6 +117,11 @@ namespace WallPoster.Helper
                     log.Info($"{(category == "0" ? "影视数据保存成功" : "剧集数据保存成功")}");
                 }
             });
+        }
+
+        private StackResolver GetResolver()
+        {
+            return new StackResolver(_namingOptions);
         }
     }
 }

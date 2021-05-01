@@ -108,6 +108,12 @@ namespace WallPoster.Helper.Video
             return _options.VideoFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase);
         }
 
+        public bool IsStubFile(string path)
+        {
+            var extension = Path.GetExtension(path);
+            return _options.StubFileExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase);
+        }
+
         public bool TryCleanString([NotNullWhen(true)] string? name, out ReadOnlySpan<char> newName)
         {
             return CleanStringParser.TryClean(name, _options.CleanStringRegexes, out newName);
