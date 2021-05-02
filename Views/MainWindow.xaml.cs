@@ -26,6 +26,11 @@ namespace WallPoster
             InitializeComponent();
             Instance = this;
             LoadSettings();
+            #region 启动时显示大小
+            Rect rc = SystemParameters.WorkArea; //获取工作区大小
+            Width = rc.Width-300;
+            Height = rc.Height-300;
+            #endregion
         }
 
         private void LoadSettings()

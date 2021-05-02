@@ -9,13 +9,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox BorderThickness="0" Style="{DynamicResource WrapPanelHorizontalListBox}" ItemsSource="{Binding DataList}">
+        <ListBox BorderThickness="0" Style="{DynamicResource WrapPanelHorizontalListBox}" ItemsSource="{Binding DataList}" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#00FFFFFF">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="data:MoviesModel">
-                    <hc:Card MaxWidth="178" BorderThickness="0" Effect="{StaticResource EffectShadow2}" Margin="10,8,0,0" Footer="{Binding Footer}">
+                    <hc:Card MaxWidth="208" BorderThickness="0" Effect="{StaticResource EffectShadow2}" Margin="10,8,0,0" Footer="{Binding Footer}">
                         <!--Card 的内容部分模板-->
                         <Border CornerRadius="4,4,0,0" Style="{StaticResource BorderClip}">
-                            <Image Width="178" Height="278" Source="{Binding Content}" Stretch="Uniform"/>
+                            <Image Width="208" Height="306" Source="{Binding Content}" Stretch="Uniform"/>
                         </Border>
                         <!--Card 的尾部部分模板-->
                         <hc:Card.FooterTemplate>
