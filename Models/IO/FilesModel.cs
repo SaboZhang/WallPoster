@@ -12,11 +12,11 @@ namespace WallPoster.Models
         public string FilePath { get; set; }
         public string? FileName { get; set; }
         public string? Caption { get; set; }
-        public long FileSize { get; set; }
+        public string FileSize { get; set; }
         public DateTime AddTime { get; set; }
         public DateTime FileModifyTime { get; set; }
-        public string? Ext { get; set; }
-        public int? Duration { get; set; }
+        public string Ext { get; set; }
+        public int? Year { get; set; }
         public string? PrivatePwd { get; set; }
         public string Category { get; set; }
         public string? StoreSite { get; set; }

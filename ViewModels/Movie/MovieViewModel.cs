@@ -1,7 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using HandyControl.Controls;
+using log4net;
+using Prism.Commands;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Media.Imaging;
 using WallPoster.Helper;
 using WallPoster.Models;
+using WallPoster.Views;
 using static WallPoster.Assets.Helper;
 
 namespace WallPoster.ViewModels
@@ -9,7 +19,12 @@ namespace WallPoster.ViewModels
     public class MovieViewModel : ViewModelBase<MoviesModel>
     {
 
-        internal ObservableCollection<MoviesModel> GetMovieDataList()
+        public DelegateCommand<object> ClickCover { get; private set; }
+        public DelegateCommand<object> ClickInfo { get; private set; }
+        private static ILog log = LogManager.GetLogger("MovieViewModel");
+        List<MoviesModel> models = new List<MoviesModel>();
+
+        /*internal ObservableCollection<MoviesModel> GetMovieDataList()
         {
             return new ObservableCollection<MoviesModel>
             {
@@ -74,47 +89,75 @@ namespace WallPoster.ViewModels
                 Footer = "Ofenbach"
             }
             };
-        }
+        }*/
 
         public MovieViewModel()
         {
+            
             ShowInfo();
-            DataList = GetMovieDataList();
+            /*GetMovies();*/
+            ClickCover = new DelegateCommand<object>(ShowClick);
+            ClickInfo = new DelegateCommand<object>(Info_click);
         }
-        /*internal void GetMoviesFile()
+
+        private void ShowClick(object parm)
         {
-            List<string> paths = Settings.MovieLocation;
-            if (paths.Count <= 0)
+            MessageBox.Show($"执行命令{parm}");
+        }
+        
+
+        public void GetMovies()
+        {
+            
+            var helper = FilesHelper.GetInstance();
+            List<FilesModel> filesModels = helper.Files
+                .Where(m => m.Category == "0").Take(100).ToList();
+            
+            foreach (var path in filesModels)
             {
-                return;
-            }
-            var pathList = new List<MoviesModel>();
-            var fileList = new List<string>();
-            foreach (string path in paths)
-            {
-                *//*Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".mp3") || s.EndsWith(".jpg"));*//*
-                string[] file = Directory.GetFiles(@path, "*.png", SearchOption.AllDirectories);
-                fileList.AddRange(file);
-            }
-            foreach (string poster in fileList)
-            {
-                MoviesModel item = new MoviesModel()
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                string url = path.StoreSite + @"\" + path.FileName + ".jpg";
+                string loca = File.Exists(url) ? url : path.StoreSite + @"\poster.jpg";
+                image.UriSource = new Uri(loca);
+                if (!File.Exists(loca))
                 {
-                    Content = poster,
-                    Header = Path.GetFileNameWithoutExtension(poster),
-                    Footer = "测试内容"
+                    continue;
+                }
+                MoviesModel movies = new MoviesModel
+                {
+                    Content = image,
+                    Header = path.Caption,
+                    Footer = path.FileName
                 };
-                pathList.Add(item);
+                image.EndInit();
+                models.Add(movies);
             }
-            DataList = pathList;
-        }*/
+            
+            DataList = models;
+            /*Task.Run(() =>
+            {
+                lock (lockobj)
+                {
+                    
+                }
+
+            });*/
+        }
+
 
         private async void ShowInfo()
         {
             FilesHelper files = new FilesHelper();
             List<string> paths = Settings.MovieLocation;
-            string[] ext = { "*.mkv", "*.mp4" };
-            await files.GetMediaFiles(paths, ext, "0");
+            await files.GetMediaFiles(paths, "0");
+        }
+
+        private void Info_click(object p)
+        {
+            MainWindow.Instance.NavigateTo(typeof(MovieInfo), p);
+            /*MessageBox.Show($"info{p}");*/
         }
 
     }
