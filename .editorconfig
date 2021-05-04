@@ -14,3 +14,18 @@ dotnet_diagnostic.CS8618.severity = suggestion
 
 # CS8600: 将 null 文本或可能的 null 值转换为不可为 null 类型。
 dotnet_diagnostic.CS8600.severity = suggestion
+
+# CS8767: 参数类型中引用类型的为 Null 性与隐式实现的成员不匹配(可能是由于为 Null 性特性)。
+dotnet_diagnostic.CS8767.severity = suggestion
+
+# CS8612: 类型中引用类型的为 Null 性与隐式实现的成员不匹配。
+dotnet_diagnostic.CS8612.severity = suggestion
+
+# CS8601: 可能的 null 引用赋值。
+dotnet_diagnostic.CS8601.severity = suggestion
+
+# CS8603: 可能的 null 引用返回。
+dotnet_diagnostic.CS8603.severity = suggestion
+
+# CS0693: 类型参数与外部类型中的类型参数同名
+dotnet_diagnostic.CS0693.severity = suggestion

@@ -1,18 +1,16 @@
 ﻿using HandyControl.Controls;
+using HandyControl.Data;
+using HandyControl.Tools.Command;
 using log4net;
 using Prism.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Media.Imaging;
 using WallPoster.Helper;
 using WallPoster.Models;
 using WallPoster.Views;
-using static WallPoster.Assets.Helper;
 
 namespace WallPoster.ViewModels
 {
@@ -22,80 +20,12 @@ namespace WallPoster.ViewModels
         public DelegateCommand<object> ClickCover { get; private set; }
         public DelegateCommand<object> ClickInfo { get; private set; }
         private static ILog log = LogManager.GetLogger("MovieViewModel");
-        List<MoviesModel> models = new List<MoviesModel>();
 
-        /*internal ObservableCollection<MoviesModel> GetMovieDataList()
-        {
-            return new ObservableCollection<MoviesModel>
-            {
-                new MoviesModel
-            {
-                Header = "Atomic",
-                Content = "/WallPoster;component/Resources/Album/1.jpg",
-                Footer = "Stive Morgan"
-            },
-            new MoviesModel
-            {
-                Header = "Zinderlong",
-                Content = "/WallPoster;component/Resources/Album/2.jpg",
-                Footer = "Zonderling"
-            },
-            new MoviesModel
-            {
-                Header = "Busy Doin' Nothin'",
-                Content = "/WallPoster;component/Resources/Album/3.jpg",
-                Footer = "Ace Wilder"
-            },
-            new MoviesModel
-            {
-                Header = "Wrong",
-                Content = "/WallPoster;component/Resources/Album/4.jpg",
-                Footer = "Blaxy Girls"
-            },
-            new MoviesModel
-            {
-                Header = "The Lights",
-                Content = "/WallPoster;component/Resources/Album/5.jpg",
-                Footer = "Panda Eyes"
-            },
-            new MoviesModel
-            {
-                Header = "EA7-50-Cent Disco",
-                Content = "/WallPoster;component/Resources/Album/6.jpg",
-                Footer = "еяхат музыка"
-            },
-            new MoviesModel
-            {
-                Header = "Monsters",
-                Content = "/WallPoster;component/Resources/Album/7.jpg",
-                Footer = "Different Heaven"
-            },
-            new MoviesModel
-            {
-                Header = "Gangsta Walk",
-                Content = "/WallPoster;component/Resources/Album/8.jpg",
-                Footer = "Illusionize"
-            },
-            new MoviesModel
-            {
-                Header = "Won't Back Down",
-                Content = "/WallPoster;component/Resources/Album/9.jpg",
-                Footer = "Boehm"
-            },
-            new MoviesModel
-            {
-                Header = "Katchi",
-                Content = "/WallPoster;component/Resources/Album/10.jpg",
-                Footer = "Ofenbach"
-            }
-            };
-        }*/
+        SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
 
         public MovieViewModel()
         {
-            
-            ShowInfo();
-            /*GetMovies();*/
+            _ = GetMoviesAsync();
             ClickCover = new DelegateCommand<object>(ShowClick);
             ClickInfo = new DelegateCommand<object>(Info_click);
         }
@@ -106,58 +36,83 @@ namespace WallPoster.ViewModels
         }
         
 
-        public void GetMovies()
+        public async Task GetMoviesAsync()
         {
-            
-            var helper = FilesHelper.GetInstance();
-            List<FilesModel> filesModels = helper.Files
-                .Where(m => m.Category == "0").Take(100).ToList();
-            
-            foreach (var path in filesModels)
+            var models = await Task.Factory.StartNew(() =>
             {
-                BitmapImage image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                string url = path.StoreSite + @"\" + path.FileName + ".jpg";
-                string loca = File.Exists(url) ? url : path.StoreSite + @"\poster.jpg";
-                image.UriSource = new Uri(loca);
-                if (!File.Exists(loca))
+                int total = helper.Files.Where(m => m.Category == "0").Count();
+                List<MoviesModel> models = new List<MoviesModel>();
+                MaxPageCount = (int)total / 50;
+                PageIndex = (int)1;
+                List<FilesModel> filesModels = helper.LoadPageItems<FilesModel, DateTime>(50, PageIndex, out total, c => c.Category == "0", u => u.AddTime, false).ToList();
+                foreach (var path in filesModels)
                 {
-                    continue;
+                    /*BitmapImage image = new BitmapImage();
+                    image.BeginInit();  var orderlist = WeichatManageApiHelper
+                    .LoadPageItems<View_Mkxx_OrderStatistics, DateTime>(pageSize, pageIndex, out total, c => c.OrderDate <= end && c.OrderDate >= start, u => u.OrderDate, false).ToList();
+                    image.CacheOption = BitmapCacheOption.OnLoad;*/
+                    string url = path.StoreSite + @"\" + path.FileName + ".jpg";
+                    string loca = File.Exists(url) ? url : path.StoreSite + @"\poster.jpg";
+                    /*image.UriSource = new Uri(loca);*/
+                    if (!File.Exists(loca))
+                    {
+                        continue;
+                    }
+                    MoviesModel movies = new MoviesModel
+                    {
+                        Content = loca,
+                        Header = path.Caption,
+                        Footer = path.FileName
+                    };
+                    /*image.EndInit();*/
+
+                    models.Add(movies);
                 }
-                MoviesModel movies = new MoviesModel
-                {
-                    Content = image,
-                    Header = path.Caption,
-                    Footer = path.FileName
-                };
-                image.EndInit();
-                models.Add(movies);
-            }
-            
+                return models;
+
+            });
             DataList = models;
-            /*Task.Run(() =>
-            {
-                lock (lockobj)
-                {
-                    
-                }
-
-            });*/
-        }
-
-
-        private async void ShowInfo()
-        {
-            FilesHelper files = new FilesHelper();
-            List<string> paths = Settings.MovieLocation;
-            await files.GetMediaFiles(paths, "0");
         }
 
         private void Info_click(object p)
         {
             MainWindow.Instance.NavigateTo(typeof(MovieInfo), p);
             /*MessageBox.Show($"info{p}");*/
+        }
+
+        /// <summary>
+        ///     页码改变命令
+        /// </summary>
+        public RelayCommand<FunctionEventArgs<int>> PageUpdatedCmd =>
+            new Lazy<RelayCommand<FunctionEventArgs<int>>>(() =>
+                new RelayCommand<FunctionEventArgs<int>>(PageUpdated)).Value;
+
+        /// <summary>
+        ///     页码改变
+        /// </summary>
+        private void PageUpdated(FunctionEventArgs<int> info)
+        {
+            var models = new List<MoviesModel>();
+            int total = helper.Files.Where(m => m.Category == "0").Count();
+            List<FilesModel> filesModels = helper.LoadPageItems<FilesModel, DateTime>(50, info.Info, out total, c => c.Category == "0", u => u.AddTime, false).ToList();
+            foreach (var path in filesModels)
+            {
+                string url = path.StoreSite + @"\" + path.FileName + ".jpg";
+                string loca = File.Exists(url) ? url : path.StoreSite + @"\poster.jpg";
+                if (!File.Exists(loca))
+                {
+                    continue;
+                }
+                MoviesModel movies = new MoviesModel
+                {
+                    Content = loca,
+                    Header = path.Caption,
+                    Footer = path.FileName
+                };
+
+                models.Add(movies);
+            }
+            DataList = models;
         }
 
     }

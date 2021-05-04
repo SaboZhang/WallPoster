@@ -101,5 +101,33 @@ namespace WallPoster.ViewModels
             get => _isShow;
             set => SetProperty(ref _isShow, value);
         }
+
+        /// <summary>
+        ///    最大页数
+        /// </summary>
+        private int _maxPageCount;
+
+        /// <summary>
+        ///  最大页数
+        /// </summary>
+        public int MaxPageCount
+        {
+            get => _maxPageCount;
+            set => SetProperty(ref _maxPageCount, value);
+        }
+
+        /// <summary>
+        ///    最大页数
+        /// </summary>
+        private int _pageIndex;
+
+        /// <summary>
+        ///  最大页数
+        /// </summary>
+        public int PageIndex
+        {
+            get => _pageIndex;
+            set => SetProperty(ref _pageIndex, value);
+        }
     }
 }

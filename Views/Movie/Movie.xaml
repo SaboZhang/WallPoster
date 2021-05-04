@@ -11,40 +11,50 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox BorderThickness="0" Style="{DynamicResource WrapPanelHorizontalListBox}" ItemsSource="{Binding DataList}"
-                 HorizontalAlignment="Left" VerticalAlignment="Top" Background="#00FFFFFF">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="data:MoviesModel">
-                    <hc:Card MaxWidth="198" BorderThickness="0" Effect="{StaticResource EffectShadow2}" Margin="10,14,0,0" Footer="{Binding Footer}">
-                        <Border CornerRadius="4,4,0,0" Style="{StaticResource BorderClip}" >
-                            <Image Width="198" Height="288" Source="{Binding Content, IsAsync=True}" Stretch="UniformToFill" x:Name="Cover"></Image>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.ClickCover}" 
+        <Border Margin="0,0,0,38">
+            <ListBox BorderThickness="0" Style="{DynamicResource WrapPanelHorizontalListBox}" ItemsSource="{Binding DataList}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="#00FFFFFF">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="data:MoviesModel">
+                        <hc:Card MaxWidth="198" BorderThickness="0" Effect="{StaticResource EffectShadow2}" Margin="10,14,0,0" Footer="{Binding Footer}">
+                            <Border CornerRadius="4,4,0,0" Style="{StaticResource BorderClip}" >
+                                <Image Width="198" Height="288" Source="{Binding Content}" Stretch="UniformToFill" x:Name="Cover"></Image>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.ClickCover}" 
                                                        CommandParameter="{Binding ElementName=Cover, Path=Source}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Border>
-                        <hc:Card.FooterTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="10">
-                                    <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockLargeBold}"
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
+                            <hc:Card.FooterTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="10">
+                                        <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockLargeBold}"
                                                Text="{Binding DataContext.Header,RelativeSource={RelativeSource AncestorType=hc:Card}}" HorizontalAlignment="Left"/>
-                                    <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockDefault}"
+                                        <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockDefault}"
                                                Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left" x:Name="Info"/>
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="MouseLeftButtonDown">
-                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.ClickInfo}" 
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.ClickInfo}" 
                                                        CommandParameter="{Binding ElementName=Info, Path=Text}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </StackPanel>
-                            </DataTemplate>
-                        </hc:Card.FooterTemplate>
-                    </hc:Card>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <hc:Pagination MaxPageCount="10" PageIndex="5" IsJumpEnabled="True" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </hc:Card.FooterTemplate>
+                        </hc:Card>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <hc:Pagination MaxPageCount="{Binding MaxPageCount}" PageIndex="{Binding PageIndex}" IsJumpEnabled="True"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="4">
+            <hc:Interaction.Triggers>
+                <hc:EventTrigger EventName="PageUpdated">
+                    <hc:EventToCommand Command="{Binding PageUpdatedCmd}" PassEventArgsToCommand="True" />
+                </hc:EventTrigger>
+            </hc:Interaction.Triggers>
+        </hc:Pagination>
+
     </Grid>
 </UserControl>

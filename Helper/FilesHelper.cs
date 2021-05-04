@@ -17,33 +17,21 @@ namespace WallPoster.Helper
     public class FilesHelper
     {
         private static ILog log = LogManager.GetLogger("FilesHelper");
-        private readonly NamingOptions _namingOptions = new NamingOptions();
-        private readonly VideoResolver _videoResolver = new VideoResolver(new NamingOptions());
+        
         private readonly VideoListResolver _videoListResolver = new VideoListResolver(new NamingOptions());
-
-        private static readonly object LockObj = new();
-        private static SQLiteHelper helper = null;
-
-        public static SQLiteHelper GetInstance()
-        {
-            if (helper == null)
-            {
-                lock (LockObj)
-                {
-                    if (helper == null)
-                    {
-                        helper = new SQLiteHelper();
-                    }
-                }
-            }
-            return helper;
-        }
 
         public FilesHelper()
         {
-            GetInstance();
+            
         }
 
+        SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
+        /// <summary>
+        /// 读取媒体库文件
+        /// </summary>
+        /// <param name="mediaPath"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public Task GetMediaFiles(List<string> mediaPath, string category)
         {
             return Task.Factory.StartNew(async () =>
@@ -53,79 +41,52 @@ namespace WallPoster.Helper
                 {
                     return;
                 }
-                /*var result = _videoListResolver.Resolve(paths.Select(i => new FileSystemMetadata
-                {
-                    IsDirectory = true,
-                    FullName = i
-                }).ToList()).ToList();*/
-                var fileList = new List<string>();
+                var fileList = new List<FileInfo>();
+                var fsm = new List<FileSystemMetadata>();
                 foreach (string path in paths)
                 {
-                    // 获取设置目录下的所有文件夹
                     DirectoryInfo dir = new(path);
                     // 获取设置目录下的所有文件
-                    System.Collections.IList list = paths;
-                    for (int i = 0; i < list.Count; i++)
+                    var files = dir.GetFiles("*", SearchOption.AllDirectories);
+                    foreach (var file in files)
                     {
-                        FileInfo file = (FileInfo)list[i];
-                        fileList.Add(file.ToString());
-                    }
-                    fileList.Add(dir.ToString());
-                    log.Info(fileList);
-                    /*DirectoryInfo dir = new(path);
-                    FileInfo[][] fis = new FileInfo[searchPatterns.Length][];
-                    int count = 0;
-                    for (int i = 0; i < searchPatterns.Length; i++)
-                    {
-                        FileInfo[] fileInfos = dir.GetFiles(searchPatterns[i], SearchOption.AllDirectories);
-                        fis[i] = fileInfos;
-                        count += fileInfos.Length;
-                    }
-                    string[] files = new string[count];
-                    int n = 0;
-                    for (int i = 0; i <= fis.GetUpperBound(0); i++)
-                    {
-                        for (int j = 0; j < fis[i].Length; j++)
+                        var item = new FileSystemMetadata
                         {
-                            string temp = fis[i][j].FullName;
-                            files[n] = temp;
-                            n++;
-                        }
-                    }*/
+                            IsDirectory = false,
+                            FullName = file.FullName,
+                            Length = file.Length / 1024,
+                            Name = file.Name,
+                            DirectoryName = file.DirectoryName,
+                            Extension = file.Extension,
+                            CreationTimeUtc = file.CreationTime,
+                            LastWriteTimeUtc = file.LastWriteTime
+
+                        };
+                        fsm.Add(item);
+                    }
                 }
-                bool isDir = true;
-                long size = 0;
-                var fsm = new List<FileSystemMetadata>();
-                foreach (var location in fileList)
+                try
                 {
-                    
-                    if (File.Exists(location))
-                    {
-                        isDir = false;
-                        var info = new FileInfo(location);
-                        size = info.Length / 1024;
-                    }
-                    else if (Directory.Exists(location))
-                    {
-                        isDir = true;
-                    }
-                    var item = new FileSystemMetadata 
-                    {
-                        IsDirectory = isDir,
-                        FullName = Path.GetFileName(location),
-                        Length = size,
-                    };
-                    fsm.Add(item);
+                    var result = _videoListResolver.Resolve(fsm);
+                    log.Info(result);
+                    await SaveMediaFiles(result, category);
                 }
-                List<VideoInfo> result = (List<VideoInfo>)_videoListResolver.Resolve(fsm);
-                log.Info(result);
-                /*var resolver = GetResolver();
-                resolver.ResolveFiles(fileList);*/
-                await SaveMediaFiles(result, category);
+                catch(Exception e)
+                {
+                    log.Error($"数据处理异常：{e.Message}");
+                    return;
+                }
+                
             });
         }
 
-        private Task SaveMediaFiles(List<VideoInfo> fileList, string category)
+        /// <summary>
+        /// 存储媒体库文件信息到SQLite
+        /// </summary>
+        /// <param name="fileList"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        private Task SaveMediaFiles(IEnumerable<VideoInfo> fileList, string category)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -136,41 +97,44 @@ namespace WallPoster.Helper
                     var year = info.Year;
                     foreach (var video in info.Files)
                     {
+                        var file = new FileInfo(video.Path);
                         var model = new FilesModel()
                         {
                             FilePath = video.Path,
-                            FileName = name,
-                            Caption = video.Name,
-                            FileSize = video.Format3D,
+                            FileName = file.Name,
+                            Caption = name,
+                            FileSize = file.Length / 1024,
                             AddTime = DateTime.Now.ToLocalTime(),
-                            FileModifyTime = DateTime.Now.ToLocalTime(),
-                            Ext = video.ExtraType.ToString(),
+                            FileModifyTime = file.LastWriteTime,
+                            StubType = video.StubType,
                             Year = year,
                             PrivatePwd = "",
                             Category = category,
-                            StoreSite = video.Path,
+                            StoreSite = file.DirectoryName,
                             Container = video.Container
                         };
                         helper.Files.Add(model);
                     }
-                    /*FileInfo fileInfo = new(path);
-                    StringHelper stringHelper = new();
-                    var file = helper.Files.Where(p => p.FilePath.Contains(path)).ToList();
-                    if (file.Count > 0)
+                    try
                     {
-                        log.Info($"跳过路径[{path}]因为数据库中已经存在");
+                        var count = helper.Files.Where(p => p.Caption.Contains(name)).Count();
+                        if (count > 0)
+                        {
+                            log.Info($"跳过文件[{name}]数据库中已经存在");
+                            continue;
+                        }
+                        helper.SaveChanges();
+                        log.Info($"{(category == "0" ? "影视数据保存成功" : "剧集数据保存成功")}");
+                    }
+                    catch (Exception e)
+                    {
+                        log.Error($"数据处理异常:{e.Message}");
                         continue;
                     }
-                    VideoFileInfo video = _videoResolver.Resolve(path, false);*/
-                    helper.SaveChanges();
-                    log.Info($"{(category == "0" ? "影视数据保存成功" : "剧集数据保存成功")}");
+
                 }
             });
-        }
 
-        private StackResolver GetResolver()
-        {
-            return new StackResolver(_namingOptions);
         }
     }
 }

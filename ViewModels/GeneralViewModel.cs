@@ -1,7 +1,9 @@
-﻿using log4net;
+﻿using HandyControl.Controls;
+using log4net;
 using Prism.Commands;
 using System.Collections.Generic;
 using WallPoster.Assets;
+using WallPoster.Helper;
 using WallPoster.Models;
 using static WallPoster.Assets.Helper;
 
@@ -65,7 +67,7 @@ namespace WallPoster.ViewModels
             GetLocations(Consts.TVCategory);
         }
 
-        internal void GetLocations(string category)
+        protected void GetLocations(string category)
         {
             var MovieLocations = Settings.MovieLocation;
             var pathList = new List<PathModel>();
@@ -107,18 +109,25 @@ namespace WallPoster.ViewModels
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string path = dialog.SelectedPath;
+                if (Settings.MovieLocation.Contains(path)|| Settings.TVLocation.Contains(path))
+                {
+                    MessageBox.Warning($"路径{path}已存在");
+                    return;
+                }
                 switch (category)
                 {
                     case Consts.MovieCategory:
                         Settings.MovieLocation.Add(path);
                         Settings.MovieLocation = new List<string>(Settings.MovieLocation);
                         GetLocations(category);
+                        Retrieval(category);
                         MovieWhether = true;
                         break;
                     case Consts.TVCategory:
                         Settings.TVLocation.Add(path);
                         Settings.TVLocation = new List<string>(Settings.TVLocation);
                         GetLocations(category);
+                        Retrieval(category);
                         TVWhether = true;
                         break;
                 }
@@ -127,16 +136,35 @@ namespace WallPoster.ViewModels
 
         protected virtual void DeleteMoviePath(object index)
         {
+            if (index.Equals(-1))
+            {
+                MessageBox.Warning("请选择需要删除的路径!");
+                return;
+            }
             List<string> path = Settings.MovieLocation;
             path.RemoveAt((int)index);
+            Settings.MovieLocation = new List<string>(path);
             GetLocations(Consts.MovieCategory);
         }
 
         protected virtual void DeleteTVPath(object index)
         {
+            if (index.Equals(-1))
+            {
+                MessageBox.Warning("请选择需要删除的路径!");
+                return;
+            }
             List<string> path = Settings.TVLocation;
             path.RemoveAt((int)index);
+            Settings.MovieLocation = new List<string>(path);
             GetLocations(Consts.TVCategory);
+        }
+
+        private async void Retrieval(string category)
+        {
+            var files = new FilesHelper();
+            List<string> paths = category == "0"? Settings.MovieLocation : Settings.TVLocation;
+            await files.GetMediaFiles(paths, category);
         }
 
     }

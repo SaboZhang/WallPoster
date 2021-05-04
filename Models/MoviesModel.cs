@@ -6,7 +6,7 @@ namespace WallPoster.Models
     {
         public string Header { get; set; }
 
-        public BitmapImage Content { get; set; }
+        public string Content { get; set; }
 
         public string Footer { get; set; }
 
