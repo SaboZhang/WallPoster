@@ -119,7 +119,7 @@ namespace WallPoster.ViewModels
         /// <summary>
         ///    最大页数
         /// </summary>
-        private int _pageIndex;
+        private int _pageIndex = 1;
 
         /// <summary>
         ///  最大页数
@@ -128,6 +128,20 @@ namespace WallPoster.ViewModels
         {
             get => _pageIndex;
             set => SetProperty(ref _pageIndex, value);
+        }
+
+        /// <summary>
+        ///    状态
+        /// </summary>
+        private string _status;
+
+        /// <summary>
+        ///  状态
+        /// </summary>
+        public string Status
+        {
+            get => _status;
+            set => SetProperty(ref _status, value);
         }
     }
 }

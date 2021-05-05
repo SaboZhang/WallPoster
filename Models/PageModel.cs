@@ -12,5 +12,7 @@
         public int PageSize { get; set; }
 
         public int MaxPageCount { get; set; }
+
+        public string Status { get; set; }
     }
 }

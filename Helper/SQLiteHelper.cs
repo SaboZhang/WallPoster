@@ -51,7 +51,10 @@ namespace WallPoster.Helper
                 ConnectionString = new SQLiteConnectionStringBuilder()
                 {
                     DataSource = dbPath,
-                    ForeignKeys = true
+                    ForeignKeys = true,
+                    Enlist = true,
+                    Pooling = true,
+                    CacheSize = 300
                 }.ConnectionString
             }, true)
         {

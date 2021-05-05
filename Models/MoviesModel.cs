@@ -1,4 +1,5 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System;
+using System.Windows.Media.Imaging;
 
 namespace WallPoster.Models
 {
@@ -6,9 +7,9 @@ namespace WallPoster.Models
     {
         public string Header { get; set; }
 
-        public string Content { get; set; }
+        public BitmapImage Content { get; set; }
 
-        public string Footer { get; set; }
+        public DateTime Footer { get; set; }
 
     }
 }
