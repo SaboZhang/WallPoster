@@ -13,7 +13,7 @@ namespace WallPoster.Helper
             {
                 return "";
             }
-            bool isCN =  Regex.IsMatch(fileName, @"[\u4e00-\u9fa5]");
+            bool isCN = Regex.IsMatch(fileName, @"[\u4e00-\u9fa5]");
             if (isCN)
             {
                 string newName = Regex.Replace(fileName, @"[a-z].*", "", RegexOptions.IgnoreCase);

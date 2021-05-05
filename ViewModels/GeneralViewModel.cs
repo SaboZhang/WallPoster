@@ -109,7 +109,7 @@ namespace WallPoster.ViewModels
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string path = dialog.SelectedPath;
-                if (Settings.MovieLocation.Contains(path)|| Settings.TVLocation.Contains(path))
+                if (Settings.MovieLocation.Contains(path) || Settings.TVLocation.Contains(path))
                 {
                     MessageBox.Warning($"路径{path}已存在");
                     return;
@@ -163,7 +163,7 @@ namespace WallPoster.ViewModels
         private async void Retrieval(string category)
         {
             var files = new FilesHelper();
-            List<string> paths = category == "0"? Settings.MovieLocation : Settings.TVLocation;
+            List<string> paths = category == "0" ? Settings.MovieLocation : Settings.TVLocation;
             await files.GetMediaFiles(paths, category);
         }
 

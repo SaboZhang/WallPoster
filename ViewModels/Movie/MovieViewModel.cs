@@ -1,5 +1,4 @@
-﻿using HandyControl.Controls;
-using HandyControl.Data;
+﻿using HandyControl.Data;
 using HandyControl.Tools.Command;
 using log4net;
 using Prism.Commands;
@@ -16,7 +15,6 @@ using System.Windows.Threading;
 using WallPoster.Helper;
 using WallPoster.Models;
 using WallPoster.Views;
-using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace WallPoster.ViewModels
 {
@@ -73,7 +71,7 @@ namespace WallPoster.ViewModels
                     MaxPageCount = total / 50;
                     filesModels = helper.LoadPageItems<FilesModel, DateTime>(50, PageIndex, out total, c => c.Category == "0", u => u.AddTime, false).ToList();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     log.Debug($"数据处理错误{e.Message}");
                     var helper = SQLiteHelper<FilesModel>.GetInstance();

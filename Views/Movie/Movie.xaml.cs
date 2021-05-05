@@ -1,5 +1,4 @@
-﻿using Prism.Commands;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace WallPoster.Views
 {

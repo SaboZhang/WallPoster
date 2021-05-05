@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using WallPoster.Models;
-using WallPoster.Helper.Video;
 using WallPoster.Helper.Common;
+using WallPoster.Helper.Video;
+using WallPoster.Models;
 using WallPoster.Models.IO;
 
 namespace WallPoster.Helper
@@ -17,12 +17,12 @@ namespace WallPoster.Helper
     public class FilesHelper
     {
         private static ILog log = LogManager.GetLogger("FilesHelper");
-        
+
         private readonly VideoListResolver _videoListResolver = new VideoListResolver(new NamingOptions());
 
         public FilesHelper()
         {
-            
+
         }
 
         SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
@@ -71,12 +71,12 @@ namespace WallPoster.Helper
                     log.Info(result);
                     await SaveMediaFiles(result, category);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     log.Error($"数据处理异常：{e.Message}");
                     return;
                 }
-                
+
             });
         }
 
