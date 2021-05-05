@@ -259,6 +259,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 影视详情 的本地化字符串。
+        /// </summary>
+        public static string MovieInfo {
+            get {
+                return ResourceManager.GetString("MovieInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 国外天气信息不完整，暂时不提供查询 的本地化字符串。
         /// </summary>
         public static string Nonsupport {

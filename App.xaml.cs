@@ -7,6 +7,7 @@ using System.Net;
 using System.Windows;
 using System.Windows.Media;
 using WallPoster.ViewModels;
+using WallPoster.Views;
 using static WallPoster.Assets.Helper;
 
 namespace WallPoster
@@ -56,6 +57,7 @@ namespace WallPoster
             /*containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);*/
             containerRegistry.RegisterForNavigation<MainWindow, MainViewModel>();
+            containerRegistry.RegisterForNavigation<MovieInfo>();
         }
 
         protected override Window CreateShell()

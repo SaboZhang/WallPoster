@@ -143,5 +143,19 @@ namespace WallPoster.ViewModels
             get => _status;
             set => SetProperty(ref _status, value);
         }
+
+        /// <summary>
+        ///    状态
+        /// </summary>
+        private string _testStatus;
+
+        /// <summary>
+        ///  状态
+        /// </summary>
+        public string TestStatus
+        {
+            get => _testStatus;
+            set => SetProperty(ref _testStatus, value);
+        }
     }
 }

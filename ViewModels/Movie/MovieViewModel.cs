@@ -2,6 +2,7 @@
 using HandyControl.Tools.Command;
 using log4net;
 using Prism.Commands;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,9 +13,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using WallPoster.Constans;
 using WallPoster.Helper;
 using WallPoster.Models;
 using WallPoster.Views;
+using DelegateCommand = Prism.Commands.DelegateCommand;
 
 namespace WallPoster.ViewModels
 {
@@ -58,6 +61,10 @@ namespace WallPoster.ViewModels
             }
         }
 
+        /// <summary>
+        /// 异步获取影片信息列表
+        /// </summary>
+        /// <returns></returns>
         public async Task GetMoviesAsync()
         {
             MaxPageCount = 2;
@@ -111,12 +118,6 @@ namespace WallPoster.ViewModels
                 }));
                 Status = "Hidden";
             });
-        }
-
-        private void Info_click(object p)
-        {
-            MainWindow.Instance.NavigateTo(typeof(MovieInfo), p);
-            /*MessageBox.Show($"info{p}");*/
         }
 
         /// <summary>
@@ -198,6 +199,25 @@ namespace WallPoster.ViewModels
             ((DispatcherFrame)state).Continue = false;
             return null;
         }
+
+        private readonly IRegionManager _regionManager;
+        private DelegateCommand _loginLoadingCommand;
+        public DelegateCommand LoginLoadingCommand =>
+                _loginLoadingCommand ?? (_loginLoadingCommand = new DelegateCommand(ExecuteMovieInfoCommand));
+
+        void ExecuteMovieInfoCommand()
+        {
+            //在LoginContentRegion区域导航到LoginMainContent
+            _regionManager.RequestNavigate(RegionNames.MovieConent, "MovieInfoRegion");
+
+        }
+
+        private void Info_click(object p)
+        {
+            MainWindow.Instance.NavigateTo(typeof(MovieInfo), p);
+            TestStatus = p.ToString();
+        }
+
     }
 
 }
