@@ -8,38 +8,34 @@ using WallPoster.Models;
 
 namespace WallPoster.ViewModels
 {
-    public class MovieInfoViewModel : ViewModelBase<MoviesModel>
+    public class MovieInfoViewModel : ViewModelBase<MoviesModel>, INavigationAware, IRegionMemberLifetime
     {
-        public DelegateCommand<object> ClickInfo { get; private set; }
+        private IRegionNavigationJournal _journal;
 
-        public MovieInfoViewModel()
+        public bool KeepAlive => true;
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            ClickInfo = new DelegateCommand<object>(Info_click);
+            return true;
         }
 
-        private void Info_click(object p)
+        public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            MessageBox.Show($"新页面{p}");
+            
         }
-
-        private readonly IRegionManager _regionManager;
-
-        private DelegateCommand _createAccountCommand;
-        public DelegateCommand CreateAccountCommand =>
-                _createAccountCommand ?? (_createAccountCommand = new DelegateCommand(ExecuteCreateAccountCommand));
-
-        //导航到CreateAccount
-        void ExecuteCreateAccountCommand()
+        /// <summary>
+        /// 从Movie导航到MovieInfo处理信息
+        /// </summary>
+        /// <param name="navigationContext"></param>
+        public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Navigate("CreateAccount");
+            _journal = navigationContext.NavigationService.Journal;
+
+            var movieInfo = navigationContext.Parameters["movieInfo"] as string;
+            if (movieInfo != null)
+            {
+                MessageBox.Show(movieInfo);
+            }
         }
-
-        private void Navigate(string navigatePath)
-        {
-            if (navigatePath != null)
-                _regionManager.RequestNavigate(RegionNames.MovieInfoRegion, navigatePath);
-
-        }
-
     }
 }

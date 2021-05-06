@@ -21,7 +21,7 @@ using DelegateCommand = Prism.Commands.DelegateCommand;
 
 namespace WallPoster.ViewModels
 {
-    public class MovieViewModel : ViewModelBase<MoviesModel>
+    public class MovieViewModel : ViewModelBase<MoviesModel>, INavigationAware
     {
 
         public DelegateCommand<object> ClickCover { get; private set; }
@@ -201,15 +201,23 @@ namespace WallPoster.ViewModels
         }
 
         private readonly IRegionManager _regionManager;
-        private DelegateCommand _loginLoadingCommand;
-        public DelegateCommand LoginLoadingCommand =>
-                _loginLoadingCommand ?? (_loginLoadingCommand = new DelegateCommand(ExecuteMovieInfoCommand));
+        private DelegateCommand<object> _movieInfoCommand;
+        public DelegateCommand<object> MovieInfoCommand =>
+                _movieInfoCommand ?? (_movieInfoCommand = new DelegateCommand<object>(ExecuteMovieInfoCommand));
 
-        void ExecuteMovieInfoCommand()
+        private string _movieInfo;
+        public string MovieInfo
         {
-            //在LoginContentRegion区域导航到LoginMainContent
-            _regionManager.RequestNavigate(RegionNames.MovieConent, "MovieInfoRegion");
+            get { return _movieInfo; }
+            set { SetProperty(ref _movieInfo, value); }
+        }
 
+        void ExecuteMovieInfoCommand(object parameter)
+        {
+            //在Movie区域导航到MovieInfoRegion
+            IRegion region = _regionManager.Regions[RegionNames.MovieConent];
+            region.RequestNavigate("MovieInfoRegion");
+            MovieInfo = parameter as string;
         }
 
         private void Info_click(object p)
@@ -218,6 +226,20 @@ namespace WallPoster.ViewModels
             TestStatus = p.ToString();
         }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            navigationContext.Parameters.Add("movieInfo", MovieInfo);
+        }
     }
 
 }

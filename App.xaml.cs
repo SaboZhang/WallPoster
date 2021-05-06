@@ -57,6 +57,7 @@ namespace WallPoster
             /*containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);*/
             containerRegistry.RegisterForNavigation<MainWindow, MainViewModel>();
+            containerRegistry.RegisterForNavigation<Movie>();
             containerRegistry.RegisterForNavigation<MovieInfo>();
         }
 
