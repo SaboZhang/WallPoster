@@ -2,6 +2,7 @@
 using HandyControl.Tools.Command;
 using log4net;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -21,12 +23,13 @@ using DelegateCommand = Prism.Commands.DelegateCommand;
 
 namespace WallPoster.ViewModels
 {
-    public class MovieViewModel : ViewModelBase<MoviesModel>, INavigationAware
+    public class MovieViewModel : ViewModelBase<MoviesModel>, INavigationAware, IRegionMemberLifetime
     {
 
         public DelegateCommand<object> ClickCover { get; private set; }
-        public DelegateCommand<object> ClickInfo { get; private set; }
         private static ILog log = LogManager.GetLogger("MovieViewModel");
+
+        private IRegionNavigationJournal _journal;
 
         SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
 
@@ -35,7 +38,11 @@ namespace WallPoster.ViewModels
             Status = "Visible";
             _ = GetMoviesAsync();
             ClickCover = new DelegateCommand<object>(ShowClick);
-            ClickInfo = new DelegateCommand<object>(Info_click);
+        }
+
+        public MovieViewModel(IRegionManager regionManager) : this()
+        {
+            _regionManager = regionManager;
         }
 
         private void ShowClick(object parm)
@@ -134,6 +141,7 @@ namespace WallPoster.ViewModels
         private void PageUpdated(FunctionEventArgs<int> info)
         {
             Status = "Visible";
+            #region 页码改变
             Task.Run(() =>
             {
                 List<FilesModel> filesModels = null;
@@ -180,9 +188,9 @@ namespace WallPoster.ViewModels
                     }
                     DataList = movies;
                 }));
-                Status = "Hidden";
             });
-
+            #endregion
+            Status = "Hidden";
         }
         /// <summary>
         /// 防止UI线程阻塞
@@ -205,6 +213,8 @@ namespace WallPoster.ViewModels
         public DelegateCommand<object> MovieInfoCommand =>
                 _movieInfoCommand ?? (_movieInfoCommand = new DelegateCommand<object>(ExecuteMovieInfoCommand));
 
+        
+
         private string _movieInfo;
         public string MovieInfo
         {
@@ -212,23 +222,22 @@ namespace WallPoster.ViewModels
             set { SetProperty(ref _movieInfo, value); }
         }
 
-        void ExecuteMovieInfoCommand(object parameter)
-        {
-            //在Movie区域导航到MovieInfoRegion
-            IRegion region = _regionManager.Regions[RegionNames.MovieConent];
-            region.RequestNavigate("MovieInfoRegion");
-            MovieInfo = parameter as string;
-        }
+        public bool KeepAlive => true;
 
-        private void Info_click(object p)
+        
+
+        private void ExecuteMovieInfoCommand(object parameter)
         {
-            MainWindow.Instance.NavigateTo(typeof(MovieInfo), p);
-            TestStatus = p.ToString();
+            /*MainWindow.Instance.NavigateTo(typeof(MovieInfo), parameter);*/
+            //在Movie区域导航到MovieInfoRegion
+            MovieInfo = parameter as string;
+            IRegion region = _regionManager.Regions[RegionNames.MovieInfoRegion];
+            region.RequestNavigate("MovieInfo", NavigationCompelted);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            
+            _journal = navigationContext.NavigationService.Journal;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -238,7 +247,23 @@ namespace WallPoster.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            navigationContext.Parameters.Add("movieInfo", MovieInfo);
+            navigationContext.Parameters.Add("MovieInfo", MovieInfo);
+        }
+
+        private void Navigate(string navigatePath)
+        {
+            if (navigatePath != null)
+                _regionManager.RequestNavigate(RegionNames.MovieInfoRegion, navigatePath);
+        }
+
+        private void NavigationCompelted(NavigationResult result)
+        {
+            
+            if (result.Result == true)
+            {
+                MainWindow.Instance.NavigateTo(typeof(MovieInfo), result);
+            }
+            
         }
     }
 

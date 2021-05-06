@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Prism.Regions;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace WallPoster.Views
 {
@@ -7,11 +9,11 @@ namespace WallPoster.Views
     /// </summary>
     public partial class Movie : UserControl
     {
-
         public Movie()
         {
             InitializeComponent();
         }
+
 
     }
 }

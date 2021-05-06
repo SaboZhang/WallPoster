@@ -9,6 +9,5 @@ namespace WallPoster.Constans
     public class RegionNames
     {
         public static string MovieInfoRegion = "MovieInfoRegion";
-        public static string MovieConent = "MovieConent";
     }
 }

@@ -12,7 +12,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="{x:Static region:RegionNames.MovieConent}"/>
         <hc:LoadingCircle Margin="0,30" Visibility="{Binding Status}" Panel.ZIndex="100"/>
         <Border Margin="0,0,0,38">
             <ListBox BorderThickness="0" Style="{DynamicResource WrapPanelHorizontalListBox}" ItemsSource="{Binding DataList}"
@@ -60,6 +59,8 @@
                 </hc:EventTrigger>
             </hc:Interaction.Triggers>
         </hc:Pagination>
+        
+       
 
     </Grid>
 </UserControl>

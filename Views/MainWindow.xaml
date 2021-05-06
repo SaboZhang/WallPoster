@@ -6,6 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:ui="http://schemas.modernwpf.com/2019"
         FontFamily="Microsoft YaHei UI"
+        xmlns:region="clr-namespace:WallPoster.Constans"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Background="{DynamicResource SecondaryRegionBrush}"
@@ -54,6 +55,7 @@
         </ui:CommandBarFlyout>
     </Window.Resources>
     <Grid Focusable="False">
+        <ContentControl prism:RegionManager.RegionName="{x:Static region:RegionNames.MovieInfoRegion}"/>
         <ui:NavigationView Name="navView" SelectionChanged="NavigationView_SelectionChanged" PaneTitle="WallPoster" AlwaysShowHeader="True"
                            Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Mode=Self}}" IsSettingsVisible="False" IsBackEnabled="True" Focusable="False"
                            IsBackButtonVisible="Visible" BackRequested="navView_BackRequested">

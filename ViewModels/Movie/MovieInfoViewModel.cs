@@ -35,7 +35,10 @@ namespace WallPoster.ViewModels
             if (movieInfo != null)
             {
                 MessageBox.Show(movieInfo);
+                
             }
         }
+
+        
     }
 }

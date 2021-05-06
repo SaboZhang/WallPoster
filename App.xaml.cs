@@ -1,11 +1,14 @@
-﻿using DryIoc;
-using HandyControl.Themes;
+﻿using HandyControl.Themes;
 using HandyControl.Tools;
-using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Regions;
+using Prism.Unity;
 using System.Net;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using WallPoster.CustomerRegionAdapters;
+using WallPoster.Infrastructure;
 using WallPoster.ViewModels;
 using WallPoster.Views;
 using static WallPoster.Assets.Helper;
@@ -17,9 +20,6 @@ namespace WallPoster
     /// </summary>
     public partial class App : PrismApplication
     {
-
-        public static string[] WindowsContextMenuArgument = { string.Empty, string.Empty };
-
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -54,11 +54,18 @@ namespace WallPoster
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            /*containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
-            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);*/
+            //注册全局命令
+            containerRegistry.RegisterSingleton<IApplicationCommands, ApplicationCommands>();
+
+            //注册导航
             containerRegistry.RegisterForNavigation<MainWindow, MainViewModel>();
-            containerRegistry.RegisterForNavigation<Movie>();
             containerRegistry.RegisterForNavigation<MovieInfo>();
+        }
+
+        protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
+        {
+            base.ConfigureRegionAdapterMappings(regionAdapterMappings);
+            regionAdapterMappings.RegisterMapping(typeof(UniformGrid), Container.Resolve<UniformGridRegionAdapter>());
         }
 
         protected override Window CreateShell()
