@@ -1,5 +1,4 @@
-﻿using HandyControl.Controls;
-using ModernWpf.Controls;
+﻿using ModernWpf.Controls;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -10,8 +9,6 @@ namespace WallPoster.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        internal static MainViewModel Instance;
-
         private readonly IRegionManager _regionManager;
         private IRegionNavigationJournal _journal;
 
@@ -24,10 +21,6 @@ namespace WallPoster.ViewModels
         public DelegateCommand LoadingCommand =>
                 _loadingCommand ?? (_loadingCommand = new DelegateCommand(ExecuteLoadingCommand));
 
-        private DelegateCommand _backCommand;
-        public DelegateCommand BackCommand =>
-                _backCommand ?? (_backCommand = new DelegateCommand(ExecuteBakcCommand));
-
         #endregion
         private bool _IsFirstRun;
 
@@ -37,28 +30,14 @@ namespace WallPoster.ViewModels
             set => SetProperty(ref _IsFirstRun, value);
         }
 
-        private bool _isBackEnabled;
-
-        public bool IsBackEnabled
-        {
-            get => _isBackEnabled;
-            set => SetProperty(ref _isBackEnabled, value);
-        }
-
         public MainViewModel(IRegionManager regionManager)
         {
-            Instance = this;
             _regionManager = regionManager;
         }
 
-        private void ExecuteBakcCommand()
-        {
-            if (_journal.CanGoBack)
-            {
-                _journal.GoBack();
-            }
-        }
-
+        /// <summary>
+        /// 初始化首页
+        /// </summary>
         private void ExecuteLoadingCommand()
         {
             IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
@@ -72,7 +51,6 @@ namespace WallPoster.ViewModels
                 {
                     Navigate(item.Tag.ToString());
                 }
-                    
         }
 
         private void Navigate(string navigatePath)
@@ -80,9 +58,13 @@ namespace WallPoster.ViewModels
             if (navigatePath != null)
             {
                 _regionManager.RequestNavigate(RegionNames.ContentRegion, navigatePath);
-                _journal.GoBack
-                IsBackEnabled = true;
-            }   
+            }
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
+            _journal = navigationContext.NavigationService.Journal;
         }
     }
 }

@@ -32,14 +32,14 @@
                             <hc:Card.FooterTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10">
-                                        <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockLargeBold}"
+                                        <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockLargeBold}" x:Name="Caption"
                                                Text="{Binding DataContext.Header,RelativeSource={RelativeSource AncestorType=hc:Card}}" HorizontalAlignment="Left"/>
                                         <TextBlock TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockDefault}"
                                                Text="{Binding}" Margin="0,6,0,0" HorizontalAlignment="Left" x:Name="Info"/>
                                         <i:Interaction.Triggers>
                                             <i:EventTrigger EventName="MouseLeftButtonDown">
                                                 <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.MovieInfoCommand}" 
-                                                       CommandParameter="{Binding ElementName=Info, Path=Text}"/>
+                                                       CommandParameter="{Binding ElementName=Caption, Path=Text}"/>
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
                                     </StackPanel>

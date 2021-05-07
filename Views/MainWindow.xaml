@@ -64,7 +64,7 @@
 
     <ui:NavigationView Name="navView"  PaneTitle="WallPoster" AlwaysShowHeader="True"
                        Header="{Binding SelectedItem.Content, RelativeSource={RelativeSource Mode=Self}}" IsSettingsVisible="False" 
-                       IsBackEnabled="{Binding IsBackEnabled}" Focusable="False">
+                       IsBackEnabled="False" Focusable="False" IsBackButtonVisible="Collapsed">
         <ui:NavigationView.MenuItems>
             <ui:NavigationViewItem Tag="Home" Content="{hc:Localization Home}">
                 <ui:NavigationViewItem.Icon>
@@ -112,20 +112,7 @@
             <i:EventTrigger EventName="Loaded">
                 <i:InvokeCommandAction Command="{Binding LoadingCommand}"/>
             </i:EventTrigger>
-            <i:EventTrigger EventName="BackRequested">
-                <i:InvokeCommandAction Command="{Binding BackCommand}"/>
-            </i:EventTrigger>
         </i:Interaction.Triggers>
-        <ui:NavigationView.Style>
-            <Style TargetType="ui:NavigationView">
-                <Setter Property="IsBackButtonVisible" Value="Collapsed" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsBackVisible}" Value="True">
-                        <Setter Property="IsBackButtonVisible" Value="Visible" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </ui:NavigationView.Style>
         <ui:NavigationView.PaneFooter>
             <StackPanel>
                 <ui:NavigationViewItem Name="navChangeLanguage" Content="{hc:Localization ChangeLanguage}" MouseLeftButtonDown="navChangeLanguage_MouseLeftButtonDown">

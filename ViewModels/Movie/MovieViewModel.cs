@@ -2,7 +2,6 @@
 using HandyControl.Tools.Command;
 using log4net;
 using Prism.Commands;
-using Prism.Ioc;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -18,8 +16,6 @@ using System.Windows.Threading;
 using WallPoster.Constans;
 using WallPoster.Helper;
 using WallPoster.Models;
-using WallPoster.Views;
-using DelegateCommand = Prism.Commands.DelegateCommand;
 
 namespace WallPoster.ViewModels
 {
@@ -41,7 +37,7 @@ namespace WallPoster.ViewModels
 
         #endregion
 
-        
+
 
         SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
 
@@ -249,12 +245,6 @@ namespace WallPoster.ViewModels
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
             navigationContext.Parameters.Add("MovieInfo", MovieInfo);
-        }
-
-        private void Navigate(string navigatePath)
-        {
-            if (navigatePath != null)
-                _regionManager.RequestNavigate(RegionNames.MovieInfoRegion, navigatePath);
         }
     }
 

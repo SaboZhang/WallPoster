@@ -1,9 +1,5 @@
 ﻿using HandyControl.Controls;
-using ModernWpf.Navigation;
-using Prism.Commands;
 using Prism.Regions;
-using System.Windows.Navigation;
-using WallPoster.Constans;
 using WallPoster.Models;
 
 namespace WallPoster.ViewModels
@@ -21,7 +17,7 @@ namespace WallPoster.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            
+
         }
         /// <summary>
         /// 从Movie导航到MovieInfo处理信息
@@ -31,14 +27,13 @@ namespace WallPoster.ViewModels
         {
             _journal = navigationContext.NavigationService.Journal;
 
-            var movieInfo = navigationContext.Parameters["movieInfo"] as string;
+            var movieInfo = navigationContext.Parameters["MovieInfo"] as string;
             if (movieInfo != null)
             {
                 MessageBox.Show(movieInfo);
-                
+
             }
         }
 
-        
     }
 }

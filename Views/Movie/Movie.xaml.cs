@@ -1,6 +1,4 @@
-﻿using Prism.Regions;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace WallPoster.Views
 {
