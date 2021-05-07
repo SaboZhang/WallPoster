@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:WallPoster.Views"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Background>
@@ -22,12 +24,13 @@
                     <hc:FlipClock/>
                 </Viewbox>
             </StackPanel>
+            <TextBlock Text="{Binding Test}" FontSize="200"></TextBlock>
             <!--<hc:LoadingLine Margin="0,30" Foreground="BlueViolet" Style="{StaticResource LoadingLineLarge}"/>-->
             <Border Margin="10,24,0,0" Width="400" HorizontalAlignment="Left"  Background="{DynamicResource BorderBrush}" Opacity="0.8" CornerRadius="5">
                 <StackPanel>
                     <hc:SearchBar ShowClearButton="True" Width="380" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}" SearchStarted="WeatherQuery" x:Name="SearchWeather"
                               hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,10,10,8" Style="{DynamicResource SearchBarPlus}">
-                        
+
                     </hc:SearchBar>
                     <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="145" HorizontalAlignment="Right"  FontSize="10" FontWeight="Bold"/>
                     <Border x:Name="AqiBorder"  HorizontalAlignment="Right" Margin="0,10,10,0" CornerRadius="12"
@@ -50,8 +53,6 @@
                     <TextBlock x:Name="vis" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
                 </StackPanel>
             </Border>
-            
-            
         </Grid>
     </hc:ScrollViewer>
 </UserControl>

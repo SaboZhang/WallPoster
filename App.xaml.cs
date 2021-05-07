@@ -60,6 +60,11 @@ namespace WallPoster
             //注册导航
             containerRegistry.RegisterForNavigation<MainWindow, MainViewModel>();
             containerRegistry.RegisterForNavigation<MovieInfo>();
+            containerRegistry.RegisterForNavigation<Movie>();
+            containerRegistry.RegisterForNavigation<TVplay>();
+            containerRegistry.RegisterForNavigation<Home>();
+            containerRegistry.RegisterForNavigation<General>();
+            containerRegistry.RegisterForNavigation<About>();
         }
 
         protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)

@@ -8,7 +8,6 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:WallPoster.ViewModels"
-             xmlns:region="clr-namespace:WallPoster.Constans"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -25,7 +24,7 @@
                                 </Image>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseLeftButtonDown">
-                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.ClickCover}" 
+                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.PlayMovieCommand}" 
                                                        CommandParameter="{Binding ElementName=Cover, Path=Source}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
@@ -59,8 +58,5 @@
                 </hc:EventTrigger>
             </hc:Interaction.Triggers>
         </hc:Pagination>
-        
-       
-
     </Grid>
 </UserControl>

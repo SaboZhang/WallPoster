@@ -3,14 +3,10 @@ using HandyControl.Themes;
 using HandyControl.Tools;
 using ModernWpf.Controls;
 using ModernWpf.Controls.Primitives;
-using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Navigation;
 using WallPoster.Assets.Strings;
-using WallPoster.Views;
 using static WallPoster.Assets.Helper;
 
 namespace WallPoster
@@ -29,7 +25,7 @@ namespace WallPoster
             #region 启动时显示大小
             Rect rc = SystemParameters.WorkArea; //获取工作区大小
             Width = rc.Width - 300;
-            Height = rc.Height - 300;
+            Height = rc.Height - 200;
             #endregion
         }
 
@@ -46,33 +42,6 @@ namespace WallPoster
             navView.IsBackButtonVisible = Settings.IsBackEnabled ? NavigationViewBackButtonVisible.Visible : NavigationViewBackButtonVisible.Collapsed;
 
 
-        }
-
-        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-        {
-            var selectedItem = (NavigationViewItem)args.SelectedItem;
-            if (selectedItem != null)
-            {
-                var tag = selectedItem.Tag.ToString();
-                switch (selectedItem.Tag)
-                {
-                    case "Home":
-                        Navigate(typeof(Home), tag);
-                        break;
-                    case "Movie":
-                        Navigate(typeof(Movie), tag);
-                        break;
-                    case "TVplay":
-                        Navigate(typeof(TVplay), tag);
-                        break;
-                    case "General":
-                        Navigate(typeof(General), tag);
-                        break;
-                    case "About":
-                        Navigate(typeof(About), tag);
-                        break;
-                }
-            }
         }
 
         private void ApplicationTheme_Click(object sender, RoutedEventArgs e)
@@ -111,60 +80,6 @@ namespace WallPoster
                 };
                 picker.Canceled += delegate { window.Close(); };
                 window.Show();
-            }
-        }
-
-
-        private void navView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-        {
-            if (contentFrame.CanGoBack)
-            {
-                contentFrame.GoBack();
-            }
-        }
-
-        private void contentFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-            var pageName = contentFrame.Content.GetType().Name;
-            var menuItem = navView.MenuItems
-                                     .OfType<NavigationViewItem>()
-                                     .Where(item => item.Tag.ToString() == pageName)
-                                     .FirstOrDefault();
-            if (menuItem != null)
-            {
-                navView.SelectedItem = menuItem;
-            }
-
-            if (contentFrame.CanGoBack)
-            {
-                navView.IsBackEnabled = true;
-            }
-            else
-            {
-                navView.IsBackEnabled = false;
-            }
-        }
-
-        private void contentFrame_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            if (e.NavigationMode == NavigationMode.Back)
-            {
-                contentFrame.RemoveBackEntry();
-            }
-        }
-
-        public void NavigateTo(Type page, object parameter)
-        {
-            contentFrame?.Navigate(page, parameter);
-        }
-
-        public void Navigate(Type page, string tag)
-        {
-            var pageName = contentFrame?.Content?.GetType()?.Name;
-
-            if (pageName != tag)
-            {
-                contentFrame?.Navigate(page);
             }
         }
 

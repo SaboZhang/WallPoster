@@ -25,11 +25,23 @@ namespace WallPoster.ViewModels
 {
     public class MovieViewModel : ViewModelBase<MoviesModel>, INavigationAware, IRegionMemberLifetime
     {
-
-        public DelegateCommand<object> ClickCover { get; private set; }
         private static ILog log = LogManager.GetLogger("MovieViewModel");
 
         private IRegionNavigationJournal _journal;
+        private readonly IRegionManager _regionManager;
+
+        #region Command
+        private DelegateCommand<object> _movieInfoCommand;
+        public DelegateCommand<object> MovieInfoCommand =>
+                _movieInfoCommand ?? (_movieInfoCommand = new DelegateCommand<object>(ExecuteMovieInfoCommand));
+
+        private DelegateCommand<object> _playMovieCommand;
+        public DelegateCommand<object> PlayMovieCommand =>
+                _playMovieCommand ?? (_playMovieCommand = new DelegateCommand<object>(ExecutePlayMovieCommand));
+
+        #endregion
+
+        
 
         SQLiteHelper<FilesModel> helper = SQLiteHelper<FilesModel>.GetInstance();
 
@@ -37,7 +49,6 @@ namespace WallPoster.ViewModels
         {
             Status = "Visible";
             _ = GetMoviesAsync();
-            ClickCover = new DelegateCommand<object>(ShowClick);
         }
 
         public MovieViewModel(IRegionManager regionManager) : this()
@@ -45,7 +56,7 @@ namespace WallPoster.ViewModels
             _regionManager = regionManager;
         }
 
-        private void ShowClick(object parm)
+        private void ExecutePlayMovieCommand(object parm)
         {
             Path.GetFileNameWithoutExtension(parm.ToString());
             var file = new FileInfo(parm.ToString());
@@ -208,13 +219,6 @@ namespace WallPoster.ViewModels
             return null;
         }
 
-        private readonly IRegionManager _regionManager;
-        private DelegateCommand<object> _movieInfoCommand;
-        public DelegateCommand<object> MovieInfoCommand =>
-                _movieInfoCommand ?? (_movieInfoCommand = new DelegateCommand<object>(ExecuteMovieInfoCommand));
-
-        
-
         private string _movieInfo;
         public string MovieInfo
         {
@@ -224,15 +228,12 @@ namespace WallPoster.ViewModels
 
         public bool KeepAlive => true;
 
-        
-
         private void ExecuteMovieInfoCommand(object parameter)
         {
-            /*MainWindow.Instance.NavigateTo(typeof(MovieInfo), parameter);*/
             //在Movie区域导航到MovieInfoRegion
             MovieInfo = parameter as string;
-            IRegion region = _regionManager.Regions[RegionNames.MovieInfoRegion];
-            region.RequestNavigate("MovieInfo", NavigationCompelted);
+            IRegion region = _regionManager.Regions[RegionNames.ContentRegion];
+            region.RequestNavigate("MovieInfo");
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -254,16 +255,6 @@ namespace WallPoster.ViewModels
         {
             if (navigatePath != null)
                 _regionManager.RequestNavigate(RegionNames.MovieInfoRegion, navigatePath);
-        }
-
-        private void NavigationCompelted(NavigationResult result)
-        {
-            
-            if (result.Result == true)
-            {
-                MainWindow.Instance.NavigateTo(typeof(MovieInfo), result);
-            }
-            
         }
     }
 

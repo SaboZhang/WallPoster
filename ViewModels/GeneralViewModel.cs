@@ -12,6 +12,22 @@ namespace WallPoster.ViewModels
     public class GeneralViewModel : ViewModelBase<PathModel>
     {
         private static ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name);
+
+        #region Command
+        private DelegateCommand<string> _setStoreLocationCommand;
+        public DelegateCommand<string> SetStoreLocationCommand =>
+            _setStoreLocationCommand ?? (_setStoreLocationCommand = new DelegateCommand<string>(SetStoreLocation));
+
+        private DelegateCommand<object> _deleteMoviePathCommand;
+        public DelegateCommand<object> DeleteMovieCommand =>
+            _deleteMoviePathCommand ?? (_deleteMoviePathCommand = new DelegateCommand<object>(DeleteMoviePath));
+
+        private DelegateCommand<object> _deleteTVPathCommand;
+        public DelegateCommand<object> DeleteTVPathCommand =>
+            _deleteTVPathCommand ?? (_deleteTVPathCommand = new DelegateCommand<object>(DeleteTVPath));
+
+        #endregion
+
         /// <summary>
         ///     影视路径
         /// </summary>
@@ -54,20 +70,13 @@ namespace WallPoster.ViewModels
             }
         }
 
-        public DelegateCommand<string> SetStoreLocation { get; private set; }
-        public DelegateCommand<object> DelMoviePath { get; private set; }
-        public DelegateCommand<object> DelTVPath { get; private set; }
-
         public GeneralViewModel()
         {
-            SetStoreLocation = new DelegateCommand<string>(SetLocation);
-            DelMoviePath = new DelegateCommand<object>(DeleteMoviePath);
-            DelTVPath = new DelegateCommand<object>(DeleteTVPath);
             GetLocations(Consts.MovieCategory);
             GetLocations(Consts.TVCategory);
         }
 
-        protected void GetLocations(string category)
+        private void GetLocations(string category)
         {
             var MovieLocations = Settings.MovieLocation;
             var pathList = new List<PathModel>();
@@ -103,7 +112,7 @@ namespace WallPoster.ViewModels
             }
         }
 
-        protected virtual void SetLocation(string category)
+        private void SetStoreLocation(string category)
         {
             using var dialog = new System.Windows.Forms.FolderBrowserDialog();
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -134,7 +143,7 @@ namespace WallPoster.ViewModels
             }
         }
 
-        protected virtual void DeleteMoviePath(object index)
+        private void DeleteMoviePath(object index)
         {
             if (index.Equals(-1))
             {
