@@ -222,4 +222,7 @@
   <data name="MovieInfo" xml:space="preserve">
     <value>Film and television details</value>
   </data>
+  <data name="WeatherNullError" xml:space="preserve">
+    <value>network error</value>
+  </data>
 </root>

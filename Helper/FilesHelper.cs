@@ -68,7 +68,6 @@ namespace WallPoster.Helper
                 try
                 {
                     var result = _videoListResolver.Resolve(fsm);
-                    log.Info(result);
                     await SaveMediaFiles(result, category);
                 }
                 catch (Exception e)

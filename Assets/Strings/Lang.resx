@@ -222,4 +222,7 @@
   <data name="WeatherError" xml:space="preserve">
     <value>获取天气信息失败,已打开错误代码页</value>
   </data>
+  <data name="WeatherNullError" xml:space="preserve">
+    <value>网络错误</value>
+  </data>
 </root>

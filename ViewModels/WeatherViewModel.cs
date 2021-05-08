@@ -17,7 +17,7 @@ namespace WallPoster.ViewModels
     {
         private static ILog log = LogManager.GetLogger("WeatherViewModel");
 
-        HttpHelper httpHelper = new HttpHelper();
+        HttpHelper httpHelper = new();
         public async Task<WeatherModel> LoadWeather(string location, string key)
         {
             Dictionary<string, string> dic = new();
@@ -49,17 +49,18 @@ namespace WallPoster.ViewModels
             Dictionary<string, string> dic = new();
             dic.Add("location", location);
             dic.Add("key", key);
-            WeatherModel WeatherAqi = null;
+            WeatherModel weatherAqi = null;
             try
             {
-                WeatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
+                weatherAqi = JsonConvert.DeserializeObject<WeatherModel>(HttpHelper.Get(Consts.Air, dic));
             }
             catch (Exception e)
             {
-                log.Debug($"和风天气获取AQI异常，代码：{WeatherAqi.code}--" + e.Message);
+                log.Debug($"和风天气获取AQI异常，代码：{weatherAqi.code}--" + e.Message);
+                return weatherAqi;
             }
 
-            return WeatherAqi;
+            return weatherAqi;
         }
 
         public string CityQuery(string city, string key)

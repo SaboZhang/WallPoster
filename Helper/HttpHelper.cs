@@ -148,6 +148,12 @@ namespace WallPoster.Models.Service
             return result;
         }
 
+        /// <summary>
+        /// 异步Get请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="dic"></param>
+        /// <returns></returns>
         public async Task<string> GetAsync(string url, Dictionary<string, string> dic)
         {
             string result = @"";

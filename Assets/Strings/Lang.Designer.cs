@@ -374,5 +374,14 @@ namespace WallPoster.Assets.Strings {
                 return ResourceManager.GetString("WeatherError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 网络错误 的本地化字符串。
+        /// </summary>
+        public static string WeatherNullError {
+            get {
+                return ResourceManager.GetString("WeatherNullError", resourceCulture);
+            }
+        }
     }
 }

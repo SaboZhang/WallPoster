@@ -14,6 +14,7 @@
         <ImageBrush ImageSource="/Resources/bg.jpg" Stretch="UniformToFill"/>
     </UserControl.Background>
     <hc:ScrollViewer>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -31,25 +32,25 @@
                               hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,10,10,8" Style="{DynamicResource SearchBarPlus}">
 
                     </hc:SearchBar>
-                    <TextBlock x:Name="UpdateTime" TextWrapping="Wrap" Width="145" HorizontalAlignment="Right"  FontSize="10" FontWeight="Bold"/>
-                    <Border x:Name="AqiBorder"  HorizontalAlignment="Right" Margin="0,10,10,0" CornerRadius="12"
-                            BorderThickness="1" Background="{Binding Aqi}">
-                        <TextBlock x:Name="Aqi" TextWrapping="Wrap"  FontSize="14" TextAlignment="Center" Margin="8,2,8,2"/>
+                    <TextBlock x:Name="UpdateTime" Text="{Binding UpdateTime}" TextWrapping="Wrap" Width="145" HorizontalAlignment="Right"  FontSize="10" FontWeight="Bold"/>
+                    <Border x:Name="AqiBorder" HorizontalAlignment="Right" Margin="0,10,10,0" CornerRadius="12"
+                            BorderThickness="1" Background="{Binding AqiBackground}">
+                        <TextBlock x:Name="Aqi" Text="{Binding AirQuality}" TextWrapping="Wrap"  FontSize="14" TextAlignment="Center" Margin="8,2,8,2"/>
                     </Border>
-                    <TextBlock x:Name="City" Width="100" Height="30" HorizontalAlignment="Left" Margin="8,-44,0,0" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>
-                    <Image x:Name="WeatherIcon" Height="78" Width="78" HorizontalAlignment="Left" Margin="130,0,0,0" />
-                    <TextBlock x:Name="Temp" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-68,140,0" FontSize="32" TextAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-30,-34,0" TextAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="380" x:Name="des" TextAlignment="Center" Margin="10,24,10,10"/>
+                    <TextBlock x:Name="City" Text="{Binding City}" Width="100" Height="30" HorizontalAlignment="Left" Margin="8,-44,0,0" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>
+                    <Image x:Name="WeatherIcon" Source="{Binding WeatherIcon}" Height="78" Width="78" HorizontalAlignment="Left" Margin="130,0,0,0" />
+                    <TextBlock x:Name="Temp" Text="{Binding Temp}" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-68,140,0" FontSize="32" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Clime}" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-30,-34,0" TextAlignment="Center"/>
+                    <TextBlock TextWrapping="Wrap" Text="{Binding Saying}" HorizontalAlignment="Center" Width="380" x:Name="des" TextAlignment="Center" Margin="10,24,10,10"/>
                     <Image Source="/Resources/Weather/wind--night.png" Width="40" HorizontalAlignment="Left" Margin="10,10,0,0"/>
                     <Image Source="/Resources/Weather/hum--night.png" Width="40" HorizontalAlignment="Left" Margin="94,-40,0,0"/>
                     <Image Source="/Resources/Weather/pressure--night.png" Width="40" HorizontalAlignment="Left" Margin="190,-40,0,0"/>
                     <Image Source="/Resources/Weather/vis--night.png" Width="40" HorizontalAlignment="Left" Margin="290,-40,0,0"/>
-                    <TextBlock x:Name="WindScale" Margin="-254,-40,0,0" TextWrapping="Wrap" Width="50"/>
-                    <TextBlock x:Name="WindDir" Margin="-254,-20,0,0" TextWrapping="Wrap" Width="50"/>
-                    <TextBlock x:Name="Humidity" Margin="-60,-40,0,0" TextWrapping="Wrap" Width="80"/>
-                    <TextBlock x:Name="Pressure" Margin="120,-40,0,0" TextWrapping="Wrap" Width="64"/>
-                    <TextBlock x:Name="vis" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
+                    <TextBlock x:Name="WindScale" Text="{Binding WindScale}" Margin="-254,-40,0,0" TextWrapping="Wrap" Width="50"/>
+                    <TextBlock x:Name="WindDir" Text="{Binding WindDir}" Margin="-254,-20,0,0" TextWrapping="Wrap" Width="50"/>
+                    <TextBlock x:Name="Humidity" Text="{Binding Humidity}" Margin="-60,-40,0,0" TextWrapping="Wrap" Width="80"/>
+                    <TextBlock x:Name="Pressure" Text="{Binding Pressure}" Margin="120,-40,0,0" TextWrapping="Wrap" Width="64"/>
+                    <TextBlock x:Name="vis" Text="{Binding Vis}" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
                 </StackPanel>
             </Border>
         </Grid>

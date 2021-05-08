@@ -27,7 +27,7 @@ namespace WallPoster.Views
         {
             InitializeComponent();
             LoadInitialSettings();
-            WeatherCard(weatherViewModel, location);
+            /*WeatherCard(weatherViewModel, location);*/
         }
 
         private void LoadInitialSettings()
@@ -36,7 +36,7 @@ namespace WallPoster.Views
             location = Settings.Location;
         }
 
-        private void WeatherCard(WeatherViewModel weatherViewModel, string location)
+        /*private void WeatherCard(WeatherViewModel weatherViewModel, string location)
         {
             Dispatcher.InvokeAsync(async () =>
            {
@@ -63,7 +63,7 @@ namespace WallPoster.Views
                System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
            });
 
-        }
+        }*/
 
         private void WeatherAqi(WeatherViewModel weatherViewModel, string location)
         {
@@ -104,7 +104,7 @@ namespace WallPoster.Views
             string loaction = weatherViewModel.CityQuery(city, key);
             if (Regex.IsMatch(loaction, @"^[+-]?\d*[.]?\d*$") && loaction != "" && loaction != "Error")
             {
-                WeatherCard(weatherViewModel, loaction);
+                /*WeatherCard(weatherViewModel, loaction);*/
                 return;
             }
             if (loaction == "Error")
