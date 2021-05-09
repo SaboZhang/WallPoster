@@ -1,23 +1,21 @@
 ﻿using HandyControl.Controls;
+using HandyControl.Data;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using WallPoster.Assets;
 using WallPoster.Assets.Strings;
-using WallPoster.Models.Service;
-using MessageBox = HandyControl.Controls.MessageBox;
-using static WallPoster.Assets.Helper;
-using WallPoster.Constans;
-using Prism.Commands;
-using HandyControl.Data;
-using System.Collections.Generic;
 using WallPoster.Helper;
 using WallPoster.Models;
-using System.Linq;
+using static WallPoster.Assets.Helper;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace WallPoster.ViewModels
 {
@@ -257,14 +255,14 @@ namespace WallPoster.ViewModels
                     var aqiResult = aqi.Result;
                     if (aqiResult.code != "200")
                     {
-                        AirQuality = aqiResult.code == "403" 
-                        ? Lang.ResourceManager.GetString("NoSupport") 
+                        AirQuality = aqiResult.code == "403"
+                        ? Lang.ResourceManager.GetString("NoSupport")
                         : Lang.ResourceManager.GetString("WeatherAqiNullError");
                         return;
                     }
                     AirQuality = "AQI" + aqiResult.now.category;
                     string[] colors = { "#95B359", "#D3CF63", "#E0991D", "#D96161", "#A257D0", "#D94371" };
-                    int color = int.Parse(aqiResult.now.level) -1;
+                    int color = int.Parse(aqiResult.now.level) - 1;
                     AqiBakcground = colors[color];
                 }));
             });
@@ -306,7 +304,7 @@ namespace WallPoster.ViewModels
                 string cityCode = cityModel.location[0].id;
                 LoadingCityInfo(cityCode, Settings.AppSecret);
                 LoadingWeatherCard(cityCode, Settings.AppSecret);
-                
+
             }
             Growl.WarningGlobal(Lang.ResourceManager.GetString("CityError") + $"  error code:{cityModel.code}");
         }
@@ -328,7 +326,7 @@ namespace WallPoster.ViewModels
             }
             DataList = ls;
         }
-   
+
 
     }
 }
