@@ -11,6 +11,13 @@ using WallPoster.Assets.Strings;
 using WallPoster.Models.Service;
 using MessageBox = HandyControl.Controls.MessageBox;
 using static WallPoster.Assets.Helper;
+using WallPoster.Constans;
+using Prism.Commands;
+using HandyControl.Data;
+using System.Collections.Generic;
+using WallPoster.Helper;
+using WallPoster.Models;
+using System.Linq;
 
 namespace WallPoster.ViewModels
 {
@@ -119,6 +126,54 @@ namespace WallPoster.ViewModels
         }
         #endregion
 
+        private string _searchText;
+
+        public string SearchText
+        {
+            get => _searchText;
+            set => SetProperty(ref _searchText, value);
+        }
+
+        private string _status;
+
+        public string Status
+        {
+            get => _status;
+            set => SetProperty(ref _status, value);
+        }
+
+        private string _cityCode;
+
+        public string CityCode
+        {
+            get => _cityCode;
+            set => SetProperty(ref _cityCode, value);
+        }
+
+        private List<string> _dataList;
+
+        public List<string> DataList
+        {
+            get => _dataList;
+            set => SetProperty(ref _dataList, value);
+        }
+
+        private List<string> _provinces;
+
+        public List<string> Provinces
+        {
+            get => _provinces;
+            set => SetProperty(ref _provinces, value);
+        }
+
+        private DelegateCommand<FunctionEventArgs<string>> _onSearchStartedCommand;
+        public DelegateCommand<FunctionEventArgs<string>> OnSearchStartedCommand =>
+                _onSearchStartedCommand ?? (_onSearchStartedCommand = new DelegateCommand<FunctionEventArgs<string>>(OnSearchStarted));
+
+        private DelegateCommand<object> _provincesCommand;
+        public DelegateCommand<object> ProvincesCommand =>
+                _provincesCommand ?? (_provincesCommand = new DelegateCommand<object>(ProvincesInfo));
+
         public HomeViewModel(IRegionManager regionManager) : this()
         {
             _regionManager = regionManager;
@@ -126,7 +181,12 @@ namespace WallPoster.ViewModels
 
         public HomeViewModel()
         {
-            LoadWeatherCard(Settings.Location, Settings.AppSecret);
+            Status = "Visible";
+            InitProvincesData();
+            LoadingCityInfo(Settings.Location, Settings.AppSecret);
+            LoadingWeatherCard(Settings.Location, Settings.AppSecret);
+            LoadingAirQuality(Settings.Location, Settings.AppSecret);
+            Status = "Hidden";
         }
 
         WeatherViewModel weatherModel = new WeatherViewModel();
@@ -136,7 +196,7 @@ namespace WallPoster.ViewModels
         /// </summary>
         /// <param name="location"></param>
         /// <param name="key"></param>
-        private void LoadWeatherCard(string location, string key)
+        private void LoadingWeatherCard(string location, string key)
         {
             Task.Run(() =>
             {
@@ -146,7 +206,7 @@ namespace WallPoster.ViewModels
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    if (weather == null)
+                    if (weather.Result == null)
                     {
                         MessageBox.Error(Lang.ResourceManager.GetString("WeatherNullError"));
                         return;
@@ -158,7 +218,7 @@ namespace WallPoster.ViewModels
                         System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
                         return;
                     }
-                    UpdateTime = weatherResult.updateTime.ToString("yyyy-MM-dd HH':'mm");
+                    UpdateTime = "更新时间:" + weatherResult.updateTime.ToString("yyyy-MM-dd HH':'mm");
                     var icon = new BitmapImage(
                         new Uri(new StringBuilder("pack://application:,,,/WallPoster;component/Resources/Weather/color-128/")
                         .Append(weatherResult.now.icon).Append(".png").ToString()));
@@ -166,7 +226,7 @@ namespace WallPoster.ViewModels
                     Temp = weatherResult.now.temp + "°";
                     Clime = weatherResult.now.text;
                     WindDir = weatherResult.now.windDir;
-                    WindScale = weatherResult.now.windDir + "级";
+                    WindScale = weatherResult.now.windScale + "级";
                     Humidity = weatherResult.now.humidity + "%\n相对湿度";
                     Vis = weatherResult.now.vis + "KM\n能见度";
                     Pressure = weatherResult.now.pressure + "hpa\n大气压";
@@ -174,7 +234,12 @@ namespace WallPoster.ViewModels
             });
         }
 
-        private void LoadAirQuality(string location, string key)
+        /// <summary>
+        /// 加载空气质量
+        /// </summary>
+        /// <param name="location"></param>
+        /// <param name="key"></param>
+        private void LoadingAirQuality(string location, string key)
         {
             Task.Run(() =>
             {
@@ -184,11 +249,86 @@ namespace WallPoster.ViewModels
             {
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
+                    if (aqi.Result == null)
+                    {
+                        MessageBox.Error(Lang.ResourceManager.GetString("WeatherAqiNullError"));
+                        return;
+                    }
                     var aqiResult = aqi.Result;
-                    AirQuality = aqiResult.now.category;
-
+                    if (aqiResult.code != "200")
+                    {
+                        AirQuality = aqiResult.code == "403" 
+                        ? Lang.ResourceManager.GetString("NoSupport") 
+                        : Lang.ResourceManager.GetString("WeatherAqiNullError");
+                        return;
+                    }
+                    AirQuality = "AQI" + aqiResult.now.category;
+                    string[] colors = { "#95B359", "#D3CF63", "#E0991D", "#D96161", "#A257D0", "#D94371" };
+                    int color = int.Parse(aqiResult.now.level) -1;
+                    AqiBakcground = colors[color];
                 }));
             });
         }
+
+        private void LoadingCityInfo(string location, string key)
+        {
+            Task.Run(() =>
+            {
+                var city = weatherModel.CityQuery(location, key);
+                return city;
+            }).ContinueWith(city =>
+            {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (city.Result == null)
+                    {
+                        MessageBox.Error(Lang.ResourceManager.GetString("WeatherCityError"));
+                        return;
+                    }
+                    var cityResult = city.Result;
+                    if (cityResult.code != "200")
+                    {
+                        Growl.WarningGlobal(Lang.ResourceManager.GetString("CityError") + $"  error code:{cityResult.code}");
+                        System.Diagnostics.Process.Start("explorer.exe", Consts.StatusCode);
+                        return;
+                    }
+                    City = cityResult.location[0].name.ToString();
+                }));
+            });
+        }
+
+        private void OnSearchStarted(FunctionEventArgs<string> e)
+        {
+            if (string.IsNullOrEmpty(SearchText)) return;
+            var cityModel = weatherModel.CityQuery(SearchText, Settings.AppSecret);
+            if (cityModel != null && cityModel.code == "200")
+            {
+                string cityCode = cityModel.location[0].id;
+                LoadingCityInfo(cityCode, Settings.AppSecret);
+                LoadingWeatherCard(cityCode, Settings.AppSecret);
+                
+            }
+            Growl.WarningGlobal(Lang.ResourceManager.GetString("CityError") + $"  error code:{cityModel.code}");
+        }
+
+        private void ProvincesInfo(object provinces)
+        {
+            // 获取所选省份
+        }
+
+        private void InitProvincesData()
+        {
+            var helper = SQLiteHelper<AdmModel>.GetInstance();
+            var lists = helper.Adms.OrderBy(p => p.Id);
+            var ls = new List<string>();
+            foreach (var p in lists)
+            {
+                string name = p.CityName;
+                ls.Add(name);
+            }
+            DataList = ls;
+        }
+   
+
     }
 }

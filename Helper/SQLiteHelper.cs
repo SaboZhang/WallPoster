@@ -71,6 +71,10 @@ namespace WallPoster.Helper
 
         public DbSet<FilesModel> Files { get; set; }
 
+        public DbSet<AreaModel> Areas { get; set; }
+
+        public DbSet<AdmModel> Adms { get; set; }
+
         /// <summary>  
         /// 分页查询 + 条件查询 + 排序  
         /// </summary>  
@@ -332,6 +336,5 @@ namespace WallPoster.Helper
         {
             return helper.Set<T>().Where(WhereLambda).ToList() ?? null;
         }
-
     }
 }

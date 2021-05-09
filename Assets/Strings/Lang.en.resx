@@ -225,4 +225,19 @@
   <data name="WeatherNullError" xml:space="preserve">
     <value>network error</value>
   </data>
+  <data name="NoSupport" xml:space="preserve">
+    <value>No data available</value>
+  </data>
+  <data name="WeatherAqiNullError" xml:space="preserve">
+    <value>Failed to get air quality</value>
+  </data>
+  <data name="CityButton" xml:space="preserve">
+    <value>Provinces</value>
+  </data>
+  <data name="CityError" xml:space="preserve">
+    <value>Parameter error</value>
+  </data>
+  <data name="WeatherCityError" xml:space="preserve">
+    <value>Failed to get city information</value>
+  </data>
 </root>

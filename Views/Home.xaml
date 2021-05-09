@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:WallPoster.Views"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:ui="http://schemas.modernwpf.com/2019"
-             xmlns:prism="http://prismlibrary.com/"
+             xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -14,7 +14,6 @@
         <ImageBrush ImageSource="/Resources/bg.jpg" Stretch="UniformToFill"/>
     </UserControl.Background>
     <hc:ScrollViewer>
-        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -25,16 +24,29 @@
                     <hc:FlipClock/>
                 </Viewbox>
             </StackPanel>
-            <!--<hc:LoadingLine Margin="0,30" Foreground="BlueViolet" Style="{StaticResource LoadingLineLarge}"/>-->
+            <hc:LoadingLine Margin="0,30" Foreground="BlueViolet" Style="{StaticResource LoadingLineLarge}" Visibility="{Binding Status}"/>
             <Border Margin="10,24,0,0" Width="400" HorizontalAlignment="Left"  Background="{DynamicResource BorderBrush}" Opacity="0.8" CornerRadius="5">
                 <StackPanel>
-                    <hc:SearchBar ShowClearButton="True" Width="380" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}" SearchStarted="WeatherQuery" x:Name="SearchWeather"
-                              hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" Margin="10,10,10,8" Style="{DynamicResource SearchBarPlus}">
-
+                    <ComboBox Margin="74,10,0,0" ItemsSource="{Binding DataList}" Width="120" x:Name="Province" HorizontalAlignment="Left" SelectedIndex="0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ProvincesCommand}" 
+                                                       CommandParameter="{Binding ElementName=Province,Path=SelectedValue}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </ComboBox>
+                    <hc:SearchBar ShowClearButton="True" Width="380" hc:InfoElement.Placeholder="{hc:Localization SearchWeather}" x:Name="SearchWeather"
+                              hc:TitleElement.TitlePlacement="Left" hc:TitleElement.Title="{hc:Localization Search}" HorizontalAlignment="Left" hc:TitleElement.TitleWidth="200"
+                                  Margin="10,-32,10,8" Style="{DynamicResource SearchBarPlus}" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                        <hc:Interaction.Triggers>
+                            <hc:EventTrigger EventName="SearchStarted">
+                                <hc:EventToCommand Command="{Binding OnSearchStartedCommand}" PassEventArgsToCommand="True" />
+                            </hc:EventTrigger>
+                        </hc:Interaction.Triggers>
                     </hc:SearchBar>
                     <TextBlock x:Name="UpdateTime" Text="{Binding UpdateTime}" TextWrapping="Wrap" Width="145" HorizontalAlignment="Right"  FontSize="10" FontWeight="Bold"/>
                     <Border x:Name="AqiBorder" HorizontalAlignment="Right" Margin="0,10,10,0" CornerRadius="12"
-                            BorderThickness="1" Background="{Binding AqiBackground}">
+                            BorderThickness="1" Background="{Binding AqiBakcground}">
                         <TextBlock x:Name="Aqi" Text="{Binding AirQuality}" TextWrapping="Wrap"  FontSize="14" TextAlignment="Center" Margin="8,2,8,2"/>
                     </Border>
                     <TextBlock x:Name="City" Text="{Binding City}" Width="100" Height="30" HorizontalAlignment="Left" Margin="8,-44,0,0" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WallPoster.Assets;
+using WallPoster.Helper;
 using WallPoster.Models;
 using WallPoster.Models.Service;
 
@@ -18,6 +19,9 @@ namespace WallPoster.ViewModels
         private static ILog log = LogManager.GetLogger("WeatherViewModel");
 
         HttpHelper httpHelper = new();
+
+        SQLiteHelper<AreaModel> helper = SQLiteHelper<AreaModel>.GetInstance();
+
         public async Task<WeatherModel> LoadWeather(string location, string key)
         {
             Dictionary<string, string> dic = new();
@@ -31,8 +35,8 @@ namespace WallPoster.ViewModels
             }
             catch (Exception e)
             {
-                log.Debug($"和风天气连接异常，代码：{nowWeather.code}--" + e.Message);
-                return null;
+                log.Debug("和风天气连接异常:" + e.Message);
+                return nowWeather;
             }
             return nowWeather;
 
@@ -56,47 +60,52 @@ namespace WallPoster.ViewModels
             }
             catch (Exception e)
             {
-                log.Debug($"和风天气获取AQI异常，代码：{weatherAqi.code}--" + e.Message);
+                log.Debug("和风天气获取AQI异常:" + e.Message);
                 return weatherAqi;
             }
 
             return weatherAqi;
         }
 
-        public string CityQuery(string city, string key)
+        public CityModel CityQuery(string city, string key)
         {
             Dictionary<string, string> dic = new();
             dic.Add("location", city);
             dic.Add("key", key);
             CityModel cityModel = null;
-            string cityInfo = "";
             try
             {
                 cityModel = JsonConvert.DeserializeObject<CityModel>(HttpHelper.Get(Consts.CityInfof, dic));
             }
             catch (Exception e)
             {
-                log.Debug($"和风天气获取城市列表异常，代码：{cityModel.code}--" + e.Message);
+                log.Debug("和风天气获取城市列表异常:" + e.Message);
+                return cityModel;
             }
-            #region 判断是否城市ID
-            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[+-]?\d*[.]?\d*$"))
+            if (cityModel.code == "200")
             {
-                cityInfo = cityModel.location[0].name;
-                return cityInfo;
+                string cityName = cityModel.location[0].name;
+                string adm1 = cityModel.location[0].adm1;
+                if (cityModel.location.Count > 1)
+                {
+                    cityModel.location[0].name = cityModel.location[0].name == cityModel.location[0].adm2 ? cityName + "市" : cityName;
+                    return cityModel;
+                }
+                try
+                {
+                    var citys = helper.GetFristDefault<AreaModel>(i => i.ProvinceName == adm1 && i.CountyName.StartsWith(cityName));
+                    cityModel.location[0].name = citys.CountyName;
+                }
+                catch (Exception e)
+                {
+                    log.Debug(e.Message);
+                    cityModel.location[0].name = cityModel.location[0].country.Equals("中国")
+                        && cityModel.location[0].name == cityModel.location[0].adm2
+                        ? cityName + "市" : cityModel.location[0].country + cityName;
+                    return cityModel;
+                }
             }
-            if (cityModel.code == "200" && Regex.IsMatch(city, @"^[\u4e00-\u9fa5A-Za-z]+$") && cityModel.location[0].country.Equals("中国"))
-            {
-                cityInfo = cityModel.location[0].id;
-                return cityInfo;
-            }
-            #endregion
-            if (cityModel.code == "404")
-            {
-                cityInfo = "Error";
-                return cityInfo;
-            }
-
-            return cityInfo;
+            return cityModel;
         }
 
         public WeatherModel LifeIndex(string location, string key, string type)
@@ -112,7 +121,7 @@ namespace WallPoster.ViewModels
             }
             catch (Exception e)
             {
-                log.Debug($"和风天气获取生活指数异常，代码：{weather.code}--" + e.Message);
+                log.Debug("和风天气获取生活指数异常:" + e.Message);
             }
             if (weather.code == "200")
             {

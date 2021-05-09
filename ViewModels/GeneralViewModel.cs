@@ -120,7 +120,7 @@ namespace WallPoster.ViewModels
                 string path = dialog.SelectedPath;
                 if (Settings.MovieLocation.Contains(path) || Settings.TVLocation.Contains(path))
                 {
-                    MessageBox.Warning($"路径{path}已存在");
+                    Growl.WarningGlobal($"路径{path}已存在");
                     return;
                 }
                 switch (category)
@@ -147,7 +147,7 @@ namespace WallPoster.ViewModels
         {
             if (index.Equals(-1))
             {
-                MessageBox.Warning("请选择需要删除的路径!");
+                Growl.WarningGlobal("请选择需要删除的路径!");
                 return;
             }
             List<string> path = Settings.MovieLocation;
@@ -160,7 +160,7 @@ namespace WallPoster.ViewModels
         {
             if (index.Equals(-1))
             {
-                MessageBox.Warning("请选择需要删除的路径!");
+                Growl.WarningGlobal("请选择需要删除的路径!");
                 return;
             }
             List<string> path = Settings.TVLocation;

@@ -124,6 +124,24 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 省份 的本地化字符串。
+        /// </summary>
+        public static string CityButton {
+            get {
+                return ResourceManager.GetString("CityButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参数错误 的本地化字符串。
+        /// </summary>
+        public static string CityError {
+            get {
+                return ResourceManager.GetString("CityError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 媒体库目录设置 的本地化字符串。
         /// </summary>
         public static string CurrentLocation {
@@ -277,6 +295,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 暂无AQI数据 的本地化字符串。
+        /// </summary>
+        public static string NoSupport {
+            get {
+                return ResourceManager.GetString("NoSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导航栏设置 的本地化字符串。
         /// </summary>
         public static string PaneMode {
@@ -363,6 +390,24 @@ namespace WallPoster.Assets.Strings {
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取空气质量失败 的本地化字符串。
+        /// </summary>
+        public static string WeatherAqiNullError {
+            get {
+                return ResourceManager.GetString("WeatherAqiNullError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取城市信息失败 的本地化字符串。
+        /// </summary>
+        public static string WeatherCityError {
+            get {
+                return ResourceManager.GetString("WeatherCityError", resourceCulture);
             }
         }
         

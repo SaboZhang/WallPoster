@@ -138,6 +138,12 @@
   <data name="Chinese" xml:space="preserve">
     <value>中文简体</value>
   </data>
+  <data name="CityButton" xml:space="preserve">
+    <value>省份</value>
+  </data>
+  <data name="CityError" xml:space="preserve">
+    <value>参数错误</value>
+  </data>
   <data name="CurrentLocation" xml:space="preserve">
     <value>媒体库目录设置</value>
   </data>
@@ -189,6 +195,9 @@
   <data name="Nonsupport" xml:space="preserve">
     <value>国外天气信息不完整，暂时不提供查询</value>
   </data>
+  <data name="NoSupport" xml:space="preserve">
+    <value>暂无AQI数据</value>
+  </data>
   <data name="PaneMode" xml:space="preserve">
     <value>导航栏设置</value>
   </data>
@@ -218,6 +227,12 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>更新</value>
+  </data>
+  <data name="WeatherAqiNullError" xml:space="preserve">
+    <value>获取空气质量失败</value>
+  </data>
+  <data name="WeatherCityError" xml:space="preserve">
+    <value>获取城市信息失败</value>
   </data>
   <data name="WeatherError" xml:space="preserve">
     <value>获取天气信息失败,已打开错误代码页</value>
