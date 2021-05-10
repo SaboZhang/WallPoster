@@ -49,7 +49,7 @@
                             BorderThickness="1" Background="{Binding AqiBakcground}">
                         <TextBlock x:Name="Aqi" Text="{Binding AirQuality}" TextWrapping="Wrap"  FontSize="14" TextAlignment="Center" Margin="8,2,8,2"/>
                     </Border>
-                    <TextBlock x:Name="City" Text="{Binding City}" Width="100" Height="30" HorizontalAlignment="Left" Margin="8,-44,0,0" VerticalAlignment="Top" FontSize="24" TextAlignment="Center"/>
+                    <TextBlock x:Name="City" Text="{Binding City}" Height="30" HorizontalAlignment="Left" Margin="18,-40,0,0" VerticalAlignment="Top" FontSize="24"/>
                     <Image x:Name="WeatherIcon" Source="{Binding WeatherIcon}" Height="78" Width="78" HorizontalAlignment="Left" Margin="130,0,0,0" />
                     <TextBlock x:Name="Temp" Text="{Binding Temp}" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-68,140,0" FontSize="32" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Clime}" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-30,-34,0" TextAlignment="Center"/>

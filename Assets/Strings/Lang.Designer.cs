@@ -133,7 +133,7 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
-        ///   查找类似 参数错误 的本地化字符串。
+        ///   查找类似 请输入正确查询城市 的本地化字符串。
         /// </summary>
         public static string CityError {
             get {
@@ -286,6 +286,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 请选择省份或国家 的本地化字符串。
+        /// </summary>
+        public static string NeedChoice {
+            get {
+                return ResourceManager.GetString("NeedChoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 国外天气信息不完整，暂时不提供查询 的本地化字符串。
         /// </summary>
         public static string Nonsupport {
@@ -304,11 +313,29 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 海外国家 的本地化字符串。
+        /// </summary>
+        public static string Overseas {
+            get {
+                return ResourceManager.GetString("Overseas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 导航栏设置 的本地化字符串。
         /// </summary>
         public static string PaneMode {
             get {
                 return ResourceManager.GetString("PaneMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请选择 的本地化字符串。
+        /// </summary>
+        public static string PleaseSelect {
+            get {
+                return ResourceManager.GetString("PleaseSelect", resourceCulture);
             }
         }
         

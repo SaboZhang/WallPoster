@@ -156,9 +156,9 @@ namespace WallPoster.ViewModels
             set => SetProperty(ref _dataList, value);
         }
 
-        private List<string> _provinces;
+        private string _provinces;
 
-        public List<string> Provinces
+        public string Provinces
         {
             get => _provinces;
             set => SetProperty(ref _provinces, value);
@@ -181,7 +181,7 @@ namespace WallPoster.ViewModels
         {
             Status = "Visible";
             InitProvincesData();
-            LoadingCityInfo(Settings.Location, Settings.AppSecret);
+            LoadingCityInfo(Settings.Location, Settings.AppSecret, Consts.DefaultCity);
             LoadingWeatherCard(Settings.Location, Settings.AppSecret);
             LoadingAirQuality(Settings.Location, Settings.AppSecret);
             Status = "Hidden";
@@ -268,11 +268,11 @@ namespace WallPoster.ViewModels
             });
         }
 
-        private void LoadingCityInfo(string location, string key)
+        private void LoadingCityInfo(string location, string key, string adm)
         {
             Task.Run(() =>
             {
-                var city = weatherModel.CityQuery(location, key);
+                var city = weatherModel.CityQuery(location, key, adm);
                 return city;
             }).ContinueWith(city =>
             {
@@ -298,13 +298,21 @@ namespace WallPoster.ViewModels
         private void OnSearchStarted(FunctionEventArgs<string> e)
         {
             if (string.IsNullOrEmpty(SearchText)) return;
-            var cityModel = weatherModel.CityQuery(SearchText, Settings.AppSecret);
+            if (string.IsNullOrEmpty(Provinces))
+            {
+                Growl.InfoGlobal(Lang.ResourceManager.GetString("NeedChoice"));
+                return;
+            }
+            Provinces = Provinces == "海外国家" ? null : Provinces;
+            var cityModel = weatherModel.CityQuery(SearchText, Settings.AppSecret, Provinces);
             if (cityModel != null && cityModel.code == "200")
             {
                 string cityCode = cityModel.location[0].id;
-                LoadingCityInfo(cityCode, Settings.AppSecret);
+                City = cityModel.location[0].country.Equals("中国") 
+                    ? cityModel.location[0].name 
+                    : cityModel.location[0].country + cityModel.location[0].name;
                 LoadingWeatherCard(cityCode, Settings.AppSecret);
-
+                return;
             }
             Growl.WarningGlobal(Lang.ResourceManager.GetString("CityError") + $"  error code:{cityModel.code}");
         }
@@ -312,6 +320,8 @@ namespace WallPoster.ViewModels
         private void ProvincesInfo(object provinces)
         {
             // 获取所选省份
+            if (string.IsNullOrEmpty(provinces.ToString())) return;
+            Provinces = provinces.ToString();
         }
 
         private void InitProvincesData()
@@ -319,11 +329,13 @@ namespace WallPoster.ViewModels
             var helper = SQLiteHelper<AdmModel>.GetInstance();
             var lists = helper.Adms.OrderBy(p => p.Id);
             var ls = new List<string>();
+            ls.Add(Lang.ResourceManager.GetString("PleaseSelect"));
             foreach (var p in lists)
             {
                 string name = p.CityName;
                 ls.Add(name);
             }
+            ls.Add(Lang.ResourceManager.GetString("Overseas"));
             DataList = ls;
         }
 

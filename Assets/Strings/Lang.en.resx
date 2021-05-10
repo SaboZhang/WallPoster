@@ -235,9 +235,18 @@
     <value>Provinces</value>
   </data>
   <data name="CityError" xml:space="preserve">
-    <value>Parameter error</value>
+    <value>Please enter the correct city for your query</value>
   </data>
   <data name="WeatherCityError" xml:space="preserve">
     <value>Failed to get city information</value>
+  </data>
+  <data name="NeedChoice" xml:space="preserve">
+    <value>Please select province or country</value>
+  </data>
+  <data name="Overseas" xml:space="preserve">
+    <value>Overseas countries</value>
+  </data>
+  <data name="PleaseSelect" xml:space="preserve">
+    <value>Please select</value>
   </data>
 </root>

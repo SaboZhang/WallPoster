@@ -66,11 +66,15 @@ namespace WallPoster.ViewModels
             return weatherAqi;
         }
 
-        public CityModel CityQuery(string city, string key)
+        public CityModel CityQuery(string city, string key, string? adm = null)
         {
             Dictionary<string, string> dic = new();
             dic.Add("location", city);
             dic.Add("key", key);
+            if (adm != null)
+            {
+                dic.Add("adm", adm);
+            }
             CityModel cityModel = null;
             try
             {
@@ -83,16 +87,15 @@ namespace WallPoster.ViewModels
             }
             if (cityModel.code == "200")
             {
-                string cityName = cityModel.location[0].name;
-                string adm1 = cityModel.location[0].adm1;
                 if (cityModel.location.Count > 1)
                 {
-                    cityModel.location[0].name = cityModel.location[0].name == cityModel.location[0].adm2 ? cityName + "市" : cityName;
                     return cityModel;
                 }
+                string cityName = cityModel.location[0].name;
+                string adm1 = cityModel.location[0].adm1;
                 try
                 {
-                    var citys = helper.GetFristDefault<AreaModel>(i => i.ProvinceName == adm1 && i.CountyName.StartsWith(cityName));
+                    var citys = helper.GetFristDefault<AreaModel>(i => i.ProvinceName == adm1 && i.CountyName.Contains(cityName));
                     cityModel.location[0].name = citys.CountyName;
                 }
                 catch (Exception e)

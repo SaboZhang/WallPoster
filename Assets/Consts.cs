@@ -25,5 +25,6 @@ namespace WallPoster.Assets
         public static readonly string SayingUrl = "https://api.xygeng.cn/one";
         public const string MovieCategory = "0";
         public const string TVCategory = "1";
+        public const string DefaultCity = "天津";
     }
 }
