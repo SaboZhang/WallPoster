@@ -153,6 +153,9 @@
   <data name="DarkTheme" xml:space="preserve">
     <value>深色</value>
   </data>
+  <data name="DataSource" xml:space="preserve">
+    <value>数据来自：和风天气</value>
+  </data>
   <data name="DefaultCity" xml:space="preserve">
     <value>默认显示城市</value>
   </data>

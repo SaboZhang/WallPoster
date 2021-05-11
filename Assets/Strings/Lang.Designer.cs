@@ -169,6 +169,15 @@ namespace WallPoster.Assets.Strings {
         }
         
         /// <summary>
+        ///   查找类似 数据来自：和风天气 的本地化字符串。
+        /// </summary>
+        public static string DataSource {
+            get {
+                return ResourceManager.GetString("DataSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 默认显示城市 的本地化字符串。
         /// </summary>
         public static string DefaultCity {

@@ -41,12 +41,6 @@ namespace WallPoster.ViewModels
 
         }
 
-        public static string LoadBackground()
-        {
-
-            return null;
-        }
-
         public WeatherModel LoadWeatherAqi(string location, string key)
         {
             Dictionary<string, string> dic = new();
@@ -88,18 +82,15 @@ namespace WallPoster.ViewModels
             if (cityModel.code == "200")
             {
                 string cityName = cityModel.location[0].name;
-                int LocationId = int.Parse(cityModel.location[0].id);
                 try
                 {
+                    int LocationId = int.Parse(cityModel.location[0].id);
                     var citys = helper.GetFristDefault<AreaModel>(i => i.LocationId == LocationId);
                     cityModel.location[0].name = citys.FullCityName;
                 }
                 catch (Exception e)
                 {
                     log.Debug(e.Message);
-                    cityModel.location[0].name = cityModel.location[0].country.Equals("中国")
-                        ? cityName
-                        : cityModel.location[0].country + cityName;
                     return cityModel;
                 }
             }

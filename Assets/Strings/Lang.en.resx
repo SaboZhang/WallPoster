@@ -249,4 +249,7 @@
   <data name="PleaseSelect" xml:space="preserve">
     <value>Please select</value>
   </data>
+  <data name="DataSource" xml:space="preserve">
+    <value>DataFrom：QWeather</value>
+  </data>
 </root>
