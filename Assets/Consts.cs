@@ -18,8 +18,8 @@ namespace WallPoster.Assets
         public static readonly string TheLife = "https://devapi.qweather.com/v7/indices/1d";
         public static readonly string Warning = "https://devapi.qweather.com/v7/warning/now";
         public static readonly string Air = "https://devapi.qweather.com/v7/air/now";
-        public static readonly string FutureWeather = "https://devapi.qweather.com/v7/weather/7d";
         public static readonly string StatusCode = "https://dev.qweather.com/docs/start/status-code/";
+        public static readonly string WeeklyWeather = "https://devapi.qweather.com/v7/weather/7d";
         #endregion
 
         public static readonly string SayingUrl = "https://api.xygeng.cn/one";

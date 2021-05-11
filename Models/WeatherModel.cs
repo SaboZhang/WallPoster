@@ -38,6 +38,11 @@ namespace WallPoster.Models
         /// </summary>
         public List<Daily> daily { get; set; }
 
+        /// <summary>
+        /// 一周天气
+        /// </summary>
+        public List<DailyItem> WeeklyWeather { get; set; }
+
     }
 
     public class Now
@@ -206,5 +211,112 @@ namespace WallPoster.Models
         public string text { get; set; }
     }
 
+    public class DailyItem
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string fxDate { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string sunrise { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string sunset { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string moonrise { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string moonset { get; set; }
+        /// <summary>
+        /// 残月
+        /// </summary>
+        public string moonPhase { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string tempMax { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string tempMin { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string iconDay { get; set; }
+        /// <summary>
+        /// 晴
+        /// </summary>
+        public string textDay { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string iconNight { get; set; }
+        /// <summary>
+        /// 晴
+        /// </summary>
+        public string textNight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string wind360Day { get; set; }
+        /// <summary>
+        /// 东南风
+        /// </summary>
+        public string windDirDay { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string windScaleDay { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string windSpeedDay { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string wind360Night { get; set; }
+        /// <summary>
+        /// 东北风
+        /// </summary>
+        public string windDirNight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string windScaleNight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string windSpeedNight { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string humidity { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string precip { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string pressure { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string vis { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string cloud { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string uvIndex { get; set; }
+    }
 
 }

@@ -179,6 +179,7 @@ namespace WallPoster.ViewModels
             LoadingWeatherCard(Settings.Location, Settings.AppSecret);
             LoadingAirQuality(Settings.Location, Settings.AppSecret);
             LoadingSaying();
+            LoadingWeeklyWeather();
             Status = "Hidden";
         }
 
@@ -338,6 +339,12 @@ namespace WallPoster.ViewModels
         {
             string say = SayingViewModel.LoadSaying();
             Saying = say;
+        }
+
+        private void LoadingWeeklyWeather()
+        {
+            weatherModel.GetWeeklyWeather(Settings.Location, Settings.AppSecret);
+            
         }
 
 

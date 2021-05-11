@@ -118,5 +118,24 @@ namespace WallPoster.ViewModels
             }
             return null;
         }
+
+        public WeatherModel GetWeeklyWeather(string location, string key)
+        {
+            Dictionary<string, string> dic = new();
+            dic.Add("location", location);
+            dic.Add("key", key);
+            WeatherModel weeklyWeather = null;
+            try
+            {
+                var result = httpHelper.GetAsync(Consts.WeeklyWeather, dic);
+                weeklyWeather = JsonConvert.DeserializeObject<WeatherModel>(result.ToString());
+            }
+            catch(Exception e)
+            {
+                log.Debug("和风天气获取一周天气异常:" + e.Message);
+                return weeklyWeather;
+            }
+            return weeklyWeather;
+        }
     }
 }
