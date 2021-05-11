@@ -21,8 +21,6 @@ namespace WallPoster.ViewModels
 {
     public class HomeViewModel : BindableBase
     {
-        private readonly IRegionManager _regionManager;
-
         #region 天气字段
         private string _updateTime;
         private string _city;
@@ -105,7 +103,7 @@ namespace WallPoster.ViewModels
             set => SetProperty(ref _pressure, value);
         }
 
-        public string Syaing
+        public string Saying
         {
             get => _saying;
             set => SetProperty(ref _saying, value);
@@ -172,10 +170,6 @@ namespace WallPoster.ViewModels
         public DelegateCommand<object> ProvincesCommand =>
                 _provincesCommand ?? (_provincesCommand = new DelegateCommand<object>(ProvincesInfo));
 
-        public HomeViewModel(IRegionManager regionManager) : this()
-        {
-            _regionManager = regionManager;
-        }
 
         public HomeViewModel()
         {
@@ -184,6 +178,7 @@ namespace WallPoster.ViewModels
             LoadingCityInfo(Settings.Location, Settings.AppSecret, Consts.DefaultCity);
             LoadingWeatherCard(Settings.Location, Settings.AppSecret);
             LoadingAirQuality(Settings.Location, Settings.AppSecret);
+            LoadingSaying();
             Status = "Hidden";
         }
 
@@ -337,6 +332,12 @@ namespace WallPoster.ViewModels
             }
             ls.Add(Lang.ResourceManager.GetString("Overseas"));
             DataList = ls;
+        }
+
+        private void LoadingSaying()
+        {
+            string say = SayingViewModel.LoadSaying();
+            Saying = say;
         }
 
 
