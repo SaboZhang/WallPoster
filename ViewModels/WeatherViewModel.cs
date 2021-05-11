@@ -87,23 +87,19 @@ namespace WallPoster.ViewModels
             }
             if (cityModel.code == "200")
             {
-                if (cityModel.location.Count > 1)
-                {
-                    return cityModel;
-                }
                 string cityName = cityModel.location[0].name;
-                string adm1 = cityModel.location[0].adm1;
+                int LocationId = int.Parse(cityModel.location[0].id);
                 try
                 {
-                    var citys = helper.GetFristDefault<AreaModel>(i => i.ProvinceName == adm1 && i.CountyName.Contains(cityName));
-                    cityModel.location[0].name = citys.CountyName;
+                    var citys = helper.GetFristDefault<AreaModel>(i => i.LocationId == LocationId);
+                    cityModel.location[0].name = citys.FullCityName;
                 }
                 catch (Exception e)
                 {
                     log.Debug(e.Message);
                     cityModel.location[0].name = cityModel.location[0].country.Equals("中国")
-                        && cityModel.location[0].name == cityModel.location[0].adm2
-                        ? cityName + "市" : cityModel.location[0].country + cityName;
+                        ? cityName
+                        : cityModel.location[0].country + cityName;
                     return cityModel;
                 }
             }

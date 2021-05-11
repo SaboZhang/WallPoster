@@ -309,7 +309,7 @@ namespace WallPoster.ViewModels
             {
                 string cityCode = cityModel.location[0].id;
                 City = cityModel.location[0].country.Equals("中国") 
-                    ? cityModel.location[0].name 
+                    ? cityModel.location[0].name
                     : cityModel.location[0].country + cityModel.location[0].name;
                 LoadingWeatherCard(cityCode, Settings.AppSecret);
                 return;
@@ -326,13 +326,13 @@ namespace WallPoster.ViewModels
 
         private void InitProvincesData()
         {
-            var helper = SQLiteHelper<AdmModel>.GetInstance();
-            var lists = helper.Adms.OrderBy(p => p.Id);
+            var helper = SQLiteHelper<AreaModel>.GetInstance();
+            var lists = helper.Areas.OrderBy(p => p.LocationId).Select(p => p.Adm1).ToList().Distinct();
             var ls = new List<string>();
             ls.Add(Lang.ResourceManager.GetString("PleaseSelect"));
             foreach (var p in lists)
             {
-                string name = p.CityName;
+                string name = p;
                 ls.Add(name);
             }
             ls.Add(Lang.ResourceManager.GetString("Overseas"));
