@@ -119,7 +119,7 @@ namespace WallPoster.ViewModels
             return null;
         }
 
-        public WeatherModel GetWeeklyWeather(string location, string key)
+        public async Task<WeatherModel> GetWeeklyWeather(string location, string key)
         {
             Dictionary<string, string> dic = new();
             dic.Add("location", location);
@@ -127,7 +127,7 @@ namespace WallPoster.ViewModels
             WeatherModel weeklyWeather = null;
             try
             {
-                var result = httpHelper.GetAsync(Consts.WeeklyWeather, dic);
+                var result = await httpHelper.GetAsync(Consts.WeeklyWeather, dic);
                 weeklyWeather = JsonConvert.DeserializeObject<WeatherModel>(result.ToString());
             }
             catch(Exception e)

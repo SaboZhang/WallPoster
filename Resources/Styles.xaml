@@ -5,14 +5,14 @@
     
     <Style TargetType="ui:AutoSuggestBox">
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
         <Style.Resources>
             <Style TargetType="ListView" BasedOn="{StaticResource DefaultListViewStyle}"/>
         </Style.Resources>
     </Style>
     
     <Style TargetType="ui:NavigationViewItem">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
     </Style>
     
     <Style x:Key="WinUI" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
@@ -20,7 +20,7 @@
     </Style>
 
     <Style x:Key="WinUIAccent" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
     </Style>
 
     <Style x:Key="ListViewItemWithoutHover" TargetType="ui:ListViewItem">
@@ -35,14 +35,14 @@
     </Style>
 
     <Style TargetType="hc:Growl" BasedOn="{StaticResource {x:Type hc:Growl}}">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
         <Setter Property="FlowDirection" Value="{hc:Localization FlowDirection}"/>
     </Style>
 
     <Style TargetType="ContextMenu" BasedOn="{StaticResource DefaultContextMenuStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
     </Style>
     <Style TargetType="MenuItem" BasedOn="{StaticResource DefaultMenuItemStyle}">
-        <Setter Property="FontFamily" Value="{StaticResource NotoSans}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PuHuiTi}"/>
     </Style>
 </ResourceDictionary>

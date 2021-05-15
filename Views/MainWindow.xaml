@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        FontFamily="Microsoft YaHei UI"
+        FontFamily="{StaticResource PuHuiTi}"
         xmlns:region="clr-namespace:WallPoster.Constans"
         xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         prism:ViewModelLocator.AutoWireViewModel="True"
@@ -20,12 +20,12 @@
     <Window.Resources>
         <ui:CommandBarFlyout x:Key="ThemeCommandBar" ShowMode="Standard">
             <ui:CommandBarFlyout.SecondaryCommands>
-                <ui:AppBarButton FontFamily="{StaticResource NotoSans}" Label="{hc:Localization LightTheme}" Tag="{x:Static hc:ApplicationTheme.Light}" Click="ApplicationTheme_Click">
+                <ui:AppBarButton FontFamily="{StaticResource PuHuiTi}" Label="{hc:Localization LightTheme}" Tag="{x:Static hc:ApplicationTheme.Light}" Click="ApplicationTheme_Click">
                     <ui:AppBarButton.Icon>
                         <ui:PathIcon Data="{DynamicResource LightGeometry}"/>
                     </ui:AppBarButton.Icon>
                 </ui:AppBarButton>
-                <ui:AppBarButton FontFamily="{StaticResource NotoSans}" Label="{hc:Localization DarkTheme}" Tag="{x:Static hc:ApplicationTheme.Dark}" Click="ApplicationTheme_Click">
+                <ui:AppBarButton FontFamily="{StaticResource PuHuiTi}" Label="{hc:Localization DarkTheme}" Tag="{x:Static hc:ApplicationTheme.Dark}" Click="ApplicationTheme_Click">
                     <ui:AppBarButton.Icon>
                         <ui:PathIcon Data="{DynamicResource NightGeometry}"/>
                     </ui:AppBarButton.Icon>
@@ -41,12 +41,12 @@
 
         <ui:CommandBarFlyout x:Key="LanguageCommandBar" ShowMode="Standard">
             <ui:CommandBarFlyout.SecondaryCommands>
-                <ui:AppBarButton FontFamily="Microsoft YaHei UI" Label="{hc:Localization Chinese}" Tag="zh-CN" Click="LanguageChange_Click">
+                <ui:AppBarButton Label="{hc:Localization Chinese}" Tag="zh-CN" Click="LanguageChange_Click">
                     <ui:AppBarButton.Icon>
                         <ui:BitmapIcon ShowAsMonochrome="False" UriSource="/WallPoster;component/Resources/Img/Flag/cn.png"/>
                     </ui:AppBarButton.Icon>
                 </ui:AppBarButton>
-                <ui:AppBarButton FontFamily="Microsoft YaHei UI" Label="{hc:Localization English}" Tag="en-US" Click="LanguageChange_Click">
+                <ui:AppBarButton Label="{hc:Localization English}" Tag="en-US" Click="LanguageChange_Click">
                     <ui:AppBarButton.Icon>
                         <ui:BitmapIcon ShowAsMonochrome="False" UriSource="/WallPoster;component/Resources/Img/Flag/en.png"/>
                     </ui:AppBarButton.Icon>
