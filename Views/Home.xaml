@@ -65,19 +65,15 @@
                     <TextBlock x:Name="Pressure" Text="{Binding Pressure}" Margin="120,-40,0,0" TextWrapping="Wrap" Width="64"/>
                     <TextBlock x:Name="vis" Text="{Binding Vis}" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
                     <StackPanel>
-                        <ListBox ItemsSource="{Binding WeeklyWeather}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                        <ListView ItemsSource="{Binding WeeklyWeather}" Margin="10">
+                            
+                        </ListView>
                     </StackPanel>
                     <Border Margin="10,40,0,0">
                         <TextBlock HorizontalAlignment="Left" 
                                    VerticalAlignment="Bottom" FontSize="10">
                             <Hyperlink CommandParameter="https://www.qweather.com/"
-                                   Command="hc:ControlCommands.OpenLink" TextDecorations="{x:Null}">
+                                   Command="hc:ControlCommands.OpenLink" TextDecorations="{x:Null}" Cursor="Hand">
                                 <TextBlock Text="{hc:Localization DataSource}" Style="{DynamicResource DataGridTextColumnStyle}"/>
                             </Hyperlink>
                         </TextBlock>
