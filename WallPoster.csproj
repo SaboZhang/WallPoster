@@ -52,6 +52,7 @@
 	  <None Remove="Resources\Album\8.jpg" />
 	  <None Remove="Resources\Album\9.jpg" />
 	  <None Remove="Resources\bg.jpg" />
+	  <None Remove="Resources\Font\AlibabaPuHuiTi-2-55-Regular.ttf" />
 	  <None Remove="Resources\Img\Flag\en.png" />
 	  <None Remove="Resources\Img\Flag\cn.png" />
 	  <None Remove="Resources\Weather\color-128\100.png" />
@@ -257,6 +258,7 @@
     <Resource Include="Resources\Album\8.jpg" />
     <Resource Include="Resources\Album\9.jpg" />
     <Resource Include="Resources\bg.jpg" />
+    <Resource Include="Resources\Font\AlibabaPuHuiTi-2-55-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>

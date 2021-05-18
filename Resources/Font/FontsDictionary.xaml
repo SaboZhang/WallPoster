@@ -2,5 +2,5 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <FontFamily x:Key="IRANSans">IRANSans, pack://application:,,,/WallPoster;component/Resources/Font/#IRANSans</FontFamily>
     <FontFamily x:Key="NotoSans">NotoSans, pack://application:,,,/WallPoster;component/Resources/Font/#NotoSans</FontFamily>
-    <FontFamily x:Key="PuHuiTi">阿里巴巴普惠体 2.0 55 Regular, pack://application:,,,/WallPoster;component/Resources/Font/#阿里巴巴普惠体 2.0 55 Regular</FontFamily>
+    <FontFamily x:Key="PuHuiTi">pack://application:,,,/WallPoster;component/Resources/Font/#阿里巴巴普惠体 2.0 55 Regular</FontFamily>
 </ResourceDictionary>
