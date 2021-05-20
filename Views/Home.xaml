@@ -55,19 +55,34 @@
                     <TextBlock x:Name="Temp" Text="{Binding Temp}" TextWrapping="Wrap" Width="70" HorizontalAlignment="Right" Margin="0,-68,140,0" FontSize="32" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Clime}" HorizontalAlignment="Center" Width="40" VerticalAlignment="Top" x:Name="Clime" FontSize="16" Margin="0,-30,-34,0" TextAlignment="Center"/>
                     <TextBlock TextWrapping="Wrap" Text="{Binding Saying}" HorizontalAlignment="Center" Width="380" x:Name="des" TextAlignment="Center" Margin="10,24,10,10"/>
-                    <Image Source="/Resources/Weather/wind--night.png" Width="40" HorizontalAlignment="Left" Margin="10,10,0,0"/>
-                    <Image Source="/Resources/Weather/hum--night.png" Width="40" HorizontalAlignment="Left" Margin="94,-40,0,0"/>
-                    <Image Source="/Resources/Weather/pressure--night.png" Width="40" HorizontalAlignment="Left" Margin="190,-40,0,0"/>
-                    <Image Source="/Resources/Weather/vis--night.png" Width="40" HorizontalAlignment="Left" Margin="290,-40,0,0"/>
-                    <TextBlock x:Name="WindScale" Text="{Binding WindScale}" Margin="-254,-40,0,0" TextWrapping="Wrap" Width="50"/>
-                    <TextBlock x:Name="WindDir" Text="{Binding WindDir}" Margin="-254,-20,0,0" TextWrapping="Wrap" Width="50"/>
-                    <TextBlock x:Name="Humidity" Text="{Binding Humidity}" Margin="-60,-40,0,0" TextWrapping="Wrap" Width="80"/>
-                    <TextBlock x:Name="Pressure" Text="{Binding Pressure}" Margin="120,-40,0,0" TextWrapping="Wrap" Width="64"/>
-                    <TextBlock x:Name="vis" Text="{Binding Vis}" Margin="314,-40,0,0" TextWrapping="Wrap" Width="50"/>
+                    <hc:SimpleStackPanel Margin="14,0,0,0">
+                        <hc:UniformSpacingPanel Spacing="40">
+                            <Image Source="/Resources/Weather/wind--night.png" Width="42" />
+                            <Image Source="/Resources/Weather/hum--night.png" Width="42" />
+                            <Image Source="/Resources/Weather/pressure--night.png" Width="42" Margin="4,0,0,0"/>
+                            <Image Source="/Resources/Weather/vis--night.png" Width="44" Margin="20,0,0,0"/>
+                        </hc:UniformSpacingPanel>
+                    </hc:SimpleStackPanel>
+                    <hc:SimpleStackPanel Margin="48,-42,0,0">
+                        <hc:UniformSpacingPanel Spacing="46">
+                            <StackPanel>
+                                <TextBlock x:Name="WindScale" Text="{Binding WindScale}" TextWrapping="Wrap"/>
+                                <TextBlock x:Name="WindDir" Text="{Binding WindDir}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <TextBlock x:Name="Humidity" Text="{Binding Humidity}" TextWrapping="Wrap" Margin="-4,0,0,0"/>
+                            <TextBlock x:Name="Pressure" Text="{Binding Pressure}" TextWrapping="Wrap" Margin="-10,0,0,0"/>
+                            <TextBlock x:Name="vis" Text="{Binding Vis}" TextWrapping="Wrap"/>
+                        </hc:UniformSpacingPanel>
+                    </hc:SimpleStackPanel>
+                    <hc:SimpleStackPanel Margin="10,10,0,0">
+                        <hc:UniformSpacingPanel Spacing="10">
+                            <TextBlock Text="测试"/>
+                            <Image Width="30" Source="/Resources/Weather/vis--night.png"/>
+                        </hc:UniformSpacingPanel>
+                    </hc:SimpleStackPanel>
+
                     <StackPanel>
-                        <ListView ItemsSource="{Binding WeeklyWeather}" Margin="10">
-                            
-                        </ListView>
+                        
                     </StackPanel>
                     <Border Margin="10,40,0,0">
                         <TextBlock HorizontalAlignment="Left" 

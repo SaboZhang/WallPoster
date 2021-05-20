@@ -308,6 +308,7 @@ namespace WallPoster.ViewModels
                     ? cityModel.location[0].name
                     : cityModel.location[0].country + cityModel.location[0].name;
                 LoadingWeatherCard(cityCode, Settings.AppSecret);
+                LoadingAirQuality(cityCode, Settings.AppSecret);
                 return;
             }
             Growl.WarningGlobal(Lang.ResourceManager.GetString("CityError") + $"  error code:{cityModel.code}");
